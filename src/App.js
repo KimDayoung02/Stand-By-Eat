@@ -1,15 +1,21 @@
 import "./App.css";
-import Server from "./Server";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
-import "bootstrap/dist/css/bootstrap.min.css";
 import styled from "styled-components";
+import UserMyPage from "./pages/users/myPage";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <HeaderDiv />
-      </header>
+      <BrowserRouter>
+        <HeaderDiv>
+          <Header />
+        </HeaderDiv>
+        <Routes>
+          <Route path="/" />
+          <Route path="myPage" element={<UserMyPage />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }

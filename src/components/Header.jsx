@@ -1,30 +1,38 @@
-import { Nav, NavDropdown, Navbar, Container } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+
+import { useNavigate } from 'react-router-dom';
+import {Container, Nav,Navbar} from 'react-bootstrap';
 
 
-export default function header() {
-    return (
-      <Navbar bg="light" expand="lg">
+function Header() {
+  let navigate = useNavigate();
+
+  return (
+    <Navbar bg="light" expand="lg">
       <Container>
-        <Navbar.Brand href="#home">
+        <Navbar.Brand href="/">
         <img
               src="\logo.png"
               width="50"
               height="50"
             />
-
         </Navbar.Brand>
-        <Navbar.Toggle className="justify-content-end" />
-        <Navbar.Collapse className="justify-content-end">
-          <Nav className="justify-content-end mx-5">
-            
-            <Nav.Link className="mx-4" href="#login">로그인</Nav.Link>
-            <Nav.Link className="mx-4" href="#link">예약</Nav.Link>
-            <Nav.Link className="mx-4" href="#link">후기</Nav.Link>
-
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link onClick={() =>{
+                navigate('/');
+            }}>Home</Nav.Link>
+            <Nav.Link onClick={() =>{
+                navigate('/myPage');
+            }}>
+              myPage
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
-      );
-  }
+  );
+}
+
+export default Header;
+
