@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React, { Component } from "react";
+import axios from "axios";
 export default class Server extends Component {
   constructor() {
     super();
     this.state = {
-      email: 'Not yet gotten',
+      email: "Not yet gotten",
     };
   }
   componentDidMount = () => {
-    axios.get('/api/users').then((res) => {
+    axios.get("http://localhost:5000/api/users").then((res) => {
       console.log(res);
       this.setState({
         email: res.data[0].email,
