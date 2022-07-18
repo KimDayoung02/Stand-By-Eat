@@ -8,7 +8,7 @@ function Signup() {
       <Container>
 
         <BackButton onClick={() => navigate(-1)} >  뒤로가기</BackButton>
-
+            
           <SignupContainer>       
             <StoreButton>점주</StoreButton>
           <ClientButton>고객</ClientButton>
