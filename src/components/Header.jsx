@@ -16,13 +16,13 @@ function Header() {
               height="50"
             />
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link onClick={() =>{
+        <Navbar.Toggle className="justify-content-end" />
+        <Navbar.Collapse className="justify-content-end">
+          <Nav className="justify-content-end mx-5">
+            <Nav.Link className="mx-4" onClick={() =>{
                 navigate('/');
             }}>Home</Nav.Link>
-            <Nav.Link onClick={() =>{
+            <Nav.Link ClassName="mx-4" onClick={() =>{
                 navigate('/myPage');
             }}>
               myPage
