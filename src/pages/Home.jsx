@@ -1,5 +1,6 @@
 import { Carousel, Button } from 'react-bootstrap';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 function Home() {
   return (
     <>
@@ -46,7 +47,10 @@ function Home() {
       </HomeDiv>
 
       <ReservationButtonDiv>
-        <Buttons href="/reservation">전체</Buttons>
+        <Link to="/reservation">
+          <Buttons>전체</Buttons>
+        </Link>
+
         <Buttons href="/reservation">부산</Buttons>
         <Buttons href="/reservation">울산</Buttons>
         <Buttons href="/reservation">대구</Buttons>

@@ -1,40 +1,39 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 function Signup() {
   const navigate = useNavigate();
   return (
-      <Container>
+    <Container>
+      <BackButton onClick={() => navigate(-1)}> 뒤로가기</BackButton>
 
-        <BackButton onClick={() => navigate(-1)} >  뒤로가기</BackButton>
-            
-          <SignupContainer>       
-            <StoreButton>점주</StoreButton>
-          <ClientButton>고객</ClientButton>
-                       <InputForm>
-                  <InputText>이름</InputText>
-                  <InputValue placeholder='이름' />
-              </InputForm>
-              <InputForm>
-                  <InputText>휴대전화 번호</InputText>
-                  <InputValue placeholder='숫자만 입력' />
-              </InputForm>
-              <InputForm>
-                  <InputText>비밀번호</InputText>
-                  <InputValue placeholder='비밀번호' />
-              </InputForm>
-              <InputForm>
-                  <InputText>비밀번호 확인</InputText>
-                  <InputValue placeholder='비밀번호 확인' />
-              </InputForm>
-              <InputForm>
-                  <InputText>닉네임 (선택)</InputText>
-                  <InputValue placeholder='닉네임' />
-              </InputForm>
-              <SignupButton>시작하기</SignupButton>
-          </SignupContainer>
-      </Container>
+      <SignupContainer>
+        <StoreButton>점주</StoreButton>
+        <ClientButton>고객</ClientButton>
+        <InputForm>
+          <InputText>이름</InputText>
+          <InputValue placeholder="이름" />
+        </InputForm>
+        <InputForm>
+          <InputText>휴대전화 번호</InputText>
+          <InputValue placeholder="숫자만 입력" />
+        </InputForm>
+        <InputForm>
+          <InputText>비밀번호</InputText>
+          <InputValue placeholder="비밀번호" />
+        </InputForm>
+        <InputForm>
+          <InputText>비밀번호 확인</InputText>
+          <InputValue placeholder="비밀번호 확인" />
+        </InputForm>
+        <InputForm>
+          <InputText>닉네임 (선택)</InputText>
+          <InputValue placeholder="닉네임" />
+        </InputForm>
+        <SignupButton>시작하기</SignupButton>
+      </SignupContainer>
+    </Container>
   );
 }
 
@@ -42,17 +41,17 @@ const Container = styled.div`
   position: absolute;
   display: flex;
   margin: 0 auto;
-  
+
   padding: 0;
   background-color: white;
-  
+
   width: 100%;
   height: 100%;
 `;
 
 const SignupContainer = styled.div`
   margin: auto;
- 
+
   background-color: white;
   width: 40%;
   height: 600px;
@@ -60,7 +59,6 @@ const SignupContainer = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-
 `;
 
 const InputForm = styled.form`
@@ -71,7 +69,7 @@ const InputForm = styled.form`
 
   font-size: medium;
   display: block;
-`; 
+`;
 
 const InputText = styled.h4`
   margin-left: 45px;
@@ -98,15 +96,14 @@ const SignupButton = styled.button`
   background-color: #F34141;
   border: 1px solid 
   font-size: medium;
-
   border-radius: 10px;
 `;
 const ClientButton = styled.button`
-width: 100px;
-height: 40px;
+  width: 100px;
+  height: 40px;
 
   color: white;
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
   border: 1px solid transparent;
   font-size: medium;
 
@@ -117,19 +114,18 @@ const StoreButton = styled.button`
   height: 40px;
 
   color: white;
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
   border: 1px solid transparent;
   font-size: medium;
 
   border-radius: 10px;
 `;
-const BackButton =styled.button`
-width: 100px;
-height: 29px;
+const BackButton = styled.button`
+  width: 100px;
+  height: 29px;
 
-font-size: medium;
+  font-size: medium;
 
-border-radius: 10px;
+  border-radius: 10px;
 `;
 export default Signup;
-

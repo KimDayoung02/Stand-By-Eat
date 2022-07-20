@@ -4,6 +4,7 @@ import Header from './components/Header';
 import styled from 'styled-components';
 import UserMyPage from './pages/users/myPage';
 import Home from './pages/Home';
+import Reservation from './pages/Reservation';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="myPage" element={<UserMyPage />} />
+          <Route path="reservation" element={<Reservation />}></Route>
         </Routes>
       </BrowserRouter>
     </div>
