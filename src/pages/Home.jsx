@@ -45,12 +45,13 @@ function Home() {
         </Carousel>
       </HomeDiv>
 
-      <ReservationButton>
-        <Buttons>전체</Buttons>
-        <Buttons>부산</Buttons>
-        <Buttons>울산</Buttons>
-        <Buttons>대구</Buttons>
-      </ReservationButton>
+      <ReservationButtonDiv>
+        <Buttons href="/reservation">전체</Buttons>
+        <Buttons href="/reservation">부산</Buttons>
+        <Buttons href="/reservation">울산</Buttons>
+        <Buttons href="/reservation">대구</Buttons>
+        {/* 추후 back에서 가져오는 지역 data로 props를 줘서 component내에서 filter할 예정 */}
+      </ReservationButtonDiv>
     </>
   );
 }
@@ -67,9 +68,10 @@ const CarouselItemImg = styled.img`
   height: 25rem;
   object-fit: cover;
 `;
-const ReservationButton = styled.div`
+const ReservationButtonDiv = styled.div`
   display: flex;
   justify-content: space-evenly;
+  text-align: center;
 `;
 const Buttons = styled(Button)`
   width: 8rem;
@@ -78,13 +80,18 @@ const Buttons = styled(Button)`
   border-color: #ffffff;
   color: #6a2490;
   background-color: #eaccfd;
-  box-shadow: none;
+  text-align: center;
+  line-height: 4rem;
+
   &:hover {
     background-color: #ba86d5;
     border-color: white;
   }
-  &:visited {
+  &:active {
     border-color: #6a2490;
+  }
+  &:visited {
+    border-color: white;
   }
 `;
 export default Home;
