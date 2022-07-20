@@ -19,7 +19,7 @@ const MyPage = ()=>{
         사용자 마이페이지입니다.
         <Layout>
         
-            <BasicExample/>
+            <MyPageComponent/>
 
         </Layout>
     
@@ -37,7 +37,7 @@ const Layout = styled.div`
     margin-top : 30px;
 `;
 
-function BasicExample() {
+function MyPageComponent() {
 
   return (
     <Form>
@@ -57,7 +57,6 @@ function BasicExample() {
 }
 
 function infoChange(e){
-    
     let innerText = e.target.innerText;
     if(innerText === '프로필수정'){
         e.target.innerText = '변경하기'
