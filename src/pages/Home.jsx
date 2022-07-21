@@ -1,6 +1,6 @@
 import { Carousel, Button } from 'react-bootstrap';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+
 function Home() {
   return (
     <>
@@ -47,13 +47,11 @@ function Home() {
       </HomeDiv>
 
       <ReservationButtonDiv>
-        <Link to="/reservation">
-          <Buttons>전체</Buttons>
-        </Link>
+        <Buttons href="/reservation">전체</Buttons>
 
-        <Buttons href="/reservation">부산</Buttons>
-        <Buttons href="/reservation">울산</Buttons>
-        <Buttons href="/reservation">대구</Buttons>
+        <Buttons href="/reservation/busan">부산</Buttons>
+        <Buttons href="/reservation/ulsan">울산</Buttons>
+        <Buttons href="/reservation/daegu">대구</Buttons>
         {/* 추후 back에서 가져오는 지역 data로 props를 줘서 component내에서 filter할 예정 */}
       </ReservationButtonDiv>
     </>
