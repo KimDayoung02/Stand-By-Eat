@@ -45,10 +45,9 @@
     - 백엔드
         - Express, Node
     
-- 와이어프레임 (Figma 등 링크 삽입)
+
 - 스토리보드 및 유저 시나리오
-    - 홈 화면에서 어떤 버튼을 클릭하여 어떤 페이지로 이동할 수 있다.
-    - 이 버튼을 클릭하면 이런 웹 서비스가 실행된다.
+  [피그마링크](https://www.figma.com/file/ey4pOq90z2jHRkivXGDeLq/%ED%85%8C%EC%9D%B4%EB%B8%94%EB%A7%81-%EC%98%88%EC%95%BD?node-id=0%3A1)
 
 ### 5. 구성원 역할
 
@@ -61,4 +60,4 @@
 
 ### 6. 데이터 설계
 
-[데이터 설계 관련 문서 작성 링크 :](https://docs.google.com/spreadsheets/d/18wSjjrUqZakAKz6wTBfXr6sPJwrnJSJTrbowwTkci1I/edit?usp=sharing)
+[데이터 설계 관련 문서 작성 링크](https://docs.google.com/spreadsheets/d/18wSjjrUqZakAKz6wTBfXr6sPJwrnJSJTrbowwTkci1I/edit?usp=sharing)
