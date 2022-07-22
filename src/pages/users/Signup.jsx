@@ -12,11 +12,11 @@ const Signup=()=> {
   
   const [id, setId] = useState('');
   const [phoneNumber, setPhonenumber] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordConfirm, setPasswordConfirm] = useState('');
+  const [pw, setPw] = useState('');
+  const [pwConfirm, setPwConfirm] = useState('');
   const [name, setName] = useState('');
   const [nickName, setNickName] = useState('신규회원');
-  const [birthDate, setBirthDate] = useState(getStringDate(new Date()));
+  const [birth, setBirth] = useState(getStringDate(new Date()));
 
   
   const handleSignUp = async (e) => {
@@ -34,7 +34,7 @@ const Signup=()=> {
       alert("비밀번호를 다시 확인해주세요");}
       else {
         try { 
-          const data = { id, phoneNumber, password ,name, nickName, birthDate};
+          const data = { id, phoneNumber, pw ,name, nickName, birth};
           // await Api.post('/register', data);
           navigate('/SignupComplete');
         } catch (err) {
@@ -63,11 +63,11 @@ const Signup=()=> {
               </InputForm>
               <InputForm>
                   <InputText>비밀번호</InputText>
-                  <InputValue placeholder='비밀번호' value={password} onChange={(e) => {  setPassword(e.target.value);}}/>
+                  <InputValue placeholder='비밀번호' value={pw} onChange={(e) => {  setPw(e.target.value);}}/>
               </InputForm>
               <InputForm>
                   <InputText>비밀번호 확인</InputText>
-                  <InputValue placeholder='비밀번호 확인' value={passwordConfirm} onChange={(e) => {  setPasswordConfirm(e.target.value);}} />
+                  <InputValue placeholder='비밀번호 확인' value={pwConfirm} onChange={(e) => {  setPwConfirm(e.target.value);}} />
               </InputForm>
               <InputForm>
                   <InputText>닉네임 (선택)</InputText>
@@ -76,7 +76,7 @@ const Signup=()=> {
               
               <InputForm>
                   <InputText>생년월일 (선택)</InputText>
-                  <InputValue value={birthDate} onChange={(e) => setBirthDate(e.target.value)} type="date" />
+                  <InputValue value={birthDate} onChange={(e) => setBirth(e.target.value)} type="date" />
               </InputForm>
               <SignupButton  onClick={handleSignUp} >시작하기</SignupButton>
           </SignupContainer>
