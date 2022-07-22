@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, ListGroup } from 'react-bootstrap';
 import styled from 'styled-components';
 
 import { PORT } from './../../Api';
@@ -9,41 +9,53 @@ function MyPage() {
 
   // console.log(userData);
   return (
-    <div>
-      사용자 마이페이지입니다.
-      <Layout>
-        <ProfileLayout>
-          <MyProfileComponent userData={userData} />
-        </ProfileLayout>
-        <ReservationLayout>
-          <ReservationComponent />
-        </ReservationLayout>
-      </Layout>
-    </div>
+    <Layout>
+      <ProfileLayout>
+        <MyProfileComponent userData={userData} />
+      </ProfileLayout>
+      <ReservationLayout>
+        <ReservationComponent />
+      </ReservationLayout>
+    </Layout>
   );
 }
-// 예약 확인 컴포넌트
+
+// 예약 확인 레이아웃
 const ReservationLayout = styled.div`
-  background-color: blue;
+  width: 80%;
 `;
 
+function DisabledExample() {
+  return (
+    <ListGroup>
+      <ListGroup.Item>Cras justo odio</ListGroup.Item>
+      <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
+      <ListGroup.Item>Morbi leo risus</ListGroup.Item>
+      <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
+    </ListGroup>
+  );
+}
+
+// 예약 목록 컴포넌트
 function ReservationComponent() {
   return (
     <>
       <h3>예약목록</h3>
-      <div></div>
+      <div>
+        <DisabledExample />
+      </div>
     </>
   );
 }
 
+// 사용자 프로필 컴포넌트
 function MyProfileComponent(props) {
-  // console.log(props);
+  console.log(props);
   return (
     <Form
       style={{
         display: 'flex',
         flexDirection: 'column',
-        // justifyContent: 'center',
         alignItems: 'center',
       }}
     >
@@ -52,7 +64,7 @@ function MyProfileComponent(props) {
           <img
             className="phoneImage"
             alt="iPhone_01"
-            src={props.userData.profileImgUrl}
+            // src={props.userData.profileImgUrl}
             style={{ width: '100px' }}
           />
         </Form.Label>
@@ -82,19 +94,20 @@ function infoChange(e) {
 }
 
 const Layout = styled.div`
-  padding: 100px;
-  margin: 50px;
-  background-color: rgba(0, 0, 0, 0.2);
-  /* margin: 0 auto; */
+  padding: 4%;
+  margin: 3% 5%;
+  /* background-color: rgba(0, 0, 0, 0.2); */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  /* border: 1px solid black; */
 `;
 
 const ProfileLayout = styled.div`
-  /* background-color: red; */
-  border: 1px solid black;
+  /* border: 1px solid black; */
   padding: 30px;
+  margin: 5%;
 `;
+
 export default MyPage;

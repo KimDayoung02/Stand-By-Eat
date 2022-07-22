@@ -6,6 +6,8 @@ import axios from 'axios';
 import { PORT } from './../Api';
 
 function Login() {
+  let [seletedRole, setRoleBtn] = useState('');
+  //let [color, setColor] = useState('#d9d9d9');
   let [id, inputId] = useState('');
   let [password, inputPassword] = useState('');
 
@@ -15,8 +17,31 @@ function Login() {
       <BackButton onClick={() => navigate(-1)}> 뒤로가기</BackButton>
 
       <SignupContainer>
-        <StoreButton>점주</StoreButton>
-        <ClientButton>고객</ClientButton>
+        <StoreButton
+          onClick={() => {
+            setRoleBtn('owner');
+            //setColor('red');
+          }}
+        >
+          점주
+        </StoreButton>
+        <button
+          onClick={() => {
+            setRoleBtn('admin');
+            //setColor('red');
+          }}
+        >
+          관리자
+        </button>
+        <ClientButton
+          // color={color}
+          onClick={() => {
+            setRoleBtn('user');
+            //setColor('red');
+          }}
+        >
+          고객
+        </ClientButton>
         <InputForm>
           <InputText>이름</InputText>
           <InputValue
@@ -24,7 +49,6 @@ function Login() {
             onChange={(e) => {
               inputId(e.target.value);
             }}
-            className="id"
           />
         </InputForm>
 
@@ -40,7 +64,12 @@ function Login() {
 
         <SignupButton
           onClick={() => {
-            checkUser(id, password);
+            if (seletedRole === '') {
+              alert(`권한 선택을 안했습니다! ${seletedRole}`);
+              return;
+            } else {
+              checkUser(id, password);
+            }
           }}
         >
           시작하기
@@ -50,18 +79,20 @@ function Login() {
   );
 
   function checkUser(id, password) {
+    let role = getRole(id);
     axios({
-      url: `${PORT}/api/login`,
+      url: role === 'user' ? `${PORT}/api/login` : `${PORT}/${role}/login`,
       method: 'post',
       data: {
         id: id,
         pw: password,
       },
     })
-      .then(function a(response) {
+      .then((res) => {
         alert('로그인 성공!');
+
         // 토큰 생성
-        const isToken = response.data;
+        const isToken = res.data;
         localStorage.setItem('token', JSON.stringify(isToken));
         localStorage.setItem('loginId', JSON.stringify(id));
         getRole(id);
@@ -79,26 +110,20 @@ function getRole(id) {
   if (id.includes('admin')) {
     role = 'admin';
     localStorage.setItem('role', JSON.stringify(role));
-    return;
+    return role;
   }
-
+  let userURL = `${PORT}/api/user/${id}`;
+  const promise1 = axios.get(userURL).then((res) => console.log(res.data));
+  console.log(promise1);
+  promise1 !== null ? (role = 'user') : (role = 'owner');
+  // console.log(role);
+  localStorage.setItem('role', JSON.stringify(role));
+  return role;
   // 유저
   // http://localhost:5000/api/user/test1
   // 점주
   // http://localhost:5000/owner/users
-  let userURL = `${PORT}/api/user/${id}`;
-  let ownerURL = `${PORT}/owner/user/${id}`;
-
-  const promise1 = axios.get(userURL).then((res) => res.data);
-  const promise2 = axios.get(ownerURL).then((res) => res.data);
-
-  promise1 !== null ? (role = 'user') : (role = 'owner');
-
-  console.log(role);
-  // Promise.all([promise1, promise2])
-  //   .then((res) => res)
-  //   .then((data) => console.log(data));
-  //axios.get(`${PORT}/owner/users/${id}`).then((res) => console.log(res));
+  //let ownerURL = `${PORT}/owner/user/${id}`;
 }
 
 // 로그인 버튼 클릭시
@@ -108,10 +133,8 @@ const Container = styled.div`
   position: absolute;
   display: flex;
   margin: 0 auto;
-
   padding: 0;
   background-color: white;
-
   width: 100%;
   height: 100%;
 `;
@@ -158,18 +181,16 @@ const SignupButton = styled.button`
   width: 300px;
   height: 50px;
   margin: 50px 180px;
-
   color: white;
   background-color: #F34141;
   border: 1px solid 
   font-size: medium;
-
   border-radius: 10px;
 `;
+
 const ClientButton = styled.button`
   width: 100px;
   height: 40px;
-
   color: white;
   background-color: #d9d9d9;
   border: 1px solid transparent;
