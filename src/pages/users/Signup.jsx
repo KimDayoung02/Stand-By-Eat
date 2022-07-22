@@ -179,4 +179,3 @@ font-size: medium;
 border-radius: 10px;
 `;
 export default Signup;
-
