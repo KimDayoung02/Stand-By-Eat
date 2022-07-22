@@ -3,55 +3,31 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 let test = [];
 
-axios.get('http://localhost:5000/api/stores').then((res) => {
-  console.log(res.data);
-  for (let i = 0; i < res.data.length; i++) {
-    test.push(res.data[i]);
-  }
-});
-console.log(test);
-
-// // console.lo
-// console.log('===================');
-// console.log(test);
-console.log(test[0]);
-
-// console.log('===================');
-
-// let arr = [];
-// arr.push(1);
-// arr.push(3);
-// console.log(arr);
-
-// console.log('===================');
-// console.log(StoreInfo[0]);
 function StoreList() {
-  // const [test, setTest] = useState([]);
-  // // let test = [];
-  // axios.get('http://localhost:5000/api/stores').then((res) => {
-  //   console.log(res.data);
-  //   for (let i = 0; i < res.data.length; i++) {
-  //     test.push(res.data[i]);
-  //   }
-  // });
+  const [test, setTest] = useState([]);
+  axios.get('http://localhost:5000/api/stores').then((res) => {
+    console.log(res.data);
+    for (let i = 0; i < res.data.length; i++) {
+      test.push(res.data[i]);
+    }
+  });
 
-  // useEffect(() => {
-  //   axios.get('http://localhost:5000/api/stores').then((res) => {
-  //     console.log(res.data);
-  //     let newArray = [];
-  //     for (let i = 0; i < res.data.length; i++) {
-  //       // test.push(res.data[i]);
-  //       newArray.push(res.data[i]);
-  //     }
-  //     setTest(newArray);
-  //   });
-  // }, []);
-  // console.log(test);
+  useEffect(() => {
+    axios.get('http://localhost:5000/api/stores').then((res) => {
+      console.log(res.data);
+      let newArray = [];
+      for (let i = 0; i < res.data.length; i++) {
+        newArray.push(res.data[i]);
+      }
+      setTest(newArray);
+    });
+  }, []);
+  console.log(test);
 
-  // // console.lo
-  // console.log('===================');
-  // console.log('test = ', test);
-  // console.log('test[0] = ', test[0]);
+  // console.lo
+  console.log('===================');
+  console.log('test = ', test);
+  console.log('test[0] = ', test[0]);
   return (
     <StoreDiv>
       <StoreContentsDiv>
@@ -59,9 +35,9 @@ function StoreList() {
           <StoreImg src="food1.jpeg" />
         </ImageDiv>
         <StoreStringsDiv>
-          <StoreName>{}</StoreName>
-          <StoreDetail>가게소개</StoreDetail>
-          <StoreNumber>000-000-0000</StoreNumber>
+          <StoreName>{test[0].storeName}</StoreName>
+          <StoreDetail>{test[0].introduction}</StoreDetail>
+          <StoreNumber>{test[0].phoneNumber}</StoreNumber>
         </StoreStringsDiv>
       </StoreContentsDiv>
     </StoreDiv>
@@ -102,6 +78,7 @@ const StoreStringsDiv = styled.div`
 
 const StoreName = styled.div`
   margin-bottom: 2rem;
+  font-size: large;
 `;
 
 const StoreDetail = styled.div`
