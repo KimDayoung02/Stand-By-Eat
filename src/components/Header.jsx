@@ -20,6 +20,13 @@ function Header() {
             <LinkStyle ClassName="mx-4" to="/myPage">
               myPage
             </LinkStyle>
+            <LinkStyle ClassName="mx-4" to="/login">
+              login
+            </LinkStyle>
+
+            <LinkStyle ClassName="mx-4" to="/signUP">
+              signUP
+            </LinkStyle>
           </Nav>
         </Navbar.Collapse>
       </Container>

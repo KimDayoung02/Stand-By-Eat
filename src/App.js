@@ -4,8 +4,13 @@ import Header from './components/Header';
 import styled from 'styled-components';
 import UserMyPage from './pages/users/myPage';
 import Home from './pages/Home';
+import Signup from './pages/Signup';
+import Login from './pages/TestLogin';
+import { useState } from 'react';
 
 function App() {
+  let [isLogin] = useState('');
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -15,7 +20,10 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Home />} />
+
           <Route path="myPage" element={<UserMyPage />} />
+          <Route path="signUp" element={<Signup />} />
+          <Route path="login" element={<Login />} />
         </Routes>
       </BrowserRouter>
     </div>

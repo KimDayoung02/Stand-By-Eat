@@ -1,50 +1,62 @@
+import { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import styled from 'styled-components';
 
-//import axios from 'axios';
+import { PORT } from './../../Api';
 
-function getData() {
-  fetch('http://localhost:5000/api/users').then((res) => {
-    console.log(res.data);
-  });
-}
+function MyPage() {
+  let [userData, setUserData] = useState();
 
-getData();
-
-const MyPage = () => {
+  // console.log(userData);
   return (
-    <>
+    <div>
       사용자 마이페이지입니다.
       <Layout>
-        <MyPageComponent />
+        <ProfileLayout>
+          <MyProfileComponent userData={userData} />
+        </ProfileLayout>
+        <ReservationLayout>
+          <ReservationComponent />
+        </ReservationLayout>
       </Layout>
-    </>
+    </div>
   );
-};
-
-const Layout = styled.div`
-  padding: 100px;
-  background-color: rgba(0, 0, 0, 0.2);
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 30px;
+}
+// 예약 확인 컴포넌트
+const ReservationLayout = styled.div`
+  background-color: blue;
 `;
 
-function MyPageComponent() {
+function ReservationComponent() {
   return (
-    <Form>
+    <>
+      <h3>예약목록</h3>
+      <div></div>
+    </>
+  );
+}
+
+function MyProfileComponent(props) {
+  // console.log(props);
+  return (
+    <Form
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        // justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>
-          {' '}
           <img
             className="phoneImage"
             alt="iPhone_01"
+            src={props.userData.profileImgUrl}
             style={{ width: '100px' }}
           />
         </Form.Label>
-        <Form.Control type="text" placeholder="닉네임" />
+        <Form.Control type="text" placeholder="닉네임" disabled />
         <Form.Text className="text-muted">
           We'll never share your email with anyone else.
         </Form.Text>
@@ -68,4 +80,21 @@ function infoChange(e) {
     e.target.innerText = '프로필수정';
   }
 }
+
+const Layout = styled.div`
+  padding: 100px;
+  margin: 50px;
+  background-color: rgba(0, 0, 0, 0.2);
+  /* margin: 0 auto; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ProfileLayout = styled.div`
+  /* background-color: red; */
+  border: 1px solid black;
+  padding: 30px;
+`;
 export default MyPage;
