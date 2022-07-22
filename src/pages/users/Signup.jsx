@@ -3,8 +3,12 @@ import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
 
 
-function Signup() {
+const Signup=()=> {
   const navigate = useNavigate();
+
+  const getStringDate = (date) => {
+    return date.toISOString().slice(0, 10);
+  };
   
   const [id, setId] = useState('');
   const [phoneNumber, setPhonenumber] = useState('');
@@ -12,7 +16,9 @@ function Signup() {
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [name, setName] = useState('');
   const [nickName, setNickName] = useState('신규회원');
- 
+  const [birthDate, setBirthDate] = useState(getStringDate(new Date()));
+
+  
   const handleSignUp = async (e) => {
     e.preventDefault();
 
@@ -24,11 +30,11 @@ function Signup() {
       alert("전화번호를 입력해주세요.");
   } else if ( password === '') {
         alert("비밀번호를 입력해주세요.");
-    }  else if (passwordConfirm==='' ||password != passwordConfirm ) {
+    }  else if (passwordConfirm==='' || password !== passwordConfirm) {
       alert("비밀번호를 다시 확인해주세요");}
       else {
-        try {
-          
+        try { 
+          navigate('/SignupComplete');
         } catch (err) {
             console.log('회원가입 실패', err);
         }
@@ -37,13 +43,11 @@ function Signup() {
 
   return (
       <Container>
-        <BackButton onClick={() => navigate(-1)} >  뒤로가기</BackButton>
-             {/* <h2 style={{margin: 30}}>회원가입</h2> */}
-             <StoreButton>점주</StoreButton>
+        <BackButton onClick={() => navigate(-1)} >  뒤로가기</BackButton> 
+          <StoreButton>점주</StoreButton>
           <ClientButton>고객</ClientButton>
           <SignupContainer>       
-   
-            <InputForm>
+              <InputForm>
                   <InputText>아이디</InputText>
                   <InputValue placeholder='아이디' value={id} onChange={(e) => {  setId(e.target.value);}}/>
               </InputForm>
@@ -66,6 +70,11 @@ function Signup() {
               <InputForm>
                   <InputText>닉네임 (선택)</InputText>
                   <InputValue placeholder='닉네임' value={nickName} onChange={(e) => {  setNickName(e.target.value);}}/>
+              </InputForm>
+              
+              <InputForm>
+                  <InputText>생년월일 (선택)</InputText>
+                  <InputValue value={birthDate} onChange={(e) => setBirthDate(e.target.value)} type="date" />
               </InputForm>
               <SignupButton  onClick={handleSignUp} >시작하기</SignupButton>
           </SignupContainer>
@@ -158,6 +167,7 @@ const StoreButton = styled.button`
 
   border-radius: 10px;
 `;
+
 const BackButton =styled.button`
 width: 100px;
 height: 29px;
