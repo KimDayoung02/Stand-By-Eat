@@ -6,12 +6,12 @@ import axios from 'axios';
 import { PORT } from './../Api';
 
 function Login() {
+  let navigate = useNavigate();
   let [seletedRole, setRoleBtn] = useState('');
   //let [color, setColor] = useState('#d9d9d9');
   let [id, inputId] = useState('');
   let [password, inputPassword] = useState('');
 
-  const navigate = useNavigate();
   return (
     <Container>
       <BackButton onClick={() => navigate(-1)}> 뒤로가기</BackButton>
@@ -90,12 +90,12 @@ function Login() {
     })
       .then((res) => {
         alert('로그인 성공!');
-
         // 토큰 생성
         const isToken = res.data;
         localStorage.setItem('token', JSON.stringify(isToken));
         localStorage.setItem('loginId', JSON.stringify(id));
         getRole(id);
+        navigate('/');
       })
       .catch(function (error) {
         console.log(error);
