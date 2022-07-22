@@ -6,11 +6,9 @@ import UserMyPage from './pages/users/myPage';
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/TestLogin';
-import { useState } from 'react';
+// import Login from './pages/Login';
 
 function App() {
-  let [isLogin] = useState('');
-
   return (
     <div className="App">
       <BrowserRouter>
