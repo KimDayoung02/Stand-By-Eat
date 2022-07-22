@@ -1,9 +1,19 @@
+<<<<<<< HEAD
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import styled from 'styled-components';
 import UserMyPage from './pages/users/myPage';
 import Home from './pages/Home';
+=======
+import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Header from "./components/Header";
+import styled from "styled-components";
+import UserMyPage from "./pages/users/myPage";
+import Signup from "./pages/users/Signup";
+import SignupComplete from "./pages/users/SignupComplete";
+>>>>>>> FE/hb
 
 function App() {
   return (
@@ -16,6 +26,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="myPage" element={<UserMyPage />} />
+          <Route path="Signup" element={<Signup />} />
+          <Route path="SignupComplete" element={<SignupComplete />} />
         </Routes>
       </BrowserRouter>
     </div>
