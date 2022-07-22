@@ -34,6 +34,8 @@ const Signup=()=> {
       alert("비밀번호를 다시 확인해주세요");}
       else {
         try { 
+          const data = { id, phoneNumber, password ,name, nickName, birthDate};
+          // await Api.post('/register', data);
           navigate('/SignupComplete');
         } catch (err) {
             console.log('회원가입 실패', err);

@@ -6,19 +6,15 @@ import { useNavigate } from "react-router-dom";
 const SignupComplete=()=> {
   const navigate = useNavigate();
  
-  const loginBtn = async(e) => {
+  const mainBtn = (e) => {
     e.preventDefault();
-    try {
       navigate('/');
-    } catch (err) {
-        console.log('회원가입 실패', err);
-    }
 }    
 
   return(
     <Container>
     <Welcome>가입이 완료되었습니다.
-    <MainButton onClick={loginBtn}>메인</MainButton> 
+    <MainButton onClick={mainBtn}>메인</MainButton> 
     </Welcome>
     
     </Container>
