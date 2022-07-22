@@ -28,15 +28,16 @@ const Signup=()=> {
       alert("이름을 입력해주세요.");
   }   else if ( phoneNumber === '') {
       alert("전화번호를 입력해주세요.");
-  } else if ( password === '') {
+  } else if ( pw === '') {
         alert("비밀번호를 입력해주세요.");
-    }  else if (passwordConfirm==='' || password !== passwordConfirm) {
+    }  else if (pwConfirm==='' || pw !== pwConfirm) {
       alert("비밀번호를 다시 확인해주세요");}
       else {
         try { 
           const data = { id, phoneNumber, pw ,name, nickName, birth};
           // await Api.post('/register', data);
-          navigate('/SignupComplete');
+          alert(`정상적으로 회원가입되었습니다.`);
+          navigate('/');
         } catch (err) {
             console.log('회원가입 실패', err);
         }
@@ -76,7 +77,7 @@ const Signup=()=> {
               
               <InputForm>
                   <InputText>생년월일 (선택)</InputText>
-                  <InputValue value={birthDate} onChange={(e) => setBirth(e.target.value)} type="date" />
+                  <InputValue value={birth} onChange={(e) => setBirth(e.target.value)} type="date" />
               </InputForm>
               <SignupButton  onClick={handleSignUp} >시작하기</SignupButton>
           </SignupContainer>
