@@ -6,8 +6,8 @@ import StoreList from '../components/StoreList';
 function Reservation() {
   return (
     <>
-      <LocationFilter></LocationFilter>
-      <StoreList></StoreList>
+      <LocationFilter />
+      <StoreList />
     </>
   );
 }
