@@ -1,7 +1,9 @@
 import React,{useState} from 'react';
 import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
+import { PORT } from './../../Api';
 
 const Signup=()=> {
   const navigate = useNavigate();
@@ -33,10 +35,20 @@ const Signup=()=> {
     }  else if (passwordConfirm==='' || password !== passwordConfirm) {
       alert("비밀번호를 다시 확인해주세요");}
       else {
+       const data = {id:id, phoneNumber:phoneNumber, pw:pw, name:name, nickName:nickName, birth:birth}
         try { 
+<<<<<<< Updated upstream
           const data = { id, phoneNumber, password ,name, nickName, birthDate};
           // await Api.post('/register', data);
           navigate('/SignupComplete');
+=======
+          axios.post(`${PORT}/user/register`,data)
+              .then(function(response) {
+                alert('정상적으로 회원가입되었습니다.')
+                navigate('/');
+              })        
+          
+>>>>>>> Stashed changes
         } catch (err) {
             console.log('회원가입 실패', err);
         }
@@ -46,9 +58,9 @@ const Signup=()=> {
   return (
       <Container>
         <BackButton onClick={() => navigate(-1)} >  뒤로가기</BackButton> 
-          <StoreButton>점주</StoreButton>
-          <ClientButton>고객</ClientButton>
+          <Title>회원가입</Title>
           <SignupContainer>       
+            
               <InputForm>
                   <InputText>아이디</InputText>
                   <InputValue placeholder='아이디' value={id} onChange={(e) => {  setId(e.target.value);}}/>
@@ -63,11 +75,19 @@ const Signup=()=> {
               </InputForm>
               <InputForm>
                   <InputText>비밀번호</InputText>
+<<<<<<< Updated upstream
                   <InputValue placeholder='비밀번호' value={password} onChange={(e) => {  setPassword(e.target.value);}}/>
               </InputForm>
               <InputForm>
                   <InputText>비밀번호 확인</InputText>
                   <InputValue placeholder='비밀번호 확인' value={passwordConfirm} onChange={(e) => {  setPasswordConfirm(e.target.value);}} />
+=======
+                  <InputValue type='password' placeholder='비밀번호' value={pw} onChange={(e) => {  setPw(e.target.value);}}/>
+              </InputForm>
+              <InputForm>
+                  <InputText>비밀번호 확인</InputText>
+                  <InputValue type='password' placeholder='비밀번호 확인' value={pwConfirm} onChange={(e) => {  setPwConfirm(e.target.value);}} />
+>>>>>>> Stashed changes
               </InputForm>
               <InputForm>
                   <InputText>닉네임 (선택)</InputText>
@@ -95,7 +115,9 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
 `;
-
+const Title= styled.div`
+text-align: center;
+`;
 const SignupContainer = styled.div`
   margin: auto;
  

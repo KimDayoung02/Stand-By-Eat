@@ -4,7 +4,11 @@ import Header from "./components/Header";
 import styled from "styled-components";
 import UserMyPage from "./pages/users/myPage";
 import Signup from "./pages/users/Signup";
-import SignupComplete from "./pages/users/SignupComplete";
+
+
+import Login from "./pages/users/Login";
+import UserSignOut from "./pages/users/UserSignOut";
+
 
 function App() {
   return (
@@ -17,7 +21,8 @@ function App() {
           <Route path="/" />
           <Route path="myPage" element={<UserMyPage />} />
           <Route path="Signup" element={<Signup />} />
-          <Route path="SignupComplete" element={<SignupComplete />} />
+          <Route path="Login" element={<Login />} />
+          <Route path="UserSignOut" element={<UserSignOut />} />
         </Routes>
       </BrowserRouter>
     </div>
