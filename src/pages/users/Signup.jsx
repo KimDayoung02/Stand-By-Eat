@@ -36,7 +36,8 @@ const Signup=()=> {
       alert("비밀번호를 다시 확인해주세요");}
       else {
        const data = {id:id, phoneNumber:phoneNumber, pw:pw, name:name, nickName:nickName, birth:birth}
-        try { 
+       
+       try { 
           axios.post(`${PORT}/user/register`,data)
               .then(function(response) {
                 alert('정상적으로 회원가입되었습니다.')
