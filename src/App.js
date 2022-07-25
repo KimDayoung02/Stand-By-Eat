@@ -9,6 +9,8 @@ import Signup from './pages/users/Signup';
 //import Signup from './pages/Signup';
 import Login from './pages/TestLogin';
 
+import StoreRegister from './pages/owner/StoreRegister';
+
 function App() {
   return (
     <div className="App">
@@ -23,6 +25,8 @@ function App() {
           <Route path="Signup" element={<Signup />} />
           {/* <Route path="SignupComplete" element={<SignupComplete />} /> */}
           <Route path="login" element={<Login />} />
+
+          <Route path="storeRegister" element={<StoreRegister />} />
         </Routes>
       </BrowserRouter>
     </div>

@@ -48,6 +48,10 @@ function Header() {
                 myPage
               </LinkStyle>
             ) : null}
+
+            <LinkStyle ClassName="mx-4" to="/storeRegister">
+              storeRegister
+            </LinkStyle>
           </Nav>
         </Navbar.Collapse>
       </Container>
