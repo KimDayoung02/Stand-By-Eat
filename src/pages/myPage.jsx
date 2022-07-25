@@ -1,11 +1,11 @@
 import { useState, useRef, useEffect } from 'react';
-import { ListGroup } from 'react-bootstrap';
+
 import styled from 'styled-components';
 import './../styles/Profile.css';
 
 // import { PORT } from './../../Api';
 
-// import axios from 'axios';
+import axios from 'axios';
 
 const TEST_DATA = {
   ninkname: '사람1',
@@ -13,6 +13,9 @@ const TEST_DATA = {
 
 const DEFAULT_IMG =
   'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png';
+
+// 예약 정보 가져오기
+
 // user 정보가져오기- alsgml1640
 // axios.get('http://localhost:5000/api/user/alsgml1640')
 
@@ -88,10 +91,6 @@ function MyPage() {
 
 // 사용자 프로필 컴포넌트
 function MyProfileComponent() {
-  // useEffect(() => {
-  //   nicknameInput.current.value = TEST_DATA.ninkname;
-  //   nicknameInput.current.disabled = true;
-  // }, []);
   const fileInput = useRef(null);
   const [image, setImage] = useState(DEFAULT_IMG);
   const [file, setFile] = useState('');
@@ -99,6 +98,7 @@ function MyProfileComponent() {
   const [nickname, setNickname] = useState(TEST_DATA.ninkname);
   const [change, setChange] = useState(false);
   const [buttonText, setButtonText] = useState('프로필 변경');
+  const [changeData, setChangeData] = useState({});
 
   const imageOnChange = (e) => {
     if (e.target.files[0]) {
@@ -128,6 +128,8 @@ function MyProfileComponent() {
     } else {
       setButtonText('수정하기');
       setNickname(nicknameInput.current.value);
+      // 프로필변경 데이터
+      setChangeData({ imageUrl: image, nickName: nicknameInput.current.value });
     }
   };
 
@@ -170,24 +172,70 @@ function MyProfileComponent() {
 }
 
 // 예약 컴포넌트
-function ReserVationData() {
+function ReserVationData({ reservationData }) {
   return (
-    <ListGroup>
-      <ListGroup.Item>Cras justo odio</ListGroup.Item>
-      <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-      <ListGroup.Item>Morbi leo risus</ListGroup.Item>
-      <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
-    </ListGroup>
+    <>
+      {reservationData.length !== 0 ? (
+        reservationData.map((e) => {
+          return (
+            <div className="stored-container">
+              <StoredDataComponent
+                storeId={e.storeId}
+                reservationTime={e.reservationTime}
+              />
+            </div>
+          );
+        })
+      ) : (
+        <>
+          <h2>예약한 가게가 없습니다!</h2>
+        </>
+      )}
+    </>
+  );
+}
+
+// 가게 정보 들고오기
+function StoredDataComponent({ storeId, reservationTime }) {
+  const [store, setStored] = useState([]);
+  useEffect(() => {
+    axios.get(`http://localhost:5000/api/store/${storeId}`).then((res) => {
+      let storeData = res.data;
+      setStored(storeData);
+    });
+  }, [storeId]);
+  return (
+    <div className="store-row">
+      <div className="storedImg-container">
+        <div>{store.picture}</div>
+      </div>
+      <div className="storedInfo-container">
+        <div>{store.categoryLocation}</div>
+        <div>{store.storeName}</div>
+        <div>{reservationTime}</div>
+      </div>
+    </div>
   );
 }
 
 // 예약 목록 컴포넌트
 function ReservationComponent() {
+  const [reservationData, setReservation] = useState([]);
+  useEffect(() => {
+    axios.get('http://localhost:5000/api/orders').then((response) => {
+      let filterReservation = response.data.filter(
+        (data) => data.userId === '62da779d6e07976e400ecebe',
+      );
+
+      setReservation(filterReservation);
+    });
+  }, []);
+
   return (
     <>
       <h3>예약목록</h3>
       <div>
-        <ReserVationData />
+        <ReserVationData reservationData={reservationData} />
       </div>
     </>
   );
