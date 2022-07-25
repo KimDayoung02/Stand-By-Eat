@@ -41,12 +41,25 @@ function Header() {
                 <LinkStyle ClassName="mx-4" to="/signUP">
                   signUP
                 </LinkStyle>
+                <LinkStyle ClassName="mx-4" to="/adminPage">
+                  admin
+                </LinkStyle>
               </>
             ) : null}
             {role === 'user' ? (
               <LinkStyle ClassName="mx-4" to="/myPage">
                 myPage
               </LinkStyle>
+            ) : null}
+            {role === 'admin' ? (
+              <>
+                <LinkStyle ClassName="mx-4" to="/myPage">
+                  myPage
+                </LinkStyle>
+                <LinkStyle ClassName="mx-4" to="/adminPage">
+                  admin
+                </LinkStyle>
+              </>
             ) : null}
           </Nav>
         </Navbar.Collapse>
@@ -58,6 +71,7 @@ function Header() {
 export default Header;
 
 const LinkStyle = styled(Link)`
+  margin-left: 1.5rem;
   text-decoration: none;
   color: #7d4e97;
   &:hover {

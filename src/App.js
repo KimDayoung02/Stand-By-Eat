@@ -5,6 +5,10 @@ import styled from 'styled-components';
 import UserMyPage from './pages/users/myPage';
 import Home from './pages/Home';
 import Signup from './pages/users/Signup';
+import AdminPage from './pages/users/adminPage';
+import ManageUsers from './pages/admin/ManageUsers';
+import ManageOrders from './pages/admin/ManageOrders';
+import ManageStores from './pages/admin/ManageStores';
 //import SignupComplete from './pages/users/SignupComplete';
 import Login from './pages/TestLogin';
 function App() {
@@ -20,6 +24,10 @@ function App() {
           <Route path="myPage" element={<UserMyPage />} />
           <Route path="Signup" element={<Signup />} />
           <Route path="login" element={<Login />} />
+          <Route path="adminPage" element={<AdminPage />} />
+          <Route path="manageUsers" element={<ManageUsers />} />
+          <Route path="manageStores" element={<ManageOrders />} />
+          <Route path="manageOrders" element={<ManageStores />} />
           {/* <Route path="SignupComplete" element={<SignupComplete />} /> */}
         </Routes>
       </BrowserRouter>
