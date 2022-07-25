@@ -1,0 +1,41 @@
+.profile-component {
+  padding: 2%;
+}
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.profile-img {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  /* background-color: aqua; */
+}
+.profile-img img {
+  border-radius: 50%;
+  margin: 20px;
+  width: 220px;
+  height: 220px;
+  position: absolute;
+}
+
+.image-change-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  background-color: azure;
+  cursor: pointer;
+}
+
+.profile-info {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
