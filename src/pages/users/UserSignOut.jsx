@@ -8,6 +8,7 @@ import { PORT } from '../../Api';
 const UserSignOut=()=> {
   const navigate = useNavigate();
  
+  const [id, setId] = useState('');
   const [pw, setPw] = useState('');
   const [pwConfirm, setPwConfirm] = useState('');
  
@@ -20,11 +21,12 @@ const UserSignOut=()=> {
       alert("비밀번호를 다시 확인해주세요");}
       else {
         try { 
-          const data ={ userId, pw }
+          const data ={ userId:id, pw:pw }
           confirm("정말 회원 탈퇴하시겠습니까?")
           axios.delete(`${PORT}/user/delete`,data 
             )
               .then(function(response) {
+                localStorage.clear();
                 alert('정상적으로 탈퇴 처리되었습니다.')
                 navigate('/');
               })        
@@ -41,6 +43,10 @@ const UserSignOut=()=> {
         <h1 style={{ marginTop: '20px' }}>회원탈퇴</h1>
            <SignupContainer>       
               회원탈퇴하기
+              <InputForm>
+                  <InputText>아이디</InputText>
+                  <InputValue type='id' placeholder='아이디' value={id} onChange={(e) => {  setId(e.target.value);}}/>
+              </InputForm>
               <InputForm>
                   <InputText>비밀번호</InputText>
                   <InputValue type='password' placeholder='비밀번호' value={pw} onChange={(e) => {  setPw(e.target.value);}}/>

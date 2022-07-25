@@ -14,11 +14,11 @@ const Signup=()=> {
   
   const [id, setId] = useState('');
   const [phoneNumber, setPhonenumber] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordConfirm, setPasswordConfirm] = useState('');
+  const [pw, setPw] = useState('');
+  const [pwConfirm, setPwConfirm] = useState('');
   const [name, setName] = useState('');
   const [nickName, setNickName] = useState('신규회원');
-  const [birthDate, setBirthDate] = useState(getStringDate(new Date()));
+  const [birth, setBirth] = useState(getStringDate(new Date()));
 
   
   const handleSignUp = async (e) => {
@@ -30,25 +30,19 @@ const Signup=()=> {
       alert("이름을 입력해주세요.");
   }   else if ( phoneNumber === '') {
       alert("전화번호를 입력해주세요.");
-  } else if ( password === '') {
+  } else if ( pw === '') {
         alert("비밀번호를 입력해주세요.");
-    }  else if (passwordConfirm==='' || password !== passwordConfirm) {
+    }  else if (pwConfirm==='' || pw !== pwConfirm) {
       alert("비밀번호를 다시 확인해주세요");}
       else {
        const data = {id:id, phoneNumber:phoneNumber, pw:pw, name:name, nickName:nickName, birth:birth}
         try { 
-<<<<<<< Updated upstream
-          const data = { id, phoneNumber, password ,name, nickName, birthDate};
-          // await Api.post('/register', data);
-          navigate('/SignupComplete');
-=======
           axios.post(`${PORT}/user/register`,data)
               .then(function(response) {
                 alert('정상적으로 회원가입되었습니다.')
                 navigate('/');
               })        
           
->>>>>>> Stashed changes
         } catch (err) {
             console.log('회원가입 실패', err);
         }
@@ -75,19 +69,11 @@ const Signup=()=> {
               </InputForm>
               <InputForm>
                   <InputText>비밀번호</InputText>
-<<<<<<< Updated upstream
-                  <InputValue placeholder='비밀번호' value={password} onChange={(e) => {  setPassword(e.target.value);}}/>
-              </InputForm>
-              <InputForm>
-                  <InputText>비밀번호 확인</InputText>
-                  <InputValue placeholder='비밀번호 확인' value={passwordConfirm} onChange={(e) => {  setPasswordConfirm(e.target.value);}} />
-=======
                   <InputValue type='password' placeholder='비밀번호' value={pw} onChange={(e) => {  setPw(e.target.value);}}/>
               </InputForm>
               <InputForm>
                   <InputText>비밀번호 확인</InputText>
                   <InputValue type='password' placeholder='비밀번호 확인' value={pwConfirm} onChange={(e) => {  setPwConfirm(e.target.value);}} />
->>>>>>> Stashed changes
               </InputForm>
               <InputForm>
                   <InputText>닉네임 (선택)</InputText>
@@ -96,7 +82,7 @@ const Signup=()=> {
               
               <InputForm>
                   <InputText>생년월일 (선택)</InputText>
-                  <InputValue value={birthDate} onChange={(e) => setBirthDate(e.target.value)} type="date" />
+                  <InputValue value={birth} onChange={(e) => setBirth(e.target.value)} type="date" />
               </InputForm>
               <SignupButton  onClick={handleSignUp} >시작하기</SignupButton>
           </SignupContainer>
@@ -201,4 +187,3 @@ font-size: medium;
 border-radius: 10px;
 `;
 export default Signup;
-
