@@ -1,5 +1,6 @@
 * {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  
 }
 .profile-component {
   width: 85%;
@@ -16,7 +17,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  /* justify-content: space-around; */
+  /* background-color: red; */
 }
 .profile-img-component {
   width: 17%;
@@ -54,8 +56,9 @@
 }
 
 .profile-info {
-  /* border: 1px solid black; */
-  margin-top: 0.5rem;
+  border: 1px solid black;
+  margin-top: 2rem;
+  width: 30%;
 }
 
 .profile-nickname-component {
@@ -67,7 +70,10 @@
   margin: 1rem;
 }
 .profile-button {
-  width: 8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35%;
   height: 3rem;
   background-color: black;
   color: grey;
@@ -77,7 +83,7 @@
 
 .profile-button:hover {
   color: white;
-  font-size: 1.1rem;
+  /* font-size: 1.1rem; */
 }
 .stored-container {
   border: 1px solid black;

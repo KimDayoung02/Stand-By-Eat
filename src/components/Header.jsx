@@ -1,23 +1,30 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Container, Nav, Navbar } from 'react-bootstrap';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // 토큰있으면
 // 해당하는 아이디와 권한 가져오기
 
 function Header() {
-  // const [haveToken, setToken] = useState('');
+  const [haveToken, setToken] = useState('');
+  const [role, setRole] = useState('');
+
   // 토큰 유무찾기
-  let isToken = localStorage.getItem('token');
-  // console.log(isToken);
-  // 생성된 토큰이 없으면 - null 일시
-  // 생성된 토큰이 있으면
-  let role = '';
-  if (isToken !== null) {
-    role = JSON.parse(localStorage.getItem('role'));
-    // console.log(role);
-  }
+
+  useEffect(() => {
+    setToken(localStorage.getItem('token'));
+    console.log(setToken(localStorage.getItem('token')));
+    // 생성된 토큰이 없으면 - null 일시
+    // 생성된 토큰이 있으면
+    if (haveToken !== null) {
+      setRole(JSON.parse(localStorage.getItem('role')));
+      console.log(role);
+    } else {
+      setRole('');
+      console.log(role);
+    }
+  }, [haveToken]);
 
   return (
     <Navbar bg="light" expand="lg">
@@ -31,14 +38,21 @@ function Header() {
             <LinkStyle to="/">Home</LinkStyle>
             {/* Link 태그 자체에 있는 밑줄이나 색깔 없애는 styled component입니다. 
             Link태그 대신 LinkStyle태그 사용해주세요 */}
-            {isToken == null ? (
+            {haveToken === null ? (
               <>
                 <LinkStyle to="/login">Login</LinkStyle>
                 <LinkStyle to="/signUP">Sign up</LinkStyle>
               </>
             ) : null}
-            {role === 'user' ? (
-              <LinkStyle to="/myPage">My page</LinkStyle>
+            {haveToken !== null && role === ('user' || 'owner') ? (
+              <>
+                <LinkStyle to="/myPage">My page</LinkStyle>
+              </>
+            ) : null}
+            {haveToken !== null && role === 'admin' ? (
+              <>
+                <LinkStyle to="/adminPage">admin page</LinkStyle>
+              </>
             ) : null}
           </Nav>
         </Navbar.Collapse>

@@ -7,8 +7,14 @@ import Home from './pages/Home';
 import Signup from './pages/users/Signup';
 import UserSignOut from './pages/users/UserSignOut';
 import Login from './pages/Login';
+import { useEffect, useState } from 'react';
 
 function App() {
+  const [token, setToken] = useState(null);
+  useEffect(() => {
+    setToken(localStorage.getItem('token'));
+  }, [token]);
+
   return (
     <div className="App">
       <BrowserRouter>
