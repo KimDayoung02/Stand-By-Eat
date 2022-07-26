@@ -5,8 +5,8 @@ import styled from 'styled-components';
 import UserMyPage from './pages/myPage';
 import Home from './pages/Home';
 import Signup from './pages/users/Signup';
-//import SignupComplete from './pages/users/SignupComplete';
-//import Signup from './pages/Signup';
+import UserSignOut from './pages/users/UserSignOut';
+
 // import Login from './pages/TestLogin';
 import Login from './pages/users/Login';
 function App() {
@@ -21,7 +21,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="myPage" element={<UserMyPage />} />
           <Route path="Signup" element={<Signup />} />
-          {/* <Route path="SignupComplete" element={<SignupComplete />} /> */}
+          <Route path="UserSignOut" element={<UserSignOut />} />
           <Route path="login" element={<Login />} />
         </Routes>
       </BrowserRouter>

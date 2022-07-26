@@ -1,7 +1,9 @@
 import React,{useState} from 'react';
 import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
+import { PORT } from './../../Api';
 
 const Signup=()=> {
   const navigate = useNavigate();
@@ -18,7 +20,8 @@ const Signup=()=> {
   const [nickName, setNickName] = useState('신규회원');
   const [birth, setBirth] = useState(getStringDate(new Date()));
 
-  
+
+
   const handleSignUp = async (e) => {
     e.preventDefault();
 
@@ -32,12 +35,17 @@ const Signup=()=> {
         alert("비밀번호를 입력해주세요.");
     }  else if (pwConfirm==='' || pw !== pwConfirm) {
       alert("비밀번호를 다시 확인해주세요");}
+      else if (pw.length<4) {
+        alert("비밀번호는 4자 이상입니다");}
       else {
+       const data = {id:id, phoneNumber:phoneNumber, pw:pw, name:name, nickName:nickName, birth:birth}
         try { 
-          const data = { id, phoneNumber, pw ,name, nickName, birth};
-          // await Api.post('/register', data);
-          alert(`정상적으로 회원가입되었습니다.`);
-          navigate('/');
+          axios.post(`${PORT}/user/register`,data)
+              .then(function(response) {
+                alert('정상적으로 회원가입되었습니다.')
+                navigate('/');
+              })        
+  
         } catch (err) {
             console.log('회원가입 실패', err);
         }
@@ -47,9 +55,9 @@ const Signup=()=> {
   return (
       <Container>
         <BackButton onClick={() => navigate(-1)} >  뒤로가기</BackButton> 
-          <StoreButton>점주</StoreButton>
-          <ClientButton>고객</ClientButton>
+     
           <SignupContainer>       
+          <h1 style={{ marginTop: '10%' }}>회원가입</h1>
               <InputForm>
                   <InputText>아이디</InputText>
                   <InputValue placeholder='아이디' value={id} onChange={(e) => {  setId(e.target.value);}}/>
@@ -60,15 +68,15 @@ const Signup=()=> {
               </InputForm>
               <InputForm>
                   <InputText>휴대전화 번호</InputText>
-                  <InputValue placeholder='숫자만 입력' value={phoneNumber} onChange={(e) => {  setPhonenumber(e.target.value);}} />
+                  <InputValue type='text' placeholder='숫자만 입력' value={phoneNumber} onChange={(e) => { setPhonenumber(e.target.value);}} />
               </InputForm>
               <InputForm>
                   <InputText>비밀번호</InputText>
-                  <InputValue placeholder='비밀번호' value={pw} onChange={(e) => {  setPw(e.target.value);}}/>
+                  <InputValue type='password' placeholder='비밀번호' value={pw} onChange={(e) => {  setPw(e.target.value);}}/>
               </InputForm>
               <InputForm>
                   <InputText>비밀번호 확인</InputText>
-                  <InputValue placeholder='비밀번호 확인' value={pwConfirm} onChange={(e) => {  setPwConfirm(e.target.value);}} />
+                  <InputValue type='password' placeholder='비밀번호 확인' value={pwConfirm} onChange={(e) => {  setPwConfirm(e.target.value);}} />
               </InputForm>
               <InputForm>
                   <InputText>닉네임 (선택)</InputText>
@@ -77,7 +85,7 @@ const Signup=()=> {
               
               <InputForm>
                   <InputText>생년월일 (선택)</InputText>
-                  <InputValue value={birth} onChange={(e) => setBirth(e.target.value)} type="date" />
+                  <InputValue type="date" value={birth} onChange={(e) => setBirth(e.target.value)}  />
               </InputForm>
               <SignupButton  onClick={handleSignUp} >시작하기</SignupButton>
           </SignupContainer>
@@ -102,7 +110,7 @@ const SignupContainer = styled.div`
  
   background-color: white;
   width: 40%;
-  height: 600px;
+  height: 90%;
   border: 1px solid black;
   justify-content: center;
   align-items: center;
@@ -148,35 +156,12 @@ const SignupButton = styled.button`
 
   border-radius: 10px;
 `;
-const ClientButton = styled.button`
-width: 100px;
-height: 40px;
-
-  color: white;
-  background-color: #D9D9D9;
-  border: 1px solid transparent;
-  font-size: medium;
-
-  border-radius: 10px;
-`;
-const StoreButton = styled.button`
-  width: 100px;
-  height: 40px;
-
-  color: white;
-  background-color: #D9D9D9;
-  border: 1px solid transparent;
-  font-size: medium;
-
-  border-radius: 10px;
-`;
 
 const BackButton =styled.button`
-width: 100px;
-height: 29px;
-
+width: 7%;
+height: 1%;
 font-size: medium;
-
 border-radius: 10px;
+  display: block;
 `;
 export default Signup;
