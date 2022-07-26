@@ -22,11 +22,11 @@ const UserSignOut=()=> {
       else {
         try { 
           const data ={ userId:id, pw:pw }
-          confirm("정말 회원 탈퇴하시겠습니까?")
+      
           axios.delete(`${PORT}/user/delete`,data 
             )
               .then(function(response) {
-                localStorage.clear();
+                // localStorage.clear();
                 alert('정상적으로 탈퇴 처리되었습니다.')
                 navigate('/');
               })        
