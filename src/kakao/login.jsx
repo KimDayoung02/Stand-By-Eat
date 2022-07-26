@@ -1,13 +1,15 @@
+import axios from 'axios';
+const { Kakao } = window;
 function KakaoLogin() {
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   const kakaoLoginButton = document.querySelector('#kakaoLoginButton');
-  initializeKakaoButton();
+
+  //   initializeKakaoButton();
   // 카카오 로그인 api
   // init 관련 문서: https://developers.kakao.com/docs/latest/ko/getting-started/sdk-js
   // 팝업 관련 문서: https://developers.kakao.com/docs/latest/ko/kakaologin/js#advanced-guide
   function initializeKakaoButton() {
-    Kakao.init('2da72af02ec112615d67ee3f96804b55');
-
+    Kakao.init('d7e2e5518e4fb25202629857964bca61');
     kakaoLoginButton.addEventListener('click', (e) => {
       e.preventDefault();
 
@@ -38,7 +40,7 @@ function KakaoLogin() {
     try {
       const data = { email };
 
-      const result = await Api.post('/api/login/kakao', data);
+      const result = await axios.post('/api/login/kakao', data);
 
       const token = result.token;
 

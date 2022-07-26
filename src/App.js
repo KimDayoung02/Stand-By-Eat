@@ -6,6 +6,8 @@ import UserMyPage from './pages/myPage';
 import Home from './pages/Home';
 import Signup from './pages/users/Signup';
 import UserSignOut from './pages/users/UserSignOut';
+import KakaoLogin from './kakao/login';
+import KakaoRegister from './kakao/register';
 
 // import Login from './pages/TestLogin';
 import Login from './pages/users/Login';
@@ -23,6 +25,8 @@ function App() {
           <Route path="Signup" element={<Signup />} />
           <Route path="UserSignOut" element={<UserSignOut />} />
           <Route path="login" element={<Login />} />
+          <Route path="kakaologin" element={<KakaoLogin />} />
+          <Route path="kakaoregister" element={<KakaoRegister />} />
         </Routes>
       </BrowserRouter>
     </div>
