@@ -5,7 +5,7 @@ function Home() {
   return (
     <>
       <HomeDiv>
-        <Carousel style={{ margin: '2rem 0 2rem 0' }} fade>
+        <Carousel fade>
           <Carousel.Item interval={1500}>
             <CarouselItemImg
               className="d-block w-100"
@@ -67,13 +67,13 @@ function Home() {
 
 const HomeDiv = styled.div`
   width: 70%;
-  height: 80%;
+  height: 25rem;
   overflow: hidden;
-  margin: 0 auto;
+  margin: 2rem auto 2rem auto;
   text-align: center;
 `;
 const CarouselItemImg = styled.img`
-  width: 109%;
+  width: 90%;
   height: 25rem;
   object-fit: cover;
 `;
