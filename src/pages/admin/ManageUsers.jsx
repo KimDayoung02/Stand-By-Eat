@@ -1,11 +1,31 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Button } from 'react-bootstrap';
+import axios from 'axios';
 function ManageUsers() {
-  //   let [userData, setUserData] = useState();
   let navigate = useNavigate();
-  // console.log(userData);
+
+  const [users, setUsers] = useState([]);
+  axios.get('http://localhost:5000/user/users').then((res) => {
+    console.log(res.data);
+    for (let i = 0; i < res.data.length; i++) {
+      users.push(res.data[i]);
+    }
+  });
+
+  useEffect(() => {
+    axios.get('http://localhost:5000/user/users').then((res) => {
+      console.log(res.data);
+      let newArray = [];
+      for (let i = 0; i < res.data.length; i++) {
+        newArray.push(res.data[i]);
+      }
+      setUsers(newArray);
+    });
+  }, []);
   return (
-    <>
+    <div>
       <BackButton onClick={() => navigate(-1)}> 뒤로가기</BackButton>
       <div class="container">
         <div class="row align-items-start">
@@ -15,15 +35,37 @@ function ManageUsers() {
           <div class="col text-center">role</div>
           <div class="col text-center">작업</div>
           <hr></hr>
-          <div class="col text-center">회원1</div>
-          <div class="col text-center">회원1 닉네임</div>
-          <div class="col text-center">회원1 번호</div>
-          <div class="col text-center">회원1 role</div>
-          <div class="col text-center">작업</div>
         </div>
+        {users.map((user) => {
+          return (
+            <div class="row">
+              <div class="col text-center">{user.name}</div>
+              <div class="col text-center">{user.nickName}</div>
+              <div class="col text-center">{user.phoneNumber}</div>
+              <div class="col text-center">user</div>
+              <div class="col text-center">
+                <Button
+                  onClick={() => {
+                    // 관리자 전용 삭제 api 추가하기
+                    axios.delete('http://localhost:5000/user/delete', {
+                      data: {
+                        userId: 'test1',
+                        userPassword: '1234',
+                      },
+                    });
+
+                    window.location.reload();
+                  }}
+                >
+                  삭제
+                </Button>
+              </div>
+            </div>
+          );
+        })}
       </div>
-      <Layout>manage Users Page</Layout>
-    </>
+      {/* <Layout>manage Users Page</Layout> */}
+    </div>
   );
 }
 
