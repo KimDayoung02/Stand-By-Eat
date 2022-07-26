@@ -4,6 +4,7 @@ import './../../styles/Signup.css';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
 import { PORT } from '../../Api';
 
@@ -13,21 +14,30 @@ const UserSignOut=()=> {
   const [id, setId] = useState('');
   const [pw, setPw] = useState('');
   const [pwConfirm, setPwConfirm] = useState('');
- 
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const handleSignOut = async (e) => {
     e.preventDefault();
-
+    
       if ( id === '') {
+        setShow(false);
         alert("ID를 입력해주세요.");
+        
     }   
     else if ( pw === '') {
+      setShow(false);
       alert("비밀번호를 입력해주세요.");
   }    
     else if (pwConfirm==='' || pw !== pwConfirm) {
+      setShow(false);
       alert("비밀번호를 다시 확인해주세요");}
       else {
+        setShow(true);
         try { 
-          const data ={ userId:id, pw:pw }
+          const data ={ userId:id, userPassword:pw }
           
           axios.delete(`${PORT}/user/delete`,data )
               .then(function(response) {
@@ -60,7 +70,23 @@ const UserSignOut=()=> {
               <div className='inputText'>비밀번호 확인 </div>
                   <input className='InputValue'  type='password' placeholder='비밀번호 확인' value={pwConfirm} onChange={(e) => {  setPwConfirm(e.target.value);}} />
                   </div>
-              <SignupButton onClick={handleSignOut} >시작하기</SignupButton>
+              <SignupButton onClick={handleShow} >시작하기</SignupButton>
+              <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>회원탈퇴</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>정말로 회원탈퇴 하시겠습니까??</Modal.Body>
+        <Modal.Footer>
+        <Button variant="primary" onClick={handleSignOut}>
+            회원탈퇴
+          </Button>
+          <Button variant="secondary" onClick={handleClose}>
+            닫기
+          </Button>
+          
+        </Modal.Footer>
+      </Modal>
+
               </div>
       </div>
   );
