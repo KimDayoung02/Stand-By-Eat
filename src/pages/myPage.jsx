@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import { InputGroup } from 'react-bootstrap';
 import styled from 'styled-components';
 import ReservationComponent from './users/ReservationList';
+import MyStore from './owner/MyStore';
 import './../styles/Profile.css';
 
 const TEST_DATA = {
@@ -13,9 +14,10 @@ const DEFAULT_IMG =
   'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png';
 
 // 예약 정보 가져오기
-
 function MyPage() {
   let [userData, setUserData] = useState('');
+
+  //getLoginData();
 
   return (
     <Layout>
@@ -23,13 +25,19 @@ function MyPage() {
       {/* <ProfileLayout> */}
       <MyProfileComponent userData={userData} />
       {/* </ProfileLayout> */}
-      <ReservationLayout>
+      <DataLayout>
+        {}
         <ReservationComponent />
-      </ReservationLayout>
+      </DataLayout>
     </Layout>
   );
 }
 
+const getLoginData = () => {
+  const loginId = JSON.parse(localStorage.getItem('loginId'));
+  const role = JSON.parse(localStorage.getItem('role'));
+  console.log(loginId, role);
+};
 // 사용자 프로필 컴포넌트
 function MyProfileComponent() {
   const fileInput = useRef(null);
@@ -105,6 +113,9 @@ function MyProfileComponent() {
               value={change ? nickname : null}
             />
           </InputGroup>
+          <button className="profile-button" onClick={infoChange}>
+            {buttonText}
+          </button>
         </div>
         <input
           type="file"
@@ -114,9 +125,6 @@ function MyProfileComponent() {
           onChange={imageOnChange}
           ref={fileInput}
         />
-        <button className="profile-button" onClick={infoChange}>
-          {buttonText}
-        </button>
       </form>
     </div>
   );
@@ -124,14 +132,16 @@ function MyProfileComponent() {
 
 // 스타일
 // 예약 확인 레이아웃
-const ReservationLayout = styled.div`
-  width: 100vw;
+const DataLayout = styled.div`
+  /* width: 100vw; */
+  width: 85%;
   border: 1px solid black;
   margin: 2rem;
 `;
 
 const Layout = styled.div`
   width: 100vw;
+
   height: 100vh;
   /* background-color: blue; */
   margin-top: 1rem;

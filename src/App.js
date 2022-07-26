@@ -6,10 +6,15 @@ import UserMyPage from './pages/myPage';
 import Home from './pages/Home';
 import Signup from './pages/users/Signup';
 import UserSignOut from './pages/users/UserSignOut';
+import Login from './pages/Login';
+import { useEffect, useState } from 'react';
 
-// import Login from './pages/TestLogin';
-import Login from './pages/users/Login';
 function App() {
+  const [token, setToken] = useState(null);
+  useEffect(() => {
+    setToken(localStorage.getItem('token'));
+  }, [token]);
+
   return (
     <div className="App">
       <BrowserRouter>
