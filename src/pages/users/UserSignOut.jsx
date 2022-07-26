@@ -1,7 +1,9 @@
 import React,{useState} from 'react';
 import styled from 'styled-components';
+import './../../styles/Signup.css';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import Button from 'react-bootstrap/Button';
 
 import { PORT } from '../../Api';
 
@@ -37,98 +39,44 @@ const UserSignOut=()=> {
 };
 
   return (
-      <Container>
-        <BackButton onClick={() => navigate(-1)} >  뒤로가기</BackButton> 
+    <div className="container">
+       <Button variant="secondary" type="button" onClick={() => navigate(-1)} >  뒤로가기</Button> 
      
-           <SignupContainer>       
-              <h1 style={{ marginTop: '10%' }}>회원탈퇴</h1>
-                  <InputForm>
-                  <InputText>아이디</InputText>
-                  <InputValue type='id' placeholder='아이디' value={id} onChange={(e) => {  setId(e.target.value);}}/>
-              </InputForm>
-              <InputForm>
-                  <InputText>비밀번호</InputText>
-                  <InputValue type='password' placeholder='비밀번호' value={pw} onChange={(e) => {  setPw(e.target.value);}}/>
-              </InputForm>
-              <InputForm>
-                  <InputText>비밀번호 확인</InputText>
-                  <InputValue type='password' placeholder='비밀번호 확인' value={pwConfirm} onChange={(e) => {  setPwConfirm(e.target.value);}} />
-              </InputForm>
-              <SignupButton  onClick={handleSignOut}>탈퇴하기</SignupButton>
-          </SignupContainer>
-      </Container>
+       <div className='signupContainer'>       
+              <h1 style={{ marginTop: '1%' }}>회원탈퇴</h1>
+              <div className='inputForm'>
+              <div className='inputText'>아이디 </div>
+                  <input className='InputValue'   type='id' placeholder='아이디' value={id} onChange={(e) => {  setId(e.target.value);}}/>
+              </div>
+              <div className='inputForm'>
+              <div className='inputText'>비밀번호 </div>
+                  <input className='InputValue'   type='password' placeholder='비밀번호' value={pw} onChange={(e) => {  setPw(e.target.value);}}/>
+                  </div>
+              <div className='inputForm'>
+              <div className='inputText'>비밀번호 확인 </div>
+                  <input className='InputValue'  type='password' placeholder='비밀번호 확인' value={pwConfirm} onChange={(e) => {  setPwConfirm(e.target.value);}} />
+                  </div>
+              <SignupButton onClick={handleSignOut} >시작하기</SignupButton>
+              </div>
+      </div>
   );
 }
 
-const Container = styled.div`
-position: absolute;
-display: flex;
-margin: 0 auto;
-padding: 0;
 
-  background-color: white;
-  
-  width: 100%;
-  height: 100%;
-`;
-
-const SignupContainer = styled.div`
-margin: auto;
-background-color: white;
-width: 500px;
-height: 600px;
-
-justify-content: center;
-align-items: center;
-text-align: center;
-
-`;
-
-const InputForm = styled.form`
-  margin: 0 auto;
-  margin-top: 40px;
-  width: 400px;
-  height: 50px;
-
-  font-size: medium;
-  display: block;
-`; 
-
-const InputText = styled.h4`
-  margin-left: 45px;
-  text-align: left;
-
-  margin-bottom: 7px;
-`;
-
-const InputValue = styled.input`
-  width: 300px;
-  height: 35px;
-
-  border: 1px solid #dbdbdb;
-
-  padding-left: 10px;
-`;
 
 const SignupButton = styled.button`
-  width: 300px;
-  height: 50px;
-  margin: 50px 180px;
+width: 30%;
+height: 10%;
+margin: 10% 35%;
+margin-bottom: 5%;
 
-  color: white;
-  background-color: #F34141;
-  border: 1px solid  transparent;
-  font-size: medium;
-
-  border-radius: 10px;
-`;
-
-const BackButton =styled.button`
-width: 100px;
-height: 29px;
-
+color: white;
+background-color: #F34141;
+border: 1px solid  transparent;
 font-size: medium;
 
 border-radius: 10px;
 `;
+
+
 export default UserSignOut;
