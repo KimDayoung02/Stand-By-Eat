@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { ImCalendar, ImClock, ImUsers } from 'react-icons/im';
 import { Modal, Button } from 'react-bootstrap';
 import React, { useState } from 'react';
+import FilterModal from './FilterModal';
+import 'react-calendar/dist/Calendar.css';
 
 function LocationFilter() {
   const [show, setShow] = useState(false);
@@ -41,7 +43,9 @@ function LocationFilter() {
             예약하고 싶은 날짜와 시간, 인원을 결정해주세요!
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Body>
+          <FilterModal />
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             닫기
