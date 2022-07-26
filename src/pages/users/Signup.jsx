@@ -1,7 +1,9 @@
 import React,{useState} from 'react';
+import './../../styles/Signup.css';
 import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import Button from 'react-bootstrap/Button';
 
 import { PORT } from './../../Api';
 
@@ -53,66 +55,54 @@ const Signup=()=> {
 };
 
   return (
-      <Container>
-        <BackButton onClick={() => navigate(-1)} >  뒤로가기</BackButton> 
-          <Title>회원가입</Title>
-          <SignupContainer>       
-            
-              <InputForm>
-                  <InputText>아이디</InputText>
-                  <InputValue placeholder='아이디' value={id} onChange={(e) => {  setId(e.target.value);}}/>
-              </InputForm>
-                       <InputForm>
-                  <InputText>이름</InputText>
-                  <InputValue placeholder='이름'value={name} onChange={(e) => { setName(e.target.value);}}/>
-              </InputForm>
-              <InputForm>
-                  <InputText>휴대전화 번호</InputText>
-                  <InputValue type='text' placeholder='숫자만 입력' value={phoneNumber} onChange={(e) => { setPhonenumber(e.target.value);}} />
-              </InputForm>
-              <InputForm>
-                  <InputText>비밀번호</InputText>
-                  <InputValue type='password' placeholder='비밀번호' value={pw} onChange={(e) => {  setPw(e.target.value);}}/>
-              </InputForm>
-              <InputForm>
-                  <InputText>비밀번호 확인</InputText>
-                  <InputValue type='password' placeholder='비밀번호 확인' value={pwConfirm} onChange={(e) => {  setPwConfirm(e.target.value);}} />
-              </InputForm>
-              <InputForm>
-                  <InputText>닉네임 (선택)</InputText>
-                  <InputValue placeholder='닉네임' value={nickName} onChange={(e) => {  setNickName(e.target.value);}}/>
-              </InputForm>
+    <div className="container">
+        <Button variant="secondary" type="button" onClick={() => navigate(-1)} >  뒤로가기</Button> 
+     
+          <div className='signupContainer'>       
+          <h1 style={{ marginTop: '1%' }}>회원가입</h1>
+              <div className='inputForm'>
+                  <div className='inputText' >아이디</div>
+                  <input className='InputValue' placeholder='아이디' value={id} onChange={(e) => {  setId(e.target.value);}}/>
+              </div>
+              <div className='inputForm'>
+                  <div className='inputText'>이름</div>
+                  <input className='InputValue' placeholder='이름'value={name} onChange={(e) => { setName(e.target.value);}}/>
+              </div>
+              <div className='inputForm'>
+                  <div className='inputText'>휴대전화 번호</div>
+                  <input className='InputValue'  type='text' placeholder='숫자만 입력' value={phoneNumber} onChange={(e) => { setPhonenumber(e.target.value);}} />
+              </div>
+              <div className='inputForm'>
+                  <div className='inputText'>비밀번호</div>
+                  <input className='InputValue'  type='password' placeholder='비밀번호' value={pw} onChange={(e) => {  setPw(e.target.value);}}/>
+              </div>
+              <div className='inputForm'>
+                  <div className='inputText'>비밀번호 확인</div>
+                  <input className='InputValue'  type='password' placeholder='비밀번호 확인' value={pwConfirm} onChange={(e) => {  setPwConfirm(e.target.value);}} />
+              </div>
+              <div className='inputForm'>
+                  <div className='inputText'>닉네임 (선택)</div>
+                  <input className='InputValue'  placeholder='닉네임' value={nickName} onChange={(e) => {  setNickName(e.target.value);}}/>
+              </div>
               
-              <InputForm>
-                  <InputText>생년월일 (선택)</InputText>
-                  <InputValue type="date" value={birth} onChange={(e) => setBirth(e.target.value)}  />
-              </InputForm>
-              <SignupButton  onClick={handleSignUp} >시작하기</SignupButton>
-          </SignupContainer>
-      </Container>
+              <div className='inputForm'>
+                  <div className='inputText'>생년월일 (선택)</div>
+                  <input className='InputValue' type="date" value={birth} onChange={(e) => setBirth(e.target.value)}  />
+              </div>
+              <SignupButton onClick={handleSignUp} >시작하기</SignupButton>
+          </div>
+      </div>
   );
 }
 
-const Container = styled.div`
-  position: absolute;
-  display: flex;
-  margin: 0 auto;
-  
-  padding: 0;
-  background-color: white;
-  
-  width: 100%;
-  height: 100%;
-`;
-const Title= styled.div`
-text-align: center;
-`;
+
+
 const SignupContainer = styled.div`
   margin: auto;
  
   background-color: white;
   width: 40%;
-  height: 600px;
+  height: 0%;
   border: 1px solid black;
   justify-content: center;
   align-items: center;
@@ -146,25 +136,35 @@ const InputValue = styled.input`
   padding-left: 10px;
 `;
 
-const SignupButton = styled.button`
-  width: 300px;
-  height: 50px;
-  margin: 50px 180px;
+const SignupButton = styled(Button)`
+width: 12rem;
+height: 5rem;
+margin: 2rem 1rem 0 1rem;
+border-radius: 20px;
+border-color: #ffffff;
+color: #6a2490;
+background-color: #ddc4ec;
+text-align: center;
+line-height: 4rem;
+font-size: 20px;
 
-  color: white;
-  background-color: #F34141;
-  border: 1px solid  transparent;
-  font-size: medium;
-
-  border-radius: 10px;
+&:hover {
+  background-color: #ba86d5;
+  border-color: white;
+}
+&:active {
+  border-color: #6a2490;
+}
+&:visited {
+  border-color: white;
+}
 `;
 
 const BackButton =styled.button`
-width: 100px;
-height: 29px;
-
+width: 7%;
+height: 1%;
 font-size: medium;
-
 border-radius: 10px;
+  display: block;
 `;
 export default Signup;
