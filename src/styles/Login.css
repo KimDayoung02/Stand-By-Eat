@@ -10,13 +10,13 @@ body,
   height: 100vh;
 }
 
-h4 {
+.title {
   font-size: 2.8rem;
   font-weight: 600;
   color: grey;
   opacity: 0.9;
 }
-h4 span {
+.title span {
   color: #000;
 }
 label {
@@ -64,19 +64,22 @@ label {
   padding: 10% 0;
   /* margin-top: 3rem; */
 }
-button {
+.login-button {
   -webkit-appearance: none;
   width: auto;
   min-width: 100px;
   border-radius: 20%;
   text-align: center;
-  padding: 4% 8%;
+  padding: 7%;
   color: #fff;
   font-size: 1rem;
   margin-left: auto;
   font-weight: bold;
   box-shadow: 0px 2px 6px -1px rgba(0, 0, 0, 0.13);
   border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   transition: all 0.3s ease;
   outline: 0;
 }

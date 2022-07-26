@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import Form from 'react-bootstrap/Form';
-import { InputGroup } from 'react-bootstrap';
+import { InputGroup, Form } from 'react-bootstrap';
 import styled from 'styled-components';
 import ReservationComponent from './ReservationList';
 import MyStoreComponent from '../owner/MyStoreComponent';
@@ -8,18 +7,16 @@ import './../../styles/Profile.css';
 import axios from 'axios';
 import { PORT } from '../../Api';
 
-// const TEST_DATA = {
-//   ninkname: '사람1',
-// };
-
 const DEFAULT_IMG =
   'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png';
+
 // 예약 정보 가져오기
 function MyPage() {
   const [userData, setUserData] = useState('');
-  const getRole = JSON.parse(localStorage.getItem('role'));
-  const getLoginId = JSON.parse(localStorage.getItem('loginId'));
-  const getToken = JSON.parse(localStorage.getItem('token'));
+  const [store, setStoreList] = useState('');
+  const getRole = JSON.parse(sessionStorage.getItem('role'));
+  const getLoginId = JSON.parse(sessionStorage.getItem('loginId'));
+  const getToken = JSON.parse(sessionStorage.getItem('token'));
 
   useEffect(() => {
     axios
@@ -31,8 +28,12 @@ function MyPage() {
       .then((res) => setUserData(res.data))
       .catch((err) => console.log(err));
   }, []);
-  //console.log(getRole, getLoginId);
-  //console.log(userData);
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:5000/api/stores')
+      .then((res) => setStoreList(res.data));
+  }, []);
 
   return (
     <Layout>
@@ -42,7 +43,7 @@ function MyPage() {
       {/* </ProfileLayout> */}
       <DataLayout>
         {getRole === 'user' ? <ReservationComponent /> : null}
-        {getRole === 'owner' ? <MyStoreComponent /> : null}
+        {getRole === 'owner' ? <MyStoreComponent store={store} /> : null}
       </DataLayout>
     </Layout>
   );
@@ -50,12 +51,11 @@ function MyPage() {
 
 // 사용자 프로필 컴포넌트
 function MyProfileComponent({ userData, role }) {
-  console.log(userData.profileImgUrl);
   const fileInput = useRef(null);
   const [image, setImage] = useState(DEFAULT_IMG);
   const [file, setFile] = useState(null);
   const nicknameInput = useRef(null);
-  const [nickname, setNickname] = useState(userData.nickname);
+  const [nickname, setNickname] = useState('');
   const [change, setChange] = useState(false);
   const [buttonText, setButtonText] = useState('프로필 변경');
 
@@ -91,8 +91,8 @@ function MyProfileComponent({ userData, role }) {
       setNickname(nicknameInput.current.value);
     }
   };
-  console.log('-----------------');
-  console.log(userData.profileImgUrl);
+  // console.log('-----------------');
+  // console.log(userData.profileImgUrl);
   return (
     <div className="profile-component">
       <form className="profile-form">
@@ -146,8 +146,8 @@ function MyProfileComponent({ userData, role }) {
 const DataLayout = styled.div`
   /* width: 100vw; */
   width: 85%;
-  border: 1px solid black;
-  margin: 2rem;
+  /* border: 1px solid black; */
+  margin-top: 4rem;
 `;
 
 const Layout = styled.div`

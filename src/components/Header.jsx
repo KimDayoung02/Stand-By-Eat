@@ -8,24 +8,27 @@ import { useEffect, useState } from 'react';
 
 function Header() {
   const [haveToken, setToken] = useState(null);
-  const [role, setRole] = useState(null);
+  const [role, setRole] = useState(JSON.parse(sessionStorage.getItem('role')));
 
   // 토큰 유무찾기
 
   useEffect(() => {
-    setToken(localStorage.getItem('token'));
+    setToken(sessionStorage.getItem('token'));
     // 생성된 토큰이 없으면 - null 일시
     // 생성된 토큰이 있으면
 
     if (haveToken !== null) {
-      setRole(JSON.parse(localStorage.getItem('role')));
-      // console.log(role);
+      setRole(JSON.parse(sessionStorage.getItem('role')));
+      console.log('-----1-');
+      console.log(role);
     } else {
-      // console.log(role);
+      setRole('');
+      console.log('-----3-');
+      console.log(role);
     }
 
     //console.log('haveToken ', haveToken);
-  });
+  }, []);
   // console.log('haveToken : ', haveToken);
   // console.log('role : ', role);
 
@@ -50,14 +53,6 @@ function Header() {
             {role === 'user' ? (
               <>
                 <LinkStyle to="/myPage">My page</LinkStyle>
-                <div
-                  onClick={() => {
-                    localStorage.removeItem('token');
-                  }}
-                  style={{ cursor: 'pointer' }}
-                >
-                  로그아웃
-                </div>
               </>
             ) : null}
             {role === 'owner' ? (

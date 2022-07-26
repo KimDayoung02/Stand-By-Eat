@@ -65,23 +65,25 @@
 .profile-info {
   /* border: 1px solid black; */
   margin-top: 2rem;
-  width: 40%;
+  width: 50%;
+  height: 15%;
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
 
-.profile-info:first-child {
-  width: 70%;
+.profile-info input {
+  width: 200px;
+  margin-right: 1rem;
 }
 .profile-button {
-  padding: 0.5rem;
+  padding: 1rem;
   margin-left: 2%;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 30%;
-  height: 2rem;
+  width: 5rem;
+  height: 4rem;
   border-radius: 15%;
   background-color: black;
   color: grey;
@@ -91,7 +93,6 @@
 
 .profile-button:hover {
   color: white;
-  /* font-size: 1.1rem; */
 }
 .stored-container {
   border: 1px solid black;

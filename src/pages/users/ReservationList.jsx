@@ -1,20 +1,18 @@
 import { useState, useEffect } from 'react';
-import './../../styles/UserReservation.css';
 
 // 예약 목록 컴포넌트
 import axios from 'axios';
 
 function ReservationComponent() {
   const [reservationData, setReservation] = useState([]);
-  //console.log(JSON.parse(localStorage.getItem('loginId')));
 
   useEffect(() => {
     axios.get('http://localhost:5000/api/orders').then((response) => {
       // console.log(response.data);
       let filterReservation = response.data.filter(
-        (data) => data.userId === JSON.parse(localStorage.getItem('objectId')),
+        (data) =>
+          data.userId === JSON.parse(sessionStorage.getItem('objectId')),
       );
-      // console.log(filterReservation);
       setReservation(filterReservation);
     });
   }, []);
@@ -31,8 +29,6 @@ function ReservationComponent() {
 
 // 예약 컴포넌트
 function ReserVationData({ reservationData }) {
-  // console.log(reservationData);
-
   return (
     <>
       {reservationData.length !== 0 ? (
