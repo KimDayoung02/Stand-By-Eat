@@ -1,0 +1,45 @@
+* {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+button {
+  width: 7%;
+  height: 1%;
+  font-size: medium;
+  border-radius: 10px;
+    display: block;
+}
+.signupContainer{
+  margin: auto;
+  background-color: white;
+  width: 50%;
+  height: 50%;
+  border: 1px solid black;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.inputForm{
+  margin: 0 auto;
+  margin-top: 40px;
+  width: 400px;
+  height: 50px;
+
+  font-size: medium;
+  display: block;
+}
+.inputText{
+  margin-left: 45px;
+  text-align: left;
+
+  margin-bottom: 7px;
+}
+
+.InputValue{
+  width: 300px;
+  height: 35px;
+
+  border: 1px solid #dbdbdb;
+
+  padding-left: 10px;
+}
