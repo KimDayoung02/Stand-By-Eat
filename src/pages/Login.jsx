@@ -18,18 +18,25 @@ function Login() {
 
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
+  const [role, setRole] = useState('');
   const idInput = useRef('');
   const passwordInput = useRef('');
+  //const [selectValue, setSelectValue] = useState('');
+  const handleChange = (e) => {
+    console.log(`선택한 값 : ${e.target.value}`);
+    setRole(e.target.value);
+  };
 
   const clickLogin = (e) => {
     e.preventDefault();
+
     setId(idInput.current.value);
     setPassword(passwordInput.current.value);
 
     checkUser(idInput.current.value, passwordInput.current.value);
 
     axios({
-      url: `${PORT}/user/login`,
+      url: `${PORT}/${role}/login`,
       method: 'post',
       data: {
         id: idInput.current.value,
@@ -39,7 +46,9 @@ function Login() {
       .then((res) => {
         alert('로그인 성공!');
         const getToken = res.data.token;
+
         localStorage.setItem('token', JSON.stringify(getToken));
+        localStorage.setItem('loginId', JSON.stringify(idInput.current.value));
         checkToken();
         navigate('/');
       })
@@ -63,6 +72,35 @@ function Login() {
         <p>
           Welcome Stand By Eat! Log in to your account to view today's clients:
         </p>
+        <div className="role-button-area">
+          <input
+            id="user"
+            value="user"
+            name="platform"
+            type="radio"
+            checked={role === 'user'}
+            onChange={handleChange}
+          />
+          사용자
+          <input
+            id="owner"
+            value="owner"
+            name="platform"
+            type="radio"
+            checked={role === 'owner'}
+            onChange={handleChange}
+          />
+          점주
+          <input
+            id="admin"
+            value="admin"
+            name="platform"
+            type="radio"
+            checked={role === 'admin'}
+            onChange={handleChange}
+          />
+          관리자
+        </div>
         <div className="login-input">
           <div className="floating-label">
             <FontAwesomeIcon
@@ -123,7 +161,7 @@ async function checkToken() {
     },
   });
 
-  localStorage.setItem('loginId', JSON.stringify(getId.data));
+  //localStorage.setItem('loginId', JSON.stringify(getId.data));
   localStorage.setItem('objectId', JSON.stringify(getObjectId.data));
   localStorage.setItem('role', JSON.stringify(getRole.data));
   console.log(getId.data, getObjectId.data, getRole.data);

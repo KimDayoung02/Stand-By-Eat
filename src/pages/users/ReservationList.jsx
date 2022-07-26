@@ -10,10 +10,11 @@ function ReservationComponent() {
 
   useEffect(() => {
     axios.get('http://localhost:5000/api/orders').then((response) => {
+      // console.log(response.data);
       let filterReservation = response.data.filter(
-        (data) => data.userId === JSON.parse(localStorage.getItem('loginId')),
+        (data) => data.userId === JSON.parse(localStorage.getItem('objectId')),
       );
-
+      // console.log(filterReservation);
       setReservation(filterReservation);
     });
   }, []);
@@ -30,6 +31,8 @@ function ReservationComponent() {
 
 // 예약 컴포넌트
 function ReserVationData({ reservationData }) {
+  // console.log(reservationData);
+
   return (
     <>
       {reservationData.length !== 0 ? (
@@ -54,33 +57,36 @@ function ReserVationData({ reservationData }) {
 
 // 가게 정보 들고오기
 function StoredDataComponent({ storeId, reservationTime }) {
-  console.log(storeId);
+  // console.log(storeId);
   const [store, setStored] = useState([]);
   useEffect(() => {
     axios
       .get(`http://localhost:5000/api/store/${storeId}`)
       .then((res) => {
-        console.log(res.data);
         const storeData = res.data;
-        //console.log(storeData);
         setStored(storeData);
       })
       .catch((err) => console.log(err));
 
-    console.log(storeId);
-    console.log(reservationTime);
-  }, [store]);
-  console.log(store);
+    // console.log(storeId);
+    // console.log(reservationTime);
+  }, []);
+  // console.log('------------------');
+  // console.log(store);
   return (
     <div className="store-row">
-      <div className="storedImg-container">
-        <div>{store.picture}</div>
-      </div>
-      <div className="storedInfo-container">
-        <div>{store.categoryLocation}</div>
-        <div>{store.storeName}</div>
-        <div>{reservationTime}</div>
-      </div>
+      {store !== null ? (
+        <>
+          <div className="storedImg-container">
+            <div>{store.picture}</div>
+          </div>
+          <div className="storedInfo-container">
+            <div>{store.categoryLocation}</div>
+            <div>{store.storeName}</div>
+            <div>{reservationTime}</div>
+          </div>
+        </>
+      ) : null}
     </div>
   );
 }
