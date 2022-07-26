@@ -2,52 +2,62 @@ import { useState, useRef, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 import { InputGroup } from 'react-bootstrap';
 import styled from 'styled-components';
-import ReservationComponent from './users/ReservationList';
-import MyStore from './owner/MyStore';
-import './../styles/Profile.css';
+import ReservationComponent from './ReservationList';
+import MyStoreComponent from '../owner/MyStoreComponent';
+import './../../styles/Profile.css';
+import axios from 'axios';
+import { PORT } from '../../Api';
 
-const TEST_DATA = {
-  ninkname: '사람1',
-};
+// const TEST_DATA = {
+//   ninkname: '사람1',
+// };
 
 const DEFAULT_IMG =
   'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png';
-
 // 예약 정보 가져오기
 function MyPage() {
-  let [userData, setUserData] = useState('');
+  const [userData, setUserData] = useState('');
+  const getRole = JSON.parse(localStorage.getItem('role'));
+  const getLoginId = JSON.parse(localStorage.getItem('loginId'));
+  const getToken = JSON.parse(localStorage.getItem('token'));
 
-  //getLoginData();
+  useEffect(() => {
+    axios
+      .get(`${PORT}/${getRole}/${getLoginId}`, {
+        headers: {
+          Authorization: `Basic ${getToken}`,
+        },
+      })
+      .then((res) => setUserData(res.data))
+      .catch((err) => console.log(err));
+  }, []);
+  //console.log(getRole, getLoginId);
+  //console.log(userData);
 
   return (
     <Layout>
-      <h2>마이 페이지</h2>
+      <h2> {userData.id}의 마이 페이지</h2>
       {/* <ProfileLayout> */}
-      <MyProfileComponent userData={userData} />
+      <MyProfileComponent userData={userData} role={getRole} />
       {/* </ProfileLayout> */}
       <DataLayout>
-        {}
-        <ReservationComponent />
+        {getRole === 'user' ? <ReservationComponent /> : null}
+        {getRole === 'owner' ? <MyStoreComponent /> : null}
       </DataLayout>
     </Layout>
   );
 }
 
-const getLoginData = () => {
-  const loginId = JSON.parse(localStorage.getItem('loginId'));
-  const role = JSON.parse(localStorage.getItem('role'));
-  console.log(loginId, role);
-};
 // 사용자 프로필 컴포넌트
-function MyProfileComponent() {
+function MyProfileComponent({ userData, role }) {
+  console.log(userData.profileImgUrl);
   const fileInput = useRef(null);
   const [image, setImage] = useState(DEFAULT_IMG);
-  const [file, setFile] = useState('');
+  const [file, setFile] = useState(null);
   const nicknameInput = useRef(null);
-  const [nickname, setNickname] = useState(TEST_DATA.ninkname);
+  const [nickname, setNickname] = useState(userData.nickname);
   const [change, setChange] = useState(false);
   const [buttonText, setButtonText] = useState('프로필 변경');
-  const [changeData, setChangeData] = useState({});
 
   const imageOnChange = (e) => {
     if (e.target.files[0]) {
@@ -77,12 +87,12 @@ function MyProfileComponent() {
     } else {
       setButtonText('수정하기');
       alert('수정되었습니다');
+
       setNickname(nicknameInput.current.value);
-      // 프로필변경 데이터
-      setChangeData({ imageUrl: image, nickName: nicknameInput.current.value });
     }
   };
-
+  console.log('-----------------');
+  console.log(userData.profileImgUrl);
   return (
     <div className="profile-component">
       <form className="profile-form">
@@ -101,7 +111,7 @@ function MyProfileComponent() {
           <h3 className="profile-nickname">{nickname}</h3>
         </label>
         <div className="profile-info">
-          <InputGroup className="mb-4">
+          <InputGroup className="mb-2">
             <InputGroup.Text id="inputGroup-sizing-default">
               닉네임
             </InputGroup.Text>
@@ -113,6 +123,7 @@ function MyProfileComponent() {
               value={change ? nickname : null}
             />
           </InputGroup>
+
           <button className="profile-button" onClick={infoChange}>
             {buttonText}
           </button>
@@ -141,7 +152,6 @@ const DataLayout = styled.div`
 
 const Layout = styled.div`
   width: 100vw;
-
   height: 100vh;
   /* background-color: blue; */
   margin-top: 1rem;

@@ -7,24 +7,27 @@ import { useEffect, useState } from 'react';
 // 해당하는 아이디와 권한 가져오기
 
 function Header() {
-  const [haveToken, setToken] = useState('');
-  const [role, setRole] = useState('');
+  const [haveToken, setToken] = useState(null);
+  const [role, setRole] = useState(null);
 
   // 토큰 유무찾기
 
   useEffect(() => {
     setToken(localStorage.getItem('token'));
-    console.log(setToken(localStorage.getItem('token')));
     // 생성된 토큰이 없으면 - null 일시
     // 생성된 토큰이 있으면
+
     if (haveToken !== null) {
       setRole(JSON.parse(localStorage.getItem('role')));
-      console.log(role);
+      // console.log(role);
     } else {
-      setRole('');
-      console.log(role);
+      // console.log(role);
     }
-  }, [haveToken]);
+
+    //console.log('haveToken ', haveToken);
+  });
+  // console.log('haveToken : ', haveToken);
+  // console.log('role : ', role);
 
   return (
     <Navbar bg="light" expand="lg">
@@ -41,15 +44,28 @@ function Header() {
             {haveToken === null ? (
               <>
                 <LinkStyle to="/login">Login</LinkStyle>
-                <LinkStyle to="/signUP">Sign up</LinkStyle>
+                <LinkStyle to="/Signup">Sign up</LinkStyle>
               </>
             ) : null}
-            {haveToken !== null && role === ('user' || 'owner') ? (
+            {role === 'user' ? (
               <>
                 <LinkStyle to="/myPage">My page</LinkStyle>
+                <div
+                  onClick={() => {
+                    localStorage.removeItem('token');
+                  }}
+                  style={{ cursor: 'pointer' }}
+                >
+                  로그아웃
+                </div>
               </>
             ) : null}
-            {haveToken !== null && role === 'admin' ? (
+            {role === 'owner' ? (
+              <>
+                <LinkStyle to="/ownerPage">owner page</LinkStyle>
+              </>
+            ) : null}
+            {role === 'admin' ? (
               <>
                 <LinkStyle to="/adminPage">admin page</LinkStyle>
               </>

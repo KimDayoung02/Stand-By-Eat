@@ -2,7 +2,7 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import styled from 'styled-components';
-import UserMyPage from './pages/myPage';
+import UserMyPage from './pages/users/myPage';
 import Home from './pages/Home';
 import Signup from './pages/users/Signup';
 import UserSignOut from './pages/users/UserSignOut';
@@ -24,6 +24,8 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="myPage" element={<UserMyPage />} />
+          <Route path="ownerPage" element={<UserMyPage />} />
           <Route path="myPage" element={<UserMyPage />} />
           <Route path="Signup" element={<Signup />} />
           <Route path="UserSignOut" element={<UserSignOut />} />
