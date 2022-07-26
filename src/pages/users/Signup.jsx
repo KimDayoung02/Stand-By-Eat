@@ -136,18 +136,28 @@ const InputValue = styled.input`
   padding-left: 10px;
 `;
 
-const SignupButton = styled.button`
-  width: 30%;
-  height: 20%;
-  margin: 10% 35%;
-  margin-bottom: 5%;
+const SignupButton = styled(Button)`
+width: 12rem;
+height: 5rem;
+margin: 2rem 1rem 0 1rem;
+border-radius: 20px;
+border-color: #ffffff;
+color: #6a2490;
+background-color: #ddc4ec;
+text-align: center;
+line-height: 4rem;
+font-size: 20px;
 
-  color: white;
-  background-color: #F34141;
-  border: 1px solid  transparent;
-  font-size: medium;
-
-  border-radius: 10px;
+&:hover {
+  background-color: #ba86d5;
+  border-color: white;
+}
+&:active {
+  border-color: #6a2490;
+}
+&:visited {
+  border-color: white;
+}
 `;
 
 const BackButton =styled.button`
