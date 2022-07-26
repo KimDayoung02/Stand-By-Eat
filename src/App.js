@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react';
 function App() {
   const [token, setToken] = useState(null);
   useEffect(() => {
-    setToken(localStorage.getItem('token'));
+    setToken(sessionStorage.getItem('token'));
   }, [token]);
 
   return (
@@ -30,6 +30,7 @@ function App() {
           <Route path="Signup" element={<Signup />} />
           <Route path="UserSignOut" element={<UserSignOut />} />
           <Route path="login" element={<Login />} />
+          <Route path="*" element={<>잘못된 경로입니다</>} />
         </Routes>
       </BrowserRouter>
     </div>

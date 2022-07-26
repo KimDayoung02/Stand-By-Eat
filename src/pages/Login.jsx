@@ -19,9 +19,9 @@ function Login() {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
+
   const idInput = useRef('');
   const passwordInput = useRef('');
-  //const [selectValue, setSelectValue] = useState('');
   const handleChange = (e) => {
     console.log(`선택한 값 : ${e.target.value}`);
     setRole(e.target.value);
@@ -46,16 +46,16 @@ function Login() {
       .then((res) => {
         alert('로그인 성공!');
         const getToken = res.data.token;
-
-        localStorage.setItem('token', JSON.stringify(getToken));
-        localStorage.setItem('loginId', JSON.stringify(idInput.current.value));
+        sessionStorage.setItem('token', JSON.stringify(getToken));
+        sessionStorage.setItem(
+          'loginId',
+          JSON.stringify(idInput.current.value),
+        );
         checkToken();
-        navigate('/');
       })
       .catch(function (error) {
         alert('로그인 실패!');
         console.log('error : ' + error);
-        // alert(error.response.data.reason);
         console.log(
           'error.response.data.reason : ' + error.response.data.reason,
         );
@@ -66,7 +66,7 @@ function Login() {
     <div className="session">
       <div className="left"></div>
       <form action="" className="logIn-form" autocomplete="off">
-        <h4>
+        <h4 className="title">
           We are <span>스탠바잇!</span>
         </h4>
         <p>
@@ -133,7 +133,11 @@ function Login() {
             />
           </div>
         </div>
-        <button onClick={clickLogin} style={{ backgroundColor: '#FF9DF0' }}>
+        <button
+          className="login-button"
+          onClick={clickLogin}
+          style={{ backgroundColor: '#FF9DF0' }}
+        >
           Log in
         </button>
       </form>
@@ -142,7 +146,7 @@ function Login() {
 }
 
 async function checkToken() {
-  let token = JSON.parse(localStorage.getItem('token'));
+  let token = JSON.parse(sessionStorage.getItem('token'));
   let getId = await axios.get('http://localhost:5000/common/id', {
     headers: {
       Authorization: `Basic ${token}`,
@@ -162,8 +166,8 @@ async function checkToken() {
   });
 
   //localStorage.setItem('loginId', JSON.stringify(getId.data));
-  localStorage.setItem('objectId', JSON.stringify(getObjectId.data));
-  localStorage.setItem('role', JSON.stringify(getRole.data));
+  sessionStorage.setItem('objectId', JSON.stringify(getObjectId.data));
+  sessionStorage.setItem('role', JSON.stringify(getRole.data));
   console.log(getId.data, getObjectId.data, getRole.data);
 }
 // 로그인하기전 유효성 검사
