@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { PORT } from '../../Api';
 
 // 예약 목록 컴포넌트
 import axios from 'axios';
@@ -7,7 +8,7 @@ function ReservationComponent() {
   const [reservationData, setReservation] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/orders').then((response) => {
+    axios.get(`${PORT}/api/orders`).then((response) => {
       // console.log(response.data);
       let filterReservation = response.data.filter(
         (data) =>
@@ -57,18 +58,13 @@ function StoredDataComponent({ storeId, reservationTime }) {
   const [store, setStored] = useState([]);
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/store/${storeId}`)
+      .get(`${PORT}/api/store/${storeId}`)
       .then((res) => {
         const storeData = res.data;
         setStored(storeData);
       })
       .catch((err) => console.log(err));
-
-    // console.log(storeId);
-    // console.log(reservationTime);
   }, []);
-  // console.log('------------------');
-  // console.log(store);
   return (
     <div className="store-row">
       {store !== null ? (

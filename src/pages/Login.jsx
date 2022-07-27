@@ -51,6 +51,7 @@ function Login() {
           'loginId',
           JSON.stringify(idInput.current.value),
         );
+
         checkToken();
       })
       .catch(function (error) {
@@ -69,9 +70,7 @@ function Login() {
         <h4 className="title">
           We are <span>스탠바잇!</span>
         </h4>
-        <p>
-          Welcome Stand By Eat! Log in to your account to view today's clients:
-        </p>
+        <p>Welcome Stand By Eat!</p>
         <div className="role-button-area">
           <input
             id="user"
@@ -165,10 +164,11 @@ async function checkToken() {
     },
   });
 
-  //localStorage.setItem('loginId', JSON.stringify(getId.data));
   sessionStorage.setItem('objectId', JSON.stringify(getObjectId.data));
   sessionStorage.setItem('role', JSON.stringify(getRole.data));
   console.log(getId.data, getObjectId.data, getRole.data);
+
+  window.location.href = '/';
 }
 // 로그인하기전 유효성 검사
 function checkUser(id, password) {

@@ -2,10 +2,11 @@ import { useState, useRef, useEffect } from 'react';
 import { InputGroup, Form } from 'react-bootstrap';
 import styled from 'styled-components';
 import ReservationComponent from './ReservationList';
-import MyStoreComponent from '../owner/MyStoreComponent';
 import './../../styles/Profile.css';
 import axios from 'axios';
 import { PORT } from '../../Api';
+import UserSignOut from './UserSignOut';
+import { Navigate, Route, useNavigate } from 'react-router-dom';
 
 const DEFAULT_IMG =
   'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png';
@@ -13,7 +14,6 @@ const DEFAULT_IMG =
 // 예약 정보 가져오기
 function MyPage() {
   const [userData, setUserData] = useState('');
-  const [store, setStoreList] = useState('');
   const getRole = JSON.parse(sessionStorage.getItem('role'));
   const getLoginId = JSON.parse(sessionStorage.getItem('loginId'));
   const getToken = JSON.parse(sessionStorage.getItem('token'));
@@ -29,12 +29,6 @@ function MyPage() {
       .catch((err) => console.log(err));
   }, []);
 
-  useEffect(() => {
-    axios
-      .get('http://localhost:5000/api/stores')
-      .then((res) => setStoreList(res.data));
-  }, []);
-
   return (
     <Layout>
       <h2> {userData.id}의 마이 페이지</h2>
@@ -43,7 +37,6 @@ function MyPage() {
       {/* </ProfileLayout> */}
       <DataLayout>
         {getRole === 'user' ? <ReservationComponent /> : null}
-        {getRole === 'owner' ? <MyStoreComponent store={store} /> : null}
       </DataLayout>
     </Layout>
   );
@@ -51,6 +44,7 @@ function MyPage() {
 
 // 사용자 프로필 컴포넌트
 function MyProfileComponent({ userData, role }) {
+  let navigate = useNavigate();
   const fileInput = useRef(null);
   const [image, setImage] = useState(DEFAULT_IMG);
   const [file, setFile] = useState(null);
@@ -87,12 +81,12 @@ function MyProfileComponent({ userData, role }) {
     } else {
       setButtonText('수정하기');
       alert('수정되었습니다');
-
       setNickname(nicknameInput.current.value);
     }
   };
-  // console.log('-----------------');
-  // console.log(userData.profileImgUrl);
+  function handleClick(e) {
+    navigate('/UserSignOut');
+  }
   return (
     <div className="profile-component">
       <form className="profile-form">
@@ -137,6 +131,10 @@ function MyProfileComponent({ userData, role }) {
           ref={fileInput}
         />
       </form>
+
+      <div>
+        <button onClick={handleClick}>회원탈퇴</button>
+      </div>
     </div>
   );
 }
