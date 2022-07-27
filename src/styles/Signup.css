@@ -36,10 +36,10 @@ button {
 }
 
 .InputValue{
-  width: 300px;
+  width: 70%;
   height: 35px;
 
   border: 1px solid #dbdbdb;
 
-  padding-left: 10px;
+  padding: 10px;
 }

@@ -21,7 +21,7 @@ const Signup=()=> {
   const [name, setName] = useState('');
   const [nickName, setNickName] = useState('신규회원');
   const [birth, setBirth] = useState(getStringDate(new Date()));
-  const [role, setRole] = useState('');
+
 
 
 
@@ -40,8 +40,7 @@ const Signup=()=> {
       alert("비밀번호를 다시 확인해주세요");}
       else if (pw.length<4) {
         alert("비밀번호는 4자 이상입니다");}
-        else if (role === '') {
-          alert("가입유형을 선택해주세요");}
+       
       else {
        const data = {id:id, phoneNumber:phoneNumber, pw:pw, name:name, nickName:nickName, birth:birth}
         try { 
