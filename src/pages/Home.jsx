@@ -85,7 +85,7 @@ const ReservationButtonDiv = styled.div`
 const Buttons = styled(Button)`
   width: 12rem;
   height: 5rem;
-  margin: 0 1rem 0 1rem;
+  margin: 2rem 1rem 0 1rem;
   border-radius: 20px;
   border-color: #ffffff;
   color: #6a2490;
