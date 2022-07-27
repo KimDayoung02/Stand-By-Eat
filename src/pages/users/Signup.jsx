@@ -21,7 +21,12 @@ const Signup=()=> {
   const [name, setName] = useState('');
   const [nickName, setNickName] = useState('신규회원');
   const [birth, setBirth] = useState(getStringDate(new Date()));
+  const [role, setRole] = useState('');
 
+  const handleChange = (e) => {
+    console.log(`선택한 값 : ${e.target.value}`);
+    setRole(e.target.value);
+  };
 
 
   const handleSignUp = async (e) => {
@@ -39,7 +44,9 @@ const Signup=()=> {
       alert("비밀번호를 다시 확인해주세요");}
       else if (pw.length<4) {
         alert("비밀번호는 4자 이상입니다");}
-      else {
+        else if (role === '') {
+          alert("가입유형을 선택해주세요");}
+      else if(role === 'user'){
        const data = {id:id, phoneNumber:phoneNumber, pw:pw, name:name, nickName:nickName, birth:birth}
         try { 
           axios.post(`${PORT}/user/register`,data)
@@ -51,7 +58,31 @@ const Signup=()=> {
         } catch (err) {
             console.log('회원가입 실패', err);
         }
-    }
+    }else if(role === 'owner'){
+      const data = {id:id, phoneNumber:phoneNumber, pw:pw, name:name }
+       try { 
+         axios.post(`${PORT}/owner/register`,data)
+             .then(function(response) {
+               alert('정상적으로 회원가입되었습니다.')
+               navigate('/');
+             })        
+ 
+       } catch (err) {
+        alert('회원가입 실패', err);
+       }
+   }else if(role === 'admin'){
+    const data = {id:id, pw:pw }
+     try { 
+       axios.post(`${PORT}/admin/register`,data)
+           .then(function(response) {
+             alert('정상적으로 회원가입되었습니다.')
+             navigate('/');
+           })        
+
+     } catch (err) {
+         console.log('회원가입 실패', err);
+     }
+ }
 };
 
   return (
@@ -60,6 +91,35 @@ const Signup=()=> {
      
           <div className='signupContainer'>       
           <h1 style={{ marginTop: '1%' }}>회원가입</h1>
+          <div className="role-button-area">
+          <input
+            id="user"
+            value="user"
+            name="platform"
+            type="radio"
+            checked={role === 'user'}
+            onChange={handleChange}
+          />
+          사용자
+          <input
+            id="owner"
+            value="owner"
+            name="platform"
+            type="radio"
+            checked={role === 'owner'}
+            onChange={handleChange}
+          />
+          점주
+          <input
+            id="admin"
+            value="admin"
+            name="platform"
+            type="radio"
+            checked={role === 'admin'}
+            onChange={handleChange}
+          />
+          관리자
+        </div>
               <div className='inputForm'>
                   <div className='inputText' >아이디</div>
                   <input className='InputValue' placeholder='아이디' value={id} onChange={(e) => {  setId(e.target.value);}}/>
@@ -96,46 +156,6 @@ const Signup=()=> {
 }
 
 
-
-const SignupContainer = styled.div`
-  margin: auto;
- 
-  background-color: white;
-  width: 40%;
-  height: 0%;
-  border: 1px solid black;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-
-`;
-
-const InputForm = styled.form`
-  margin: 0 auto;
-  margin-top: 40px;
-  width: 400px;
-  height: 50px;
-
-  font-size: medium;
-  display: block;
-`; 
-
-const InputText = styled.h4`
-  margin-left: 45px;
-  text-align: left;
-
-  margin-bottom: 7px;
-`;
-
-const InputValue = styled.input`
-  width: 300px;
-  height: 35px;
-
-  border: 1px solid #dbdbdb;
-
-  padding-left: 10px;
-`;
-
 const SignupButton = styled(Button)`
 width: 12rem;
 height: 5rem;
@@ -160,11 +180,5 @@ font-size: 20px;
 }
 `;
 
-const BackButton =styled.button`
-width: 7%;
-height: 1%;
-font-size: medium;
-border-radius: 10px;
-  display: block;
-`;
+
 export default Signup;
