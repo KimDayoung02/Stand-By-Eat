@@ -51,6 +51,7 @@ function Login() {
           'loginId',
           JSON.stringify(idInput.current.value),
         );
+
         checkToken();
       })
       .catch(function (error) {
@@ -167,6 +168,8 @@ async function checkToken() {
   sessionStorage.setItem('objectId', JSON.stringify(getObjectId.data));
   sessionStorage.setItem('role', JSON.stringify(getRole.data));
   console.log(getId.data, getObjectId.data, getRole.data);
+
+  window.location.href = '/';
 }
 // 로그인하기전 유효성 검사
 function checkUser(id, password) {

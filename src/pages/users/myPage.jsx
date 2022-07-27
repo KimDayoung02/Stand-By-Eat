@@ -5,6 +5,8 @@ import ReservationComponent from './ReservationList';
 import './../../styles/Profile.css';
 import axios from 'axios';
 import { PORT } from '../../Api';
+import UserSignOut from './UserSignOut';
+import { Navigate, Route, useNavigate } from 'react-router-dom';
 
 const DEFAULT_IMG =
   'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png';
@@ -42,6 +44,7 @@ function MyPage() {
 
 // 사용자 프로필 컴포넌트
 function MyProfileComponent({ userData, role }) {
+  let navigate = useNavigate();
   const fileInput = useRef(null);
   const [image, setImage] = useState(DEFAULT_IMG);
   const [file, setFile] = useState(null);
@@ -81,7 +84,9 @@ function MyProfileComponent({ userData, role }) {
       setNickname(nicknameInput.current.value);
     }
   };
-
+  function handleClick(e) {
+    navigate('/UserSignOut');
+  }
   return (
     <div className="profile-component">
       <form className="profile-form">
@@ -126,6 +131,10 @@ function MyProfileComponent({ userData, role }) {
           ref={fileInput}
         />
       </form>
+
+      <div>
+        <button onClick={handleClick}>회원탈퇴</button>
+      </div>
     </div>
   );
 }

@@ -28,7 +28,7 @@ function Header() {
     }
 
     //console.log('haveToken ', haveToken);
-  }, []);
+  }, [haveToken, role]);
   // console.log('haveToken : ', haveToken);
   // console.log('role : ', role);
 
