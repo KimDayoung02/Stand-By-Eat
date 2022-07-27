@@ -1,12 +1,15 @@
-import 'react-calendar/dist/Calendar.css';
+import 'react-day-picker/dist/style.css';
 import React, { useState } from 'react';
-import Calendar from 'react-calendar';
+import { format } from 'date-fns';
+import { DayPicker } from 'react-day-picker';
 
-import moment from 'moment';
 function FilterModal() {
-  const [value, onChange] = useState(new Date());
+  // const [selected, setSelected] = React.useState<Date>();
 
-  let momenttest;
+  // let footer = <p>Please pick a day.</p>;
+  // if (selected) {
+  //   footer = <p>You picked {format(selected, 'PP')}.</p>;
+  // }
   return (
     <div
       style={{
@@ -16,11 +19,12 @@ function FilterModal() {
         flexDirection: 'column',
       }}
     >
-      <Calendar onChange={onChange} value={value} />
-      <div style={{ marginTop: '1rem' }}>
-        {(momenttest = moment(value).format())}
-        {console.log(typeof momenttest)}
-      </div>
+      <DayPicker
+      // mode="single"
+      // selected={selected}
+      // onSelect={setSelected}
+      // footer={footer}
+      />
     </div>
   );
 }

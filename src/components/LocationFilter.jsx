@@ -3,7 +3,6 @@ import { ImCalendar, ImClock, ImUsers } from 'react-icons/im';
 import { Modal, Button } from 'react-bootstrap';
 import React, { useState } from 'react';
 import FilterModal from './FilterModal';
-import 'react-calendar/dist/Calendar.css';
 
 function LocationFilter() {
   const [show, setShow] = useState(false);
