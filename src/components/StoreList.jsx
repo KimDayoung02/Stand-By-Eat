@@ -1,46 +1,35 @@
 import styled from 'styled-components';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-let test = [];
 
 function StoreList() {
-  const [test, setTest] = useState([]);
-  axios.get('http://localhost:5000/api/stores').then((res) => {
-    console.log(res.data);
-    for (let i = 0; i < res.data.length; i++) {
-      test.push(res.data[i]);
-    }
-  });
+  const [storeList, setStoreList] = useState();
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/stores').then((res) => {
-      console.log(res.data);
-      let newArray = [];
-      for (let i = 0; i < res.data.length; i++) {
-        newArray.push(res.data[i]);
-      }
-      setTest(newArray);
+    axios('http://localhost:5000/api/stores').then((res) => {
+      setStoreList(res.data);
     });
   }, []);
-  console.log(test);
+  console.log(storeList);
 
-  // console.lo
-  console.log('===================');
-  console.log('test = ', test);
-  console.log('test[0] = ', test[0]);
   return (
-    <StoreDiv>
-      <StoreContentsDiv>
-        <ImageDiv>
-          <StoreImg src="food1.jpeg" />
-        </ImageDiv>
-        <StoreStringsDiv>
-          <StoreName>{test[0].storeName}</StoreName>
-          <StoreDetail>{test[0].introduction}</StoreDetail>
-          <StoreNumber>{test[0].phoneNumber}</StoreNumber>
-        </StoreStringsDiv>
-      </StoreContentsDiv>
-    </StoreDiv>
+    <>
+      {storeList &&
+        storeList.map((store) => (
+          <StoreDiv>
+            <StoreContentsDiv>
+              <ImageDiv>
+                <StoreImg src="food1.jpeg" />
+              </ImageDiv>
+              <StoreStringsDiv>
+                <StoreName>{store.storeName}</StoreName>
+                <StoreDetail>{store.introduction}</StoreDetail>
+                <StoreNumber>{store.phoneNumber}</StoreNumber>
+              </StoreStringsDiv>
+            </StoreContentsDiv>
+          </StoreDiv>
+        ))}
+    </>
   );
 }
 
