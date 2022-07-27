@@ -164,7 +164,6 @@ async function checkToken() {
     },
   });
 
-  //localStorage.setItem('loginId', JSON.stringify(getId.data));
   sessionStorage.setItem('objectId', JSON.stringify(getObjectId.data));
   sessionStorage.setItem('role', JSON.stringify(getRole.data));
   console.log(getId.data, getObjectId.data, getRole.data);

@@ -35,8 +35,7 @@ const UserSignOut = () => {
       setShow(true);
 
       const data = { userId: id, userPassword: pw };
-      console.log(data.userId);
-      console.log(data.userPassword);
+
       await axios({
         url: `${PORT}/user/delete`,
         method: 'delete',
