@@ -26,8 +26,8 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="adminPage" element={<AdminPage />} />
           <Route path="manageUsers" element={<ManageUsers />} />
-          <Route path="manageStores" element={<ManageOrders />} />
-          <Route path="manageOrders" element={<ManageStores />} />
+          <Route path="manageStores" element={<ManageStores />} />
+          <Route path="manageOrders" element={<ManageOrders />} />
           {/* <Route path="SignupComplete" element={<SignupComplete />} /> */}
         </Routes>
       </BrowserRouter>

@@ -3,20 +3,19 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
+import { PORT } from '../../Api';
 function ManageUsers() {
   let navigate = useNavigate();
 
   const [users, setUsers] = useState([]);
-  axios.get('http://localhost:5000/user/users').then((res) => {
-    console.log(res.data);
+  axios.get(`${PORT}/user/users`).then((res) => {
     for (let i = 0; i < res.data.length; i++) {
       users.push(res.data[i]);
     }
   });
 
   useEffect(() => {
-    axios.get('http://localhost:5000/user/users').then((res) => {
-      console.log(res.data);
+    axios.get(`${PORT}/user/users`).then((res) => {
       let newArray = [];
       for (let i = 0; i < res.data.length; i++) {
         newArray.push(res.data[i]);
@@ -32,7 +31,6 @@ function ManageUsers() {
           <div class="col text-center">회원명</div>
           <div class="col text-center">닉네임</div>
           <div class="col text-center">번호</div>
-          <div class="col text-center">role</div>
           <div class="col text-center">작업</div>
           <hr></hr>
         </div>
@@ -42,29 +40,22 @@ function ManageUsers() {
               <div class="col text-center">{user.name}</div>
               <div class="col text-center">{user.nickName}</div>
               <div class="col text-center">{user.phoneNumber}</div>
-              <div class="col text-center">user</div>
               <div class="col text-center">
-                <Button
+                <DeleteButton
                   onClick={() => {
                     // 관리자 전용 삭제 api 추가하기
-                    axios.delete('http://localhost:5000/user/delete', {
-                      data: {
-                        userId: 'test1',
-                        userPassword: '1234',
-                      },
-                    });
+                    axios.delete(`${PORT}/user/delete/${user._id}`);
 
                     window.location.reload();
                   }}
                 >
                   삭제
-                </Button>
+                </DeleteButton>
               </div>
             </div>
           );
         })}
       </div>
-      {/* <Layout>manage Users Page</Layout> */}
     </div>
   );
 }
@@ -87,6 +78,20 @@ const BackButton = styled.button`
   font-size: medium;
 
   border-radius: 10px;
+`;
+const DeleteButton = styled(Button)`
+  width: 5rem;
+  margin-bottom: 1rem;
+  &:hover {
+    background-color: #ba86d5;
+    border-color: white;
+  }
+  &:active {
+    border-color: #6a2490;
+  }
+  &:visited {
+    border-color: white;
+  }
 `;
 
 export default ManageUsers;

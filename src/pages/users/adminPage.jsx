@@ -12,16 +12,17 @@ function AdminPage() {
 function CategoryButtons() {
   return (
     <ButtonGroup size="lg">
-      <Button className="me-3" href="manageUsers">
+      <CategoryButton className="me-3" href="manageUsers">
         회원 관리
-      </Button>
-      <Button className="me-3" href="manageStores">
+      </CategoryButton>
+      <CategoryButton className="me-3" href="manageStores">
         가게 관리
-      </Button>
-      <Button href="manageOrders"> 예약 관리</Button>
+      </CategoryButton>
+      <CategoryButton href="manageOrders"> 예약 관리</CategoryButton>
     </ButtonGroup>
   );
 }
+
 const Layout = styled.div`
   padding: 4%;
   margin: 3% 5%;
@@ -31,6 +32,28 @@ const Layout = styled.div`
   justify-content: center;
   align-items: center;
   /* border: 1px solid black; */
+`;
+
+const CategoryButton = styled(Button)`
+  width: 15rem;
+  height: 5rem;
+  border-radius: 20px;
+  border-color: #ffffff;
+  color: #6a2490;
+  background-color: #eaccfd;
+  text-align: center;
+  line-height: 4rem;
+
+  &:hover {
+    background-color: #ba86d5;
+    border-color: white;
+  }
+  &:active {
+    border-color: #6a2490;
+  }
+  &:visited {
+    border-color: white;
+  }
 `;
 
 export default AdminPage;
