@@ -24,6 +24,7 @@ const Signup=()=> {
 
 
 
+
   const handleSignUp = async (e) => {
     e.preventDefault();
 
@@ -39,6 +40,7 @@ const Signup=()=> {
       alert("비밀번호를 다시 확인해주세요");}
       else if (pw.length<4) {
         alert("비밀번호는 4자 이상입니다");}
+       
       else {
        const data = {id:id, phoneNumber:phoneNumber, pw:pw, name:name, nickName:nickName, birth:birth}
         try { 
@@ -52,14 +54,14 @@ const Signup=()=> {
             console.log('회원가입 실패', err);
         }
     }
-};
-
+  };
   return (
     <div className="container">
         <Button variant="secondary" type="button" onClick={() => navigate(-1)} >  뒤로가기</Button> 
      
           <div className='signupContainer'>       
           <h1 style={{ marginTop: '1%' }}>회원가입</h1>
+        
               <div className='inputForm'>
                   <div className='inputText' >아이디</div>
                   <input className='InputValue' placeholder='아이디' value={id} onChange={(e) => {  setId(e.target.value);}}/>
@@ -96,46 +98,6 @@ const Signup=()=> {
 }
 
 
-
-const SignupContainer = styled.div`
-  margin: auto;
- 
-  background-color: white;
-  width: 40%;
-  height: 0%;
-  border: 1px solid black;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-
-`;
-
-const InputForm = styled.form`
-  margin: 0 auto;
-  margin-top: 40px;
-  width: 400px;
-  height: 50px;
-
-  font-size: medium;
-  display: block;
-`; 
-
-const InputText = styled.h4`
-  margin-left: 45px;
-  text-align: left;
-
-  margin-bottom: 7px;
-`;
-
-const InputValue = styled.input`
-  width: 300px;
-  height: 35px;
-
-  border: 1px solid #dbdbdb;
-
-  padding-left: 10px;
-`;
-
 const SignupButton = styled(Button)`
 width: 12rem;
 height: 5rem;
@@ -160,11 +122,5 @@ font-size: 20px;
 }
 `;
 
-const BackButton =styled.button`
-width: 7%;
-height: 1%;
-font-size: medium;
-border-radius: 10px;
-  display: block;
-`;
+
 export default Signup;

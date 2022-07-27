@@ -1,45 +1,57 @@
 import { useState, useRef, useEffect } from 'react';
-import Form from 'react-bootstrap/Form';
-import { InputGroup } from 'react-bootstrap';
+import { InputGroup, Form } from 'react-bootstrap';
 import styled from 'styled-components';
-import ReservationComponent from './users/ReservationList';
-import './../styles/Profile.css';
-
-const TEST_DATA = {
-  ninkname: '사람1',
-};
+import ReservationComponent from './ReservationList';
+import './../../styles/Profile.css';
+import axios from 'axios';
+import { PORT } from '../../Api';
+import UserSignOut from './UserSignOut';
+import { Navigate, Route, useNavigate } from 'react-router-dom';
 
 const DEFAULT_IMG =
   'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png';
 
 // 예약 정보 가져오기
-
 function MyPage() {
-  let [userData, setUserData] = useState('');
+  const [userData, setUserData] = useState('');
+  const getRole = JSON.parse(sessionStorage.getItem('role'));
+  const getLoginId = JSON.parse(sessionStorage.getItem('loginId'));
+  const getToken = JSON.parse(sessionStorage.getItem('token'));
+
+  useEffect(() => {
+    axios
+      .get(`${PORT}/${getRole}/${getLoginId}`, {
+        headers: {
+          Authorization: `Basic ${getToken}`,
+        },
+      })
+      .then((res) => setUserData(res.data))
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <Layout>
-      <h2>마이 페이지</h2>
+      <h2> {userData.id}의 마이 페이지</h2>
       {/* <ProfileLayout> */}
-      <MyProfileComponent userData={userData} />
+      <MyProfileComponent userData={userData} role={getRole} />
       {/* </ProfileLayout> */}
-      <ReservationLayout>
-        <ReservationComponent />
-      </ReservationLayout>
+      <DataLayout>
+        {getRole === 'user' ? <ReservationComponent /> : null}
+      </DataLayout>
     </Layout>
   );
 }
 
 // 사용자 프로필 컴포넌트
-function MyProfileComponent() {
+function MyProfileComponent({ userData, role }) {
+  let navigate = useNavigate();
   const fileInput = useRef(null);
   const [image, setImage] = useState(DEFAULT_IMG);
-  const [file, setFile] = useState('');
+  const [file, setFile] = useState(null);
   const nicknameInput = useRef(null);
-  const [nickname, setNickname] = useState(TEST_DATA.ninkname);
+  const [nickname, setNickname] = useState('');
   const [change, setChange] = useState(false);
   const [buttonText, setButtonText] = useState('프로필 변경');
-  const [changeData, setChangeData] = useState({});
 
   const imageOnChange = (e) => {
     if (e.target.files[0]) {
@@ -70,11 +82,11 @@ function MyProfileComponent() {
       setButtonText('수정하기');
       alert('수정되었습니다');
       setNickname(nicknameInput.current.value);
-      // 프로필변경 데이터
-      setChangeData({ imageUrl: image, nickName: nicknameInput.current.value });
     }
   };
-
+  function handleClick(e) {
+    navigate('/UserSignOut');
+  }
   return (
     <div className="profile-component">
       <form className="profile-form">
@@ -93,7 +105,7 @@ function MyProfileComponent() {
           <h3 className="profile-nickname">{nickname}</h3>
         </label>
         <div className="profile-info">
-          <InputGroup className="mb-4">
+          <InputGroup className="mb-2">
             <InputGroup.Text id="inputGroup-sizing-default">
               닉네임
             </InputGroup.Text>
@@ -105,6 +117,10 @@ function MyProfileComponent() {
               value={change ? nickname : null}
             />
           </InputGroup>
+
+          <button className="profile-button" onClick={infoChange}>
+            {buttonText}
+          </button>
         </div>
         <input
           type="file"
@@ -114,20 +130,22 @@ function MyProfileComponent() {
           onChange={imageOnChange}
           ref={fileInput}
         />
-        <button className="profile-button" onClick={infoChange}>
-          {buttonText}
-        </button>
       </form>
+
+      <div>
+        <button onClick={handleClick}>회원탈퇴</button>
+      </div>
     </div>
   );
 }
 
 // 스타일
 // 예약 확인 레이아웃
-const ReservationLayout = styled.div`
-  width: 100vw;
-  border: 1px solid black;
-  margin: 2rem;
+const DataLayout = styled.div`
+  /* width: 100vw; */
+  width: 85%;
+  /* border: 1px solid black; */
+  margin-top: 4rem;
 `;
 
 const Layout = styled.div`

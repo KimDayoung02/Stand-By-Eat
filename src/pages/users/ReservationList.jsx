@@ -1,15 +1,19 @@
 import { useState, useEffect } from 'react';
+import { PORT } from '../../Api';
+
 // 예약 목록 컴포넌트
 import axios from 'axios';
 
 function ReservationComponent() {
   const [reservationData, setReservation] = useState([]);
-  useEffect(() => {
-    axios.get('http://localhost:5000/api/orders').then((response) => {
-      let filterReservation = response.data.filter(
-        (data) => data.userId === '62da779d6e07976e400ecebe',
-      );
 
+  useEffect(() => {
+    axios.get(`${PORT}/api/orders`).then((response) => {
+      // console.log(response.data);
+      let filterReservation = response.data.filter(
+        (data) =>
+          data.userId === JSON.parse(sessionStorage.getItem('objectId')),
+      );
       setReservation(filterReservation);
     });
   }, []);
@@ -50,23 +54,31 @@ function ReserVationData({ reservationData }) {
 
 // 가게 정보 들고오기
 function StoredDataComponent({ storeId, reservationTime }) {
+  // console.log(storeId);
   const [store, setStored] = useState([]);
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/store/${storeId}`).then((res) => {
-      let storeData = res.data;
-      setStored(storeData);
-    });
-  }, [storeId]);
+    axios
+      .get(`${PORT}/api/store/${storeId}`)
+      .then((res) => {
+        const storeData = res.data;
+        setStored(storeData);
+      })
+      .catch((err) => console.log(err));
+  }, []);
   return (
     <div className="store-row">
-      <div className="storedImg-container">
-        <div>{store.picture}</div>
-      </div>
-      <div className="storedInfo-container">
-        <div>{store.categoryLocation}</div>
-        <div>{store.storeName}</div>
-        <div>{reservationTime}</div>
-      </div>
+      {store !== null ? (
+        <>
+          <div className="storedImg-container">
+            <div>{store.picture}</div>
+          </div>
+          <div className="storedInfo-container">
+            <div>{store.categoryLocation}</div>
+            <div>{store.storeName}</div>
+            <div>{reservationTime}</div>
+          </div>
+        </>
+      ) : null}
     </div>
   );
 }
