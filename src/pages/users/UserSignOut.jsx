@@ -11,7 +11,6 @@ import { PORT } from '../../Api';
 const UserSignOut = () => {
   const navigate = useNavigate();
 
-  const [id, setId] = useState('');
   const [pw, setPw] = useState('');
   const [pwConfirm, setPwConfirm] = useState('');
   const [show, setShow] = useState(false);
@@ -19,6 +18,7 @@ const UserSignOut = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const id = JSON.parse(sessionStorage.getItem('loginId'));
   const handleSignOut = async (e) => {
     e.preventDefault();
 
@@ -73,9 +73,7 @@ const UserSignOut = () => {
             type="id"
             placeholder="아이디"
             value={id}
-            onChange={(e) => {
-              setId(e.target.value);
-            }}
+            disabled
           />
         </div>
         <div className="inputForm">
@@ -102,7 +100,7 @@ const UserSignOut = () => {
             }}
           />
         </div>
-        <SignupButton onClick={handleShow}>시작하기</SignupButton>
+        <SignupButton onClick={handleShow}>탈퇴하기</SignupButton>
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>회원탈퇴</Modal.Title>
@@ -125,6 +123,7 @@ const UserSignOut = () => {
 const SignupButton = styled(Button)`
   width: 12rem;
   height: 5rem;
+
   margin: 2rem 1rem 0 1rem;
   border-radius: 20px;
   border-color: #ffffff;
@@ -132,7 +131,7 @@ const SignupButton = styled(Button)`
   background-color: #ddc4ec;
   text-align: center;
   line-height: 4rem;
-  font-size: 20px;
+  font-size: 1.5rem;
 
   &:hover {
     background-color: #ba86d5;
