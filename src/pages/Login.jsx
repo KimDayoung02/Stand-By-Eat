@@ -69,9 +69,7 @@ function Login() {
         <h4 className="title">
           We are <span>스탠바잇!</span>
         </h4>
-        <p>
-          Welcome Stand By Eat! Log in to your account to view today's clients:
-        </p>
+        <p>Welcome Stand By Eat!</p>
         <div className="role-button-area">
           <input
             id="user"

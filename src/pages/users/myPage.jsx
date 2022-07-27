@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from 'react';
 import { InputGroup, Form } from 'react-bootstrap';
 import styled from 'styled-components';
 import ReservationComponent from './ReservationList';
-import MyStoreComponent from '../owner/MyStoreComponent';
 import './../../styles/Profile.css';
 import axios from 'axios';
 import { PORT } from '../../Api';
@@ -13,7 +12,6 @@ const DEFAULT_IMG =
 // 예약 정보 가져오기
 function MyPage() {
   const [userData, setUserData] = useState('');
-  const [store, setStoreList] = useState('');
   const getRole = JSON.parse(sessionStorage.getItem('role'));
   const getLoginId = JSON.parse(sessionStorage.getItem('loginId'));
   const getToken = JSON.parse(sessionStorage.getItem('token'));
@@ -29,12 +27,6 @@ function MyPage() {
       .catch((err) => console.log(err));
   }, []);
 
-  useEffect(() => {
-    axios
-      .get('http://localhost:5000/api/stores')
-      .then((res) => setStoreList(res.data));
-  }, []);
-
   return (
     <Layout>
       <h2> {userData.id}의 마이 페이지</h2>
@@ -43,7 +35,6 @@ function MyPage() {
       {/* </ProfileLayout> */}
       <DataLayout>
         {getRole === 'user' ? <ReservationComponent /> : null}
-        {getRole === 'owner' ? <MyStoreComponent store={store} /> : null}
       </DataLayout>
     </Layout>
   );
@@ -87,12 +78,10 @@ function MyProfileComponent({ userData, role }) {
     } else {
       setButtonText('수정하기');
       alert('수정되었습니다');
-
       setNickname(nicknameInput.current.value);
     }
   };
-  // console.log('-----------------');
-  // console.log(userData.profileImgUrl);
+
   return (
     <div className="profile-component">
       <form className="profile-form">
