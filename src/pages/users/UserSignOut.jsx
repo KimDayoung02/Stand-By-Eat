@@ -37,11 +37,9 @@ const UserSignOut=()=> {
       else {
         setShow(true);
         try { 
-          const data ={ userId:id, userPassword:pw }
-          
+          const data ={ userId:id, userPassword:pw }          
           axios.delete(`${PORT}/user/delete`,data )
               .then(function(response) {
-                // localStorage.clear();
                 alert('정상적으로 탈퇴 처리되었습니다.')
                 navigate('/');
               })        
