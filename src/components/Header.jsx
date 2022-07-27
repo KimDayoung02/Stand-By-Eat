@@ -65,6 +65,16 @@ function Header() {
                 <LinkStyle to="/adminPage">admin page</LinkStyle>
               </>
             ) : null}
+            {role === 'admin' ? (
+              <>
+                <LinkStyle ClassName="mx-4" to="/myPage">
+                  myPage
+                </LinkStyle>
+                <LinkStyle ClassName="mx-4" to="/adminPage">
+                  admin
+                </LinkStyle>
+              </>
+            ) : null}
           </Nav>
         </Navbar.Collapse>
       </Container>
