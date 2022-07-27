@@ -6,7 +6,6 @@ import UserMyPage from './pages/users/myPage';
 import Home from './pages/Home';
 import Signup from './pages/users/Signup';
 import UserSignOut from './pages/users/UserSignOut';
-import Login from './pages/users/Login';
 import Reservation from './pages/Reservation';
 import Login from './pages/Login';
 import { useEffect, useState } from 'react';
@@ -32,7 +31,13 @@ function App() {
           <Route path="Signup" element={<Signup />} />
           <Route path="UserSignOut" element={<UserSignOut />} />
           <Route path="login" element={<Login />} />
-          <Route path="reservation" element={<Reservation />} />
+
+          {/* <Route path="reservation" element={<Reservation />}></Route>
+          <Route path="reservation/:id" element={<Reservation />}></Route> */}
+
+          <Route path="reservation/*" element={<Reservation />}>
+            <Route path=":location" element={<Reservation />} />
+          </Route>
           <Route path="*" element={<>잘못된 경로입니다</>} />
         </Routes>
       </BrowserRouter>

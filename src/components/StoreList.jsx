@@ -2,15 +2,24 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
-function StoreList() {
+function StoreList({ region }) {
   const [storeList, setStoreList] = useState();
+  const [location] = useState(region);
+
+  // 한글 이름
+  let regionName = checkRegionName(location);
 
   useEffect(() => {
-    axios('http://localhost:5000/api/stores').then((res) => {
-      setStoreList(res.data);
-    });
-  }, []);
-  console.log(storeList);
+    if (regionName === null) {
+      axios('http://localhost:5000/api/stores').then((res) => {
+        setStoreList(res.data);
+      });
+    } else {
+      axios('http://localhost:5000/api/stores').then((res) => {
+        setStoreList(res.data.filter((e) => e.categoryLocation === regionName));
+      });
+    }
+  }, [regionName]);
 
   return (
     <>
@@ -19,7 +28,7 @@ function StoreList() {
           <StoreDiv>
             <StoreContentsDiv>
               <ImageDiv>
-                <StoreImg src="food1.jpeg" />
+                <StoreImg src="/food1.jpeg" />
               </ImageDiv>
               <StoreStringsDiv>
                 <StoreName>{store.storeName}</StoreName>
@@ -31,6 +40,19 @@ function StoreList() {
         ))}
     </>
   );
+}
+
+function checkRegionName(region) {
+  switch (region) {
+    case 'busan':
+      return '부산';
+    case 'ulsan':
+      return '울산';
+    case 'daegu':
+      return '대구';
+    default:
+      return null;
+  }
 }
 
 const StoreDiv = styled.div`

@@ -5,14 +5,14 @@ import ReservationComponent from './ReservationList';
 import './../../styles/Profile.css';
 import axios from 'axios';
 import { PORT } from '../../Api';
-import UserSignOut from './UserSignOut';
-import { Navigate, Route, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const DEFAULT_IMG =
   'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png';
 
 // 예약 정보 가져오기
 function MyPage() {
+  let navigate = useNavigate();
   const [userData, setUserData] = useState('');
   const getRole = JSON.parse(sessionStorage.getItem('role'));
   const getLoginId = JSON.parse(sessionStorage.getItem('loginId'));
@@ -29,6 +29,9 @@ function MyPage() {
       .catch((err) => console.log(err));
   }, []);
 
+  function handleClick(e) {
+    navigate('/UserSignOut');
+  }
   return (
     <Layout>
       <h2> {userData.id}의 마이 페이지</h2>
@@ -38,13 +41,15 @@ function MyPage() {
       <DataLayout>
         {getRole === 'user' ? <ReservationComponent /> : null}
       </DataLayout>
+      <button className="signOut-button" onClick={handleClick}>
+        회원탈퇴
+      </button>
     </Layout>
   );
 }
 
 // 사용자 프로필 컴포넌트
 function MyProfileComponent({ userData, role }) {
-  let navigate = useNavigate();
   const fileInput = useRef(null);
   const [image, setImage] = useState(DEFAULT_IMG);
   const [file, setFile] = useState(null);
@@ -84,9 +89,7 @@ function MyProfileComponent({ userData, role }) {
       setNickname(nicknameInput.current.value);
     }
   };
-  function handleClick(e) {
-    navigate('/UserSignOut');
-  }
+
   return (
     <div className="profile-component">
       <form className="profile-form">
@@ -131,10 +134,6 @@ function MyProfileComponent({ userData, role }) {
           ref={fileInput}
         />
       </form>
-
-      <div>
-        <button onClick={handleClick}>회원탈퇴</button>
-      </div>
     </div>
   );
 }
@@ -143,6 +142,7 @@ function MyProfileComponent({ userData, role }) {
 // 예약 확인 레이아웃
 const DataLayout = styled.div`
   /* width: 100vw; */
+
   width: 85%;
   /* border: 1px solid black; */
   margin-top: 4rem;
@@ -151,6 +151,7 @@ const DataLayout = styled.div`
 const Layout = styled.div`
   width: 100vw;
   height: 100vh;
+  position: relative;
   /* background-color: blue; */
   margin-top: 1rem;
   display: flex;

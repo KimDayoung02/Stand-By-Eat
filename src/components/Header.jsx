@@ -11,12 +11,8 @@ function Header() {
   const [role, setRole] = useState(JSON.parse(sessionStorage.getItem('role')));
 
   // 토큰 유무찾기
-
   useEffect(() => {
     setToken(sessionStorage.getItem('token'));
-    // 생성된 토큰이 없으면 - null 일시
-    // 생성된 토큰이 있으면
-
     if (haveToken !== null) {
       setRole(JSON.parse(sessionStorage.getItem('role')));
       console.log('-----1-');
@@ -26,11 +22,7 @@ function Header() {
       console.log('-----3-');
       console.log(role);
     }
-
-    //console.log('haveToken ', haveToken);
   }, [haveToken, role]);
-  // console.log('haveToken : ', haveToken);
-  // console.log('role : ', role);
 
   return (
     <Navbar bg="light" expand="lg">
