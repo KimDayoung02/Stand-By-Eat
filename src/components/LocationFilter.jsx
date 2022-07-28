@@ -9,30 +9,42 @@ import ButtonMater from '@mui/material/Button';
 import 'react-day-picker/dist/style.css';
 
 function LocationFilter() {
+  //모달창 상태
   const [show, setShow] = useState(false);
+
+  //달력으로 선택된 날짜 상태
   const [selected, setSelected] = useState();
-  const [date, setDate] = useState();
 
-  const handleShow = () => setShow(true);
+  //선택된 날짜를 yyyy-mm-dd형태로 받아오는 상태
+  const [date, setDate] = useState('선택해주세요!');
 
-  const [selectedOption, setSelectedOption] = useState('8:00');
+  //시간을 선택하는 select value 상태
+  const [selectedOption, setSelectedOption] = useState('선택해주세요!');
+
+  //예약인원을 선택하는 value 상태
   let [count, setCount] = useState(0);
+
+  //모달
+  const handleShow = () => setShow(true);
 
   // 달력 날짜 포멧 출력에 사용
   let footer = <p>날짜를 선택해주세요!</p>;
   if (selected) {
-    footer = <p> {format(selected, 'yyyy-MM-dd')}.</p>;
+    footer = format(selected, 'yyyy-MM-dd');
   }
 
+  //모달이 닫힐 때 날짜 값을 set
   const handleClose = () => {
     setDate(footer);
     setShow(false);
   };
 
-  useEffect(() => {
-    console.log(selectedOption);
-  }, [selectedOption]);
+  //select에서 쓰이는 이벤트
+  const handleSelect = (e) => {
+    setSelectedOption(e.target.value);
+  };
 
+  //인원수 증가 감소 버튼이벤트
   const incrementCount = () => {
     count = count + 1;
     setCount(count);
@@ -48,11 +60,7 @@ function LocationFilter() {
     }
   };
 
-  const handleSelect = (e) => {
-    setSelectedOption(e.target.value);
-  };
-
-  //여기 select
+  //select option
   const selectList = [
     '08:00',
     '09:00',
@@ -71,23 +79,22 @@ function LocationFilter() {
     '22:00',
     '23:00'
   ];
-  console.log(selectList);
 
   return (
     <>
       <Filter>
         <FilterButton variant="primary" onClick={handleShow}>
           <FilterDiv>
-            <ReservationContentsDiv>
+            <ReservationContentsDiv style={{ width: '25%' }}>
               <ImCalendar /> 예약 날짜 : {date}
             </ReservationContentsDiv>
 
-            <ReservationContentsDiv>
+            <ReservationContentsDiv style={{ width: '25%' }}>
               <ImClock /> 예약 시간 : {selectedOption}
             </ReservationContentsDiv>
 
-            <ReservationContentsDiv>
-              <ImUsers /> 예약 인원 :{count}
+            <ReservationContentsDiv style={{ width: '25%' }}>
+              <ImUsers /> 예약 인원 : {count}
             </ReservationContentsDiv>
 
             {/* <ClickHereDiv>
@@ -112,7 +119,6 @@ function LocationFilter() {
             />
           </DateDiv>
 
-          {/* 여기가 select */}
           <ModalTimeDiv>
             <select onChange={handleSelect} value={selectedOption}>
               {selectList.map((item) => (
@@ -122,7 +128,6 @@ function LocationFilter() {
               ))}
             </select>
           </ModalTimeDiv>
-          {/* 여기까지 select */}
 
           <ModalCount>
             <ButtonMater variant="outlined" onClick={incrementCount}>
