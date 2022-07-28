@@ -6,7 +6,6 @@ import axios from 'axios';
 import { PORT } from '../../Api';
 function ManageUsers() {
   let navigate = useNavigate();
-
   const [users, setUsers] = useState([]);
   axios.get(`${PORT}/user/users`).then((res) => {
     for (let i = 0; i < res.data.length; i++) {
