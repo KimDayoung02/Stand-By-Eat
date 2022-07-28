@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { PORT } from './../Api';
 
 function StoreList({ region }) {
   const [storeList, setStoreList] = useState();
@@ -11,16 +13,17 @@ function StoreList({ region }) {
 
   useEffect(() => {
     if (regionName === null) {
-      axios('http://localhost:5000/api/stores').then((res) => {
+      axios(`${PORT}/api/stores`).then((res) => {
         setStoreList(res.data);
       });
     } else {
-      axios('http://localhost:5000/api/stores').then((res) => {
+      axios(`${PORT}/api/stores`).then((res) => {
         setStoreList(res.data.filter((e) => e.categoryLocation === regionName));
       });
     }
   }, [regionName]);
 
+  console.log(storeList);
   return (
     <>
       {storeList &&
@@ -28,13 +31,15 @@ function StoreList({ region }) {
           <StoreDiv>
             <StoreContentsDiv>
               <ImageDiv>
-                <StoreImg src="/food1.jpeg" />
+                <StoreImg src={store.picture[0]} />
               </ImageDiv>
-              <StoreStringsDiv>
-                <StoreName>{store.storeName}</StoreName>
-                <StoreDetail>{store.introduction}</StoreDetail>
-                <StoreNumber>{store.phoneNumber}</StoreNumber>
-              </StoreStringsDiv>
+              <Link to={`/StoreDetail/${store._id}`}>
+                <StoreStringsDiv>
+                  <StoreName>{store.storeName}</StoreName>
+                  <StoreDetail>{store.introduction}</StoreDetail>
+                  <StoreNumber>{store.phoneNumber}</StoreNumber>
+                </StoreStringsDiv>
+              </Link>
             </StoreContentsDiv>
           </StoreDiv>
         ))}

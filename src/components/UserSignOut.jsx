@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import './../../styles/Signup.css';
+import './../styles/Signup.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Button, Modal } from 'react-bootstrap';
 
-import { PORT } from '../../Api';
+import { PORT } from '../Api';
 
 const UserSignOut = () => {
   const navigate = useNavigate();
@@ -106,10 +106,18 @@ const UserSignOut = () => {
           </Modal.Header>
           <Modal.Body>정말로 회원탈퇴 하시겠습니까??</Modal.Body>
           <Modal.Footer>
-            <Button variant="primary" onClick={handleSignOut}>
+            <Button
+              variant="primary"
+              onClick={handleSignOut}
+              style={{ width: '20%' }}
+            >
               회원탈퇴
             </Button>
-            <Button variant="secondary" onClick={handleClose}>
+            <Button
+              variant="secondary"
+              onClick={handleClose}
+              style={{ width: '20%' }}
+            >
               닫기
             </Button>
           </Modal.Footer>
