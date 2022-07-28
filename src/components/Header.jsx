@@ -70,6 +70,11 @@ function Header() {
             {role === 'admin' ? (
               <LinkStyle to="/admin">Admin page</LinkStyle>
             ) : null}
+            {haveToken !== null ? (
+              <>
+                <LinkStyle to="/logout">Logout</LinkStyle>
+              </>
+            ) : null}
           </Nav>
         </Navbar.Collapse>
       </Container>

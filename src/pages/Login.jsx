@@ -11,11 +11,7 @@ import { PORT } from '../Api';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-export const LoginInfo = createContext(null);
-
 function Login() {
-  const navigate = useNavigate();
-
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
@@ -55,7 +51,7 @@ function Login() {
         checkToken();
       })
       .catch(function (error) {
-        alert('로그인 실패!');
+        alert(error.response.data.reason);
         console.log('error : ' + error);
         console.log(
           'error.response.data.reason : ' + error.response.data.reason,
@@ -81,7 +77,7 @@ function Login() {
             onChange={handleChange}
           />
           사용자
-          <input
+          {/* <input
             id="owner"
             value="owner"
             name="platform"
@@ -89,7 +85,7 @@ function Login() {
             checked={role === 'owner'}
             onChange={handleChange}
           />
-          점주
+          점주 */}
           <input
             id="admin"
             value="admin"

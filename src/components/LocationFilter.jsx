@@ -46,10 +46,18 @@ function LocationFilter() {
           <FilterModal />
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button
+            variant="secondary"
+            onClick={handleClose}
+            style={{ width: '10%' }}
+          >
             닫기
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button
+            variant="primary"
+            onClick={handleClose}
+            style={{ width: '20%' }}
+          >
             결정했어요!
           </Button>
         </Modal.Footer>
