@@ -9,7 +9,7 @@ import UserSignOut from './pages/users/UserSignOut';
 import Reservation from './pages/Reservation';
 import Login from './pages/Login';
 import { useEffect, useState } from 'react';
-
+import 'react-day-picker/dist/style.css';
 function App() {
   const [token, setToken] = useState(null);
   useEffect(() => {
