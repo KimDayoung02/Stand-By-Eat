@@ -31,7 +31,7 @@ function App() {
           <Route path="Signup" element={<Signup />} />
           <Route path="UserSignOut" element={<UserSignOut />} />
           <Route path="login" element={<Login />} />
-
+          <Route path="StoreDetail" element={<StoreDetail />} />
           {/* <Route path="reservation" element={<Reservation />}></Route>
           <Route path="reservation/:id" element={<Reservation />}></Route> */}
 
