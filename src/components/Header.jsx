@@ -54,9 +54,6 @@ function Header() {
             ) : null}
             {role === 'admin' ? (
               <>
-                <LinkStyle ClassName="mx-4" to="/myPage">
-                  myPage
-                </LinkStyle>
                 <LinkStyle ClassName="mx-4" to="/adminPage">
                   admin
                 </LinkStyle>
