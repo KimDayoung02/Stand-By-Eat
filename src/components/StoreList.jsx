@@ -23,7 +23,6 @@ function StoreList({ region }) {
     }
   }, [regionName]);
 
-  console.log(storeList);
   return (
     <>
       {storeList &&
