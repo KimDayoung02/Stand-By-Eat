@@ -13,9 +13,10 @@ import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons';
   function StoreDetail({  }) {
 
     const navigate = useNavigate();
+    const { storeId } = useParams();
     const [store, setStore] = useState([]);
     const [menu, setMenu] = useState([]);
-    const { storeId } = useParams();
+ 
 
     useEffect(() => {
       axios.get(`${ PORT }/api/store/${storeId}`)
@@ -32,19 +33,24 @@ import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons';
         })
         .catch((err) => console.log(err));    
     }, []);
-   console.log(menu);
+
     // store.latitude,store.hardness
   const reservationButton=()=> {
     navigate('/');
   }
-
+  console.log('================================');
+console.log(store);
+console.log(store.latitude);
+console.log(store.hardness);
+console.log(menu);
+console.log('================================');
   useEffect(()=>{
-    var container = document.getElementById('map');
-    var options = {
+    const container = document.getElementById('map');
+    const options = {
       center: new kakao.maps.LatLng(store.latitude,store.hardness),
       level: 3
     };
-    var map = new kakao.maps.Map(container, options);
+    const map = new kakao.maps.Map(container, options);
     }, [])
 
   return (
@@ -66,7 +72,7 @@ import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons';
           <Carousel.Item interval={1500}>
             <CarouselItemImg
               className="d-block w-100"
-              src={menu.picture}
+              src={store.picture}
             />
             <Carousel.Caption >
            {store.storeName}
@@ -78,7 +84,6 @@ import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons';
           <h1>가게 정보</h1>
           <h5>{store.introduction}</h5>
           <h5>{store.location}</h5>
-      
           <h5>{store.phoneNumber}</h5>
       </div>
       <div class="HomeDiv2">
