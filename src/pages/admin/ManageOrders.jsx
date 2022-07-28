@@ -41,22 +41,14 @@ function ManageOrders() {
             <div class="row">
               <div class="col text-center">{order.storeId.storeName}</div>
               <div class="col text-center">{order.userId.name}</div>
-              <div class="col text-center">
-                {order.timeId.year +
-                  '/' +
-                  order.timeId.month +
-                  '/' +
-                  order.timeId.day}
-              </div>
-              <div class="col text-center">
-                {order.timeId.hour + ':' + order.timeId.min}
-              </div>
+              <div class="col text-center">{order.timeId.date}</div>
+              <div class="col text-center">{order.timeId.time}</div>
               <div class="col text-center">{order.numberOfReservations}</div>
               <div class="col text-center">
                 <DeleteButton
                   onClick={() => {
                     // 관리자 전용 삭제 api 추가하기
-                    axios.delete(`${PORT}/${order._id}`);
+                    axios.delete(`${PORT}/api/order/${order._id}`);
 
                     window.location.reload();
                   }}

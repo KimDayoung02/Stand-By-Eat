@@ -46,7 +46,7 @@ function ManageStores() {
                 <DeleteButton
                   onClick={() => {
                     // 관리자 전용 삭제 api 추가하기
-                    axios.delete(`${PORT}/${store._id}`);
+                    axios.delete(`${PORT}/api/store/${store._id}`);
 
                     window.location.reload();
                   }}
