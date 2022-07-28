@@ -8,6 +8,7 @@ import Signup from './pages/users/Signup';
 import UserSignOut from './pages/users/UserSignOut';
 import Reservation from './pages/Reservation';
 import Login from './pages/Login';
+import StoreDetail from './pages/StoreDetail';
 import { useEffect, useState } from 'react';
 
 function App() {
