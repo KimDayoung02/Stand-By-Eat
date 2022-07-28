@@ -15,12 +15,12 @@ function Header() {
     setToken(sessionStorage.getItem('token'));
     if (haveToken !== null) {
       setRole(JSON.parse(sessionStorage.getItem('role')));
-      console.log('-----1-');
-      console.log(role);
+      // console.log('-----1-');
+      // console.log(role);
     } else {
       setRole('');
-      console.log('-----3-');
-      console.log(role);
+      // console.log('-----3-');
+      // console.log(role);
     }
   }, [haveToken, role]);
 
@@ -54,9 +54,6 @@ function Header() {
             ) : null}
             {role === 'admin' ? (
               <>
-                <LinkStyle ClassName="mx-4" to="/myPage">
-                  myPage
-                </LinkStyle>
                 <LinkStyle ClassName="mx-4" to="/adminPage">
                   admin
                 </LinkStyle>
