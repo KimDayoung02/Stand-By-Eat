@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
 import { PORT } from '../../Api';
-function ManageUsers() {
+function ManageOrders() {
   let navigate = useNavigate();
 
   const [orders, setOrders] = useState([]);
@@ -39,10 +39,18 @@ function ManageUsers() {
         {orders.map((order) => {
           return (
             <div class="row">
-              <div class="col text-center">{order.storeId}</div>
-              <div class="col text-center">{order.userId}</div>
-              <div class="col text-center">{'날짜'}</div>
-              <div class="col text-center">{'시간'}</div>
+              <div class="col text-center">{order.storeId.storeName}</div>
+              <div class="col text-center">{order.userId.name}</div>
+              <div class="col text-center">
+                {order.timeId.year +
+                  '/' +
+                  order.timeId.month +
+                  '/' +
+                  order.timeId.day}
+              </div>
+              <div class="col text-center">
+                {order.timeId.hour + ':' + order.timeId.min}
+              </div>
               <div class="col text-center">{order.numberOfReservations}</div>
               <div class="col text-center">
                 <DeleteButton
@@ -98,4 +106,4 @@ const DeleteButton = styled(Button)`
   }
 `;
 
-export default ManageUsers;
+export default ManageOrders;

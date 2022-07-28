@@ -1,0 +1,50 @@
+p{
+  text-align: center;
+}
+.title{
+  width: 70%;
+  height: 3rem;
+  margin: 2rem auto 2rem auto;
+  text-align: center;
+  background-color:#f8effb;;
+  border: 5px solid #ddb8e8;
+  border-radius: 30px;
+  color:black;
+}
+
+.HomeDiv1{
+  width: 70%;
+  height: 10rem;
+  margin: 2rem auto 2rem auto;
+  text-align: center;
+  background-color:#f8f9fa;
+  border: 5px solid #ddb8e8;
+  border-radius: 30px;
+}
+.HomeDiv1 h1{
+    border-bottom: 1mm ridge rgba(155, 153, 154, 0.6);
+}
+
+.HomeDiv2{
+  width: 70%;
+  height: 20rem;
+  margin: 2rem auto 2rem auto;
+  text-align: center;
+  background-color:#f8f9fa;
+  
+  border-radius: 30px;
+}
+.HomeDiv2 h1{   
+  border-bottom: 1mm ridge rgba(155, 153, 154, 0.6);
+}
+.menu{   
+  text-align:center;
+
+}
+
+.HomeDiv3{
+width: 70%;
+height: 10rem;
+margin: 2rem auto 2rem auto;
+text-align: center;
+}

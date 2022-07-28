@@ -11,6 +11,10 @@ import Login from './pages/Login';
 import StoreDetail from './pages/StoreDetail';
 import Logout from './components/Logout';
 import { useEffect, useState } from 'react';
+import AdminPage from './pages/users/adminPage';
+import ManageUsers from './pages/admin/ManageUsers';
+import ManageOrders from './pages/admin/ManageOrders';
+import ManageStores from './pages/admin/ManageStores';
 
 function App() {
   const [token, setToken] = useState(null);
@@ -27,6 +31,10 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="adminPage" element={<AdminPage />} />
+          <Route path="manageUsers" element={<ManageUsers />} />
+          <Route path="manageOrders" element={<ManageOrders />} />
+          <Route path="manageStores" element={<ManageStores />} />
           <Route path="myPage" element={<UserMyPage />} />
           <Route path="ownerPage" element={<UserMyPage />} />
           <Route path="myPage" element={<UserMyPage />} />
