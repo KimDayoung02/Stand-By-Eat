@@ -11,9 +11,9 @@ function ManageUsers() {
   axios.get(`${PORT}/user/users`).then((res) => {
     for (let i = 0; i < res.data.length; i++) {
       users.push(res.data[i]);
+      console.log(res.data[i]);
     }
   });
-
   useEffect(() => {
     axios.get(`${PORT}/user/users`).then((res) => {
       let newArray = [];
@@ -44,7 +44,13 @@ function ManageUsers() {
                 <DeleteButton
                   onClick={() => {
                     // 관리자 전용 삭제 api 추가하기
-                    axios.delete(`${PORT}/user/delete/${user._id}`);
+                    const token = JSON.parse(sessionStorage.getItem('token'));
+                    console.log(user._id);
+                    axios.delete(`${PORT}/user/delete/${user._id}`, {
+                      headers: {
+                        Authorization: `Basic ${token}`,
+                      },
+                    });
 
                     window.location.reload();
                   }}

@@ -54,11 +54,6 @@ function Header() {
             ) : null}
             {role === 'admin' ? (
               <>
-                <LinkStyle to="/adminPage">admin page</LinkStyle>
-              </>
-            ) : null}
-            {role === 'admin' ? (
-              <>
                 <LinkStyle ClassName="mx-4" to="/myPage">
                   myPage
                 </LinkStyle>
@@ -67,9 +62,7 @@ function Header() {
                 </LinkStyle>
               </>
             ) : null}
-            {role === 'admin' ? (
-              <LinkStyle to="/admin">Admin page</LinkStyle>
-            ) : null}
+
             {haveToken !== null ? (
               <>
                 <LinkStyle to="/logout">Logout</LinkStyle>

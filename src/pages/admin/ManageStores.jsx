@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
 import { PORT } from '../../Api';
-function ManageUsers() {
+function ManageStores() {
   let navigate = useNavigate();
 
   const [stores, setStores] = useState([]);
@@ -46,7 +46,7 @@ function ManageUsers() {
                 <DeleteButton
                   onClick={() => {
                     // 관리자 전용 삭제 api 추가하기
-                    axios.delete(`${PORT}/${store._id}`);
+                    axios.delete(`${PORT}/api/store/${store._id}`);
 
                     window.location.reload();
                   }}
@@ -96,4 +96,4 @@ const DeleteButton = styled(Button)`
   }
 `;
 
-export default ManageUsers;
+export default ManageStores;
