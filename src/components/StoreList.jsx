@@ -10,7 +10,7 @@ function StoreList({ region }) {
 
   // 한글 이름
   let regionName = checkRegionName(location);
-  // console.log(region);
+
   useEffect(() => {
     if (regionName === null) {
       axios(`${PORT}/api/stores`).then((res) => {
@@ -23,12 +23,12 @@ function StoreList({ region }) {
     }
   }, [regionName]);
 
+  console.log(storeList);
   return (
     <>
       {storeList &&
         storeList.map((store) => (
           <StoreDiv>
-            {/* {console.log(store._id)} */}
             <StoreContentsDiv>
               <ImageDiv>
                 <StoreImg src={store.picture[0]} />
@@ -103,8 +103,4 @@ const StoreDetail = styled.div`
 
 const StoreNumber = styled.div``;
 
-const StoreEmpty = styled.div`
-  /* width: 80%; */
-  margin-top: 10%;
-`;
 export default StoreList;
