@@ -2,7 +2,7 @@
 import React,{ useState, useEffect } from 'react';
 import { Carousel, Button } from 'react-bootstrap';
 import styled from 'styled-components';
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useParams  } from "react-router-dom";
 import { PORT } from '../Api';
 import axios from 'axios';
 import './../styles/StoreDetail.css';
@@ -10,15 +10,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons';
 
 
-  function StoreDetail({ storeId }) {
+  function StoreDetail({  }) {
 
     const navigate = useNavigate();
     const [store, setStore] = useState([]);
     const [menu, setMenu] = useState([]);
-
+    const { storeId } = useParams();
 
     useEffect(() => {
-      axios.get(`${ PORT }/api/store/62e217c80aa9ad97c3cad599`)
+      axios.get(`${ PORT }/api/store/${storeId}`)
         .then((res) => {
           setStore(res.data);
         })
@@ -26,7 +26,7 @@ import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons';
     }, []);
 
     useEffect(() => {
-      axios.get(`${ PORT }/api/menus?storeId=62e217c80aa9ad97c3cad599`)
+      axios.get(`${ PORT }/api/menus?storeId=${storeId}`)
         .then((res) => {
           setMenu(res.data);
         })
@@ -66,7 +66,7 @@ import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons';
           <Carousel.Item interval={1500}>
             <CarouselItemImg
               className="d-block w-100"
-              src={store.picture}
+              src={menu.picture}
             />
             <Carousel.Caption >
            {store.storeName}
