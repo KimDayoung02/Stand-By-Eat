@@ -50,6 +50,8 @@ function MyPage() {
 
 // 사용자 프로필 컴포넌트
 function MyProfileComponent({ userData, role }) {
+  let navigate = useNavigate();
+  // console.log(userData);
   const fileInput = useRef(null);
   const [image, setImage] = useState(DEFAULT_IMG);
   const [file, setFile] = useState(null);
@@ -57,6 +59,7 @@ function MyProfileComponent({ userData, role }) {
   const [nickname, setNickname] = useState('');
   const [change, setChange] = useState(false);
   const [buttonText, setButtonText] = useState('프로필 변경');
+  // const [info, setInfo] = useState('');
 
   const imageOnChange = (e) => {
     if (e.target.files[0]) {
@@ -78,6 +81,14 @@ function MyProfileComponent({ userData, role }) {
     reader.readAsDataURL(e.target.files[0]);
   };
 
+  const config = {
+    headers: {
+      Authorization: `Basic ${JSON.parse(sessionStorage.getItem('token'))}`,
+    },
+  };
+  //console.log(image);
+  // console.log(file);
+  //console.log(nicknameInput.current.value);
   const infoChange = (e) => {
     e.preventDefault();
     setChange(!change);
@@ -85,10 +96,26 @@ function MyProfileComponent({ userData, role }) {
       setButtonText('프로필 변경');
     } else {
       setButtonText('수정하기');
+      navigate('/myPage');
       alert('수정되었습니다');
       setNickname(nicknameInput.current.value);
+
+      axios
+        .patch(
+          `${PORT}/user/update/${userData.id}`,
+          {
+            nickName: nicknameInput.current.value,
+            profileImgUrl: image,
+            currentPassword: userData.pw,
+          },
+          config,
+        )
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
     }
   };
+
+  useEffect(() => {}, [nickname]);
 
   return (
     <div className="profile-component">
@@ -105,7 +132,7 @@ function MyProfileComponent({ userData, role }) {
           ></div>
         </div>
         <label className="profile-nickname-component">
-          <h3 className="profile-nickname">{nickname}</h3>
+          <h3 className="profile-nickname">{userData.nickName}</h3>
         </label>
         <div className="profile-info">
           <InputGroup className="mb-2">
