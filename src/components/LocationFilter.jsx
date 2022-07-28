@@ -3,6 +3,13 @@ import { ImCalendar, ImClock, ImUsers } from 'react-icons/im';
 import { Modal, Button } from 'react-bootstrap';
 import React, { useState } from 'react';
 import FilterModal from './FilterModal';
+import {
+  LocalizationProvider,
+  TimePicker,
+  InputLabel,
+  MenuItem,
+} from '@mui/material';
+import FilterTime from './FilterTime';
 
 function LocationFilter() {
   const [show, setShow] = useState(false);
@@ -42,9 +49,12 @@ function LocationFilter() {
             예약하고 싶은 날짜와 시간, 인원을 결정해주세요!
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          <FilterModal />
-        </Modal.Body>
+        <ModalBody>
+          <Modal.Body>
+            <FilterModal />
+            <FilterTime />
+          </Modal.Body>
+        </ModalBody>
         <Modal.Footer>
           <Button
             variant="secondary"
@@ -120,4 +130,8 @@ const ReservationContentsDiv = styled.div`
 const ClickHereDiv = styled.div`
   padding: 1rem;
   font-size: 14px;
+`;
+
+const ModalBody = styled.div`
+  border: 1px soild black;
 `;
