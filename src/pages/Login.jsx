@@ -36,8 +36,8 @@ function Login() {
       method: 'post',
       data: {
         id: idInput.current.value,
-        pw: passwordInput.current.value,
-      },
+        pw: passwordInput.current.value
+      }
     })
       .then((res) => {
         alert('로그인 성공!');
@@ -45,16 +45,21 @@ function Login() {
         sessionStorage.setItem('token', JSON.stringify(getToken));
         sessionStorage.setItem(
           'loginId',
-          JSON.stringify(idInput.current.value),
+          JSON.stringify(idInput.current.value)
         );
 
         checkToken();
       })
       .catch(function (error) {
-        alert(error.response.data.reason);
+        if (role === '') {
+          alert('권한을 선택하지 않았습니다.');
+        } else {
+          alert(error.response.data.reason);
+        }
+
         console.log('error : ' + error);
         console.log(
-          'error.response.data.reason : ' + error.response.data.reason,
+          'error.response.data.reason : ' + error.response.data.reason
         );
       });
   };
@@ -77,15 +82,6 @@ function Login() {
             onChange={handleChange}
           />
           사용자
-          {/* <input
-            id="owner"
-            value="owner"
-            name="platform"
-            type="radio"
-            checked={role === 'owner'}
-            onChange={handleChange}
-          />
-          점주 */}
           <input
             id="admin"
             value="admin"
@@ -144,20 +140,20 @@ async function checkToken() {
   let token = JSON.parse(sessionStorage.getItem('token'));
   let getId = await axios.get('http://localhost:5000/common/id', {
     headers: {
-      Authorization: `Basic ${token}`,
-    },
+      Authorization: `Basic ${token}`
+    }
   });
 
   let getObjectId = await axios.get('http://localhost:5000/common/oid', {
     headers: {
-      Authorization: `Basic ${token}`,
-    },
+      Authorization: `Basic ${token}`
+    }
   });
 
   let getRole = await axios.get('http://localhost:5000/common/role', {
     headers: {
-      Authorization: `Basic ${token}`,
-    },
+      Authorization: `Basic ${token}`
+    }
   });
 
   sessionStorage.setItem('objectId', JSON.stringify(getObjectId.data));

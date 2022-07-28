@@ -8,7 +8,6 @@ import axios from 'axios';
 import './../styles/StoreDetail.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons';
-import KaKaoMap from '../components/KaKaoMap';
 
 function StoreDetail() {
   const navigate = useNavigate();
@@ -42,7 +41,7 @@ function StoreDetail() {
     const container = document.getElementById('map');
     const options = {
       center: new kakao.maps.LatLng(store.latitude, store.hardness),
-      level: 2,
+      level: 2
     };
 
     const map = new kakao.maps.Map(container, options);
@@ -50,11 +49,11 @@ function StoreDetail() {
     // // 마커가 표시될 위치입니다
     const markerPosition = new kakao.maps.LatLng(
       store.latitude,
-      store.hardness,
+      store.hardness
     );
     // 마커를 생성합니다
     const marker = new kakao.maps.Marker({
-      position: markerPosition,
+      position: markerPosition
     });
 
     // 마커가 지도 위에 표시되도록 설정합니다
@@ -92,7 +91,7 @@ function StoreDetail() {
         {menu &&
           menu.map((menu) => (
             <div className="menu">
-              <MenuImg src={menu.picture}/>
+              <MenuImg src={menu.picture} />
               <h3>{menu.menuName}</h3>
               <h4>{menu.price}원</h4>
             </div>

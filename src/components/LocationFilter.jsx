@@ -114,7 +114,7 @@ function LocationFilter() {
 
           {/* 여기가 select */}
           <ModalTimeDiv>
-            <select onChange={handleSelect} value={selected}>
+            <select onChange={handleSelect} value={selectedOption}>
               {selectList.map((item) => (
                 <option value={item} key={item}>
                   {item}

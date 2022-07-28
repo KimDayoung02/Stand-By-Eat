@@ -14,7 +14,7 @@ function Logout() {
   return (
     <>
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title>LOG OUT</Modal.Title>
         </Modal.Header>
         <Modal.Body>{loginId}님 로그아웃 하시겠습니까?</Modal.Body>
