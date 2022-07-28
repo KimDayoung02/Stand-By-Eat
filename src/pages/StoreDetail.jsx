@@ -91,10 +91,10 @@ function StoreDetail() {
         <h1>MENU</h1>
         {menu &&
           menu.map((menu) => (
-            <div>
-              {menu.menuName}
-              {menu.details}
-              {menu.price}
+            <div className="menu">
+              <MenuImg src={menu.picture}/>
+              <h3>{menu.menuName}</h3>
+              <h4>{menu.price}원</h4>
             </div>
           ))}
       </div>
@@ -125,7 +125,12 @@ const CarouselItemImg = styled.img`
   height: 25rem;
   object-fit: cover;
 `;
-
+const MenuImg = styled.img`
+  width: 8rem;
+  height: 8rem;
+  text-align: center;
+  border-radius: 1rem;
+`;
 const ReservationButton = styled(Button)`
   width: 12rem;
   height: 5rem;
