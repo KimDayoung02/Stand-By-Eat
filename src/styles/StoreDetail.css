@@ -3,7 +3,7 @@ p{
 }
 .title{
   width: 70%;
-  height: 3rem;
+  height: 3.5rem;
   margin: 2rem auto 2rem auto;
   text-align: center;
   background-color:#f8effb;;
@@ -22,7 +22,7 @@ p{
   border-radius: 30px;
 }
 .HomeDiv1 h1{
-    border-bottom: 1mm ridge rgba(155, 153, 154, 0.6);
+    border-bottom: 1mm solid rgba(155, 153, 154, 0.6);
 }
 
 .HomeDiv2{
@@ -35,13 +35,20 @@ p{
   border-radius: 30px;
 }
 .HomeDiv2 h1{   
-  border-bottom: 1mm ridge rgba(155, 153, 154, 0.6);
+  border-bottom: 1mm solid rgba(155, 153, 154, 0.6);
 }
 .menu{   
   text-align:center;
 
 }
+#map{
+  width: 70%;
+  height: 20rem;
+  margin: 2rem auto 2rem auto;
+  text-align: center;
+  border-radius: 30px;
 
+}
 .HomeDiv3{
 width: 70%;
 height: 10rem;
