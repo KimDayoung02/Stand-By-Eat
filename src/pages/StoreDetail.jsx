@@ -1,5 +1,5 @@
 /*global kakao*/ 
-import React,{ useState, useEffect,useRef } from 'react';
+import React,{ useState, useEffect } from 'react';
 import { Carousel, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
@@ -11,9 +11,6 @@ import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons';
 
 
   function StoreDetail({ storeId }) {
-    console.log('----------------');
-    console.log(storeId);
-    console.log('----------------');
 
     const navigate = useNavigate();
     const [store, setStore] = useState([]);
@@ -21,7 +18,7 @@ import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons';
 
 
     useEffect(() => {
-      axios.get(`${ PORT }/api/store/62e0032d1cf99b76a9c29c27`)
+      axios.get(`${ PORT }/api/store/62e217c80aa9ad97c3cad599`)
         .then((res) => {
           setStore(res.data);
         })
@@ -29,13 +26,13 @@ import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons';
     }, []);
 
     useEffect(() => {
-      axios.get(`${ PORT }/api/menus?storeId=62e0032d1cf99b76a9c29c27`)
+      axios.get(`${ PORT }/api/menus?storeId=62e217c80aa9ad97c3cad599`)
         .then((res) => {
           setMenu(res.data);
         })
         .catch((err) => console.log(err));    
     }, []);
-   
+   console.log(menu);
     // store.latitude,store.hardness
   const reservationButton=()=> {
     navigate('/');
@@ -79,15 +76,17 @@ import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons';
       </HomeDiv>
       <div class="HomeDiv1">
           <h1>가게 정보</h1>
-          <h5>({store.introduction})</h5>
+          <h5>{store.introduction}</h5>
           <h5>{store.location}</h5>
       
           <h5>{store.phoneNumber}</h5>
       </div>
       <div class="HomeDiv2">
         <h1>MENU</h1>
-        <div class="menu">{menu.menuName}{store.facilities}</div>
-
+        {menu &&
+        menu.map((menu) => (
+          <div>{menu.menuName}{menu.details}{menu.price}</div>
+        ))}
         </div>
         <div id="map" style={{width:"500px", height:"400px"}}></div> 
              <div class="HomeDiv3" >
