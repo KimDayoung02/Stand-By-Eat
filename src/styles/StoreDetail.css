@@ -37,6 +37,19 @@ p {
 .HomeDiv2 h1 {
   border-bottom: 1mm solid rgba(155, 153, 154, 0.6);
 }
+
+.HomeDiv2 {
+  width: 70%;
+  height: auto;
+  margin: 2rem auto 2rem auto;
+  text-align: center;
+  background-color: #f8f9fa;
+
+  border-radius: 30px;
+}
+.HomeDiv2 h1 {
+  border-bottom: 1mm solid rgba(155, 153, 154, 0.6);
+}
 .menu {
   text-align: center;
 }
