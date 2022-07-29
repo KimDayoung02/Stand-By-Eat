@@ -171,9 +171,9 @@ function StoreDetail() {
         <ReservationButton onClick={handleShow}>예약하기</ReservationButton>
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>예약확정</Modal.Title>
+            <Modal.Title>예약정보가 맞습니까?</Modal.Title>
           </Modal.Header>
-          <Modal.Body>{store.storeName}</Modal.Body>
+          <Modal.Body><p>{store.storeName}</p><p>{date}&nbsp;{time}</p><p>인원: {userCount}명</p> </Modal.Body>
           <Modal.Footer>
             <Button
               variant="primary"
@@ -212,8 +212,8 @@ const CarouselItemImg = styled.img`
   object-fit: cover;
 `;
 const MenuImg = styled.img`
-  width: 8rem;
-  height: 8rem;
+  width:27%;
+  height:27%;
   text-align: center;
   border-radius: 1rem;
 `;
