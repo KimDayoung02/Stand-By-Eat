@@ -29,9 +29,7 @@ function StoreDetail() {
     
     }
   }, [haveToken, role]);
-  console.log('==================');
-  console.log(role);
-  console.log('=======5==========');
+ 
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -81,14 +79,16 @@ function StoreDetail() {
 
   const confirmResevation= async (e) => {
     e.preventDefault();
-    const data={userId,storeId,numberOfReservations,timeId}
+    // const data={userId,storeId,numberOfReservations,timeId}
 
     if(haveToken === null ){
       alert("로그인 후 예약해주세요!")
       navigate('/login');
     }else{
        try { 
-          axios.post(`${PORT}/api/order`,data)
+          axios.post(`${PORT}/api/order`,
+          // data
+          )
            .then(function(response) {
             alert('예약이 완료되었습니다.')
             navigate('/myPage');
