@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
 import { PORT } from '../../Api';
+
 function ManageOrders() {
   let navigate = useNavigate();
 
@@ -23,6 +24,10 @@ function ManageOrders() {
       setOrders(newArray);
     });
   }, []);
+
+  let random = ['사용자1', '사용자2', '사용자3', '사용자4'];
+  let MathNum = Math.floor(Math.random() * random.length);
+
   return (
     <div>
       <BackButton onClick={() => navigate(-1)}> 뒤로가기</BackButton>
@@ -40,10 +45,12 @@ function ManageOrders() {
           return (
             <div class="row">
               <div class="col text-center">{order.storeId.storeName}</div>
-              <div class="col text-center">{order.userId.name}</div>
-              <div class="col text-center">{order.timeId.date}</div>
-              <div class="col text-center">{order.timeId.time}</div>
-              <div class="col text-center">{order.numberOfReservations}</div>
+              <div class="col text-center">
+                {order.userId == null ? random[MathNum] : order.userId.name}
+              </div>
+              <div class="col text-center">{order.date}</div>
+              <div class="col text-center">{order.time}</div>
+              <div class="col text-center">{order.count}</div>
               <div class="col text-center">
                 <DeleteButton
                   onClick={() => {
@@ -85,13 +92,13 @@ const BackButton = styled.button`
 `;
 const DeleteButton = styled(Button)`
   width: 5rem;
+  height: auto;
   margin-bottom: 1rem;
+  background-color: #ba86d5;
+  border-color: white;
+
   &:hover {
-    background-color: #ba86d5;
-    border-color: white;
-  }
-  &:active {
-    border-color: #6a2490;
+    background-color: #6a2490;
   }
   &:visited {
     border-color: white;

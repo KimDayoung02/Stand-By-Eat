@@ -24,7 +24,7 @@ function LocationFilter() {
   const [selectedOption, setSelectedOption] = useState('선택해주세요!');
 
   //예약인원을 선택하는 value 상태
-  let [count, setCount] = useState(0);
+  let [count, setCount] = useState(1);
 
   localStorage.setItem('date', date);
   localStorage.setItem('time', selectedOption);
@@ -115,7 +115,13 @@ function LocationFilter() {
             예약하고 싶은 날짜와 시간, 인원을 결정해주세요!
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center'
+          }}
+        >
           <DateDiv>
             <Calendar
               mode="single"
@@ -125,7 +131,13 @@ function LocationFilter() {
             />
           </DateDiv>
 
-          <ModalTimeDiv>
+          <ModalTimeDiv
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              marginBottom: '1rem'
+            }}
+          >
             <select onChange={handleSelect} value={selectedOption}>
               {selectList.map((item) => (
                 <option value={item} key={item}>

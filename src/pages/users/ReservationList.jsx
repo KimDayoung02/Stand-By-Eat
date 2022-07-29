@@ -48,6 +48,7 @@ function ReserVationData({ reservationData }) {
               storeId={e.storeId._id}
               reservationTime={e.time}
               count={e.count}
+              date={e.date}
             />
           );
         })
@@ -66,7 +67,7 @@ const CarouselItemImg = styled.img`
 `;
 
 // 가게 정보 들고오기
-function StoredDataComponent({ storeId, reservationTime, count }) {
+function StoredDataComponent({ storeId, reservationTime, count, date }) {
   // console.log(storeId);
   const [store, setStored] = useState([]);
   useEffect(() => {
@@ -123,7 +124,7 @@ function StoredDataComponent({ storeId, reservationTime, count }) {
               justifyContent: 'center'
             }}
           >
-            {reservationTime}
+            {date} {reservationTime}
           </div>
           <div
             class="col text-center"

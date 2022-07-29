@@ -33,19 +33,19 @@ function StoreDetail() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => {
-    if(date=='선택해주세요!'){
+    if (date == '선택해주세요!') {
       alert('날짜를 선택해주세요!');
       navigate(-1);
-    }else if(time=='선택해주세요!'){
+    } else if (time == '선택해주세요!') {
       alert('시간을 선택해주세요!');
       navigate(-1);
-    }else if(userCount==0){
+    } else if (userCount == 0) {
       alert('인원을 선택해주세요!');
       navigate(-1);
-    }else{
+    } else {
       setShow(true);
-    }};
-    
+    }
+  };
 
   useEffect(() => {
     axios
@@ -96,7 +96,7 @@ function StoreDetail() {
   console.log(date);
   console.log(time);
   console.log(userCount);
-  // console.log(userObjectId);
+  console.log(userObjectId);
   const confirmResevation = async (e) => {
     e.preventDefault();
     const data = {
@@ -186,13 +186,22 @@ function StoreDetail() {
           <Modal.Header closeButton>
             <Modal.Title>예약정보가 맞습니까?</Modal.Title>
           </Modal.Header>
-          <Modal.Body><p>{store.storeName}</p><p>{date}&nbsp;{time}</p><p>인원: {userCount}명</p> </Modal.Body>
+          <Modal.Body>
+            <p>{store.storeName}</p>
+            <p>
+              {date}&nbsp;{time}
+            </p>
+            <p>인원: {userCount}명</p>{' '}
+          </Modal.Body>
           <Modal.Footer>
             <Button
               variant="primary"
               onClick={confirmResevation}
-              style={{ width: '20%' ,  backgroundColor: '#c899d6',
-              borderColor: '#b57ec6'}}
+              style={{
+                width: '20%',
+                backgroundColor: '#c899d6',
+                borderColor: '#b57ec6'
+              }}
             >
               예약하기
             </Button>
@@ -226,8 +235,8 @@ const CarouselItemImg = styled.img`
   object-fit: cover;
 `;
 const MenuImg = styled.img`
-  width:27%;
-  height:27%;
+  width: 27%;
+  height: 27%;
   text-align: center;
   border-radius: 1rem;
 `;
