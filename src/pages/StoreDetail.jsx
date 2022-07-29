@@ -32,7 +32,20 @@ function StoreDetail() {
   }, [haveToken, role]);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = () => {
+    if(date=='선택해주세요!'){
+      alert('날짜를 선택해주세요!');
+      navigate(-1);
+    }else if(time=='선택해주세요!'){
+      alert('시간을 선택해주세요!');
+      navigate(-1);
+    }else if(userCount==0){
+      alert('인원을 선택해주세요!');
+      navigate(-1);
+    }else{
+      setShow(true);
+    }};
+    
 
   useEffect(() => {
     axios
@@ -80,9 +93,9 @@ function StoreDetail() {
   let userCount = localStorage.getItem('count');
   let userObjectId = JSON.parse(sessionStorage.getItem('objectId'));
 
-  // console.log(date);
-  // console.log(time);
-  // console.log(userCount);
+  console.log(date);
+  console.log(time);
+  console.log(userCount);
   // console.log(userObjectId);
   const confirmResevation = async (e) => {
     e.preventDefault();
