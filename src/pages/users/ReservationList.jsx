@@ -1,29 +1,36 @@
 import { useState, useEffect } from 'react';
 import { PORT } from '../../Api';
+import styled from 'styled-components';
 
 // 예약 목록 컴포넌트
 import axios from 'axios';
+import { height } from '@mui/system';
 
 function ReservationComponent() {
   const [reservationData, setReservation] = useState([]);
 
   useEffect(() => {
     axios.get(`${PORT}/api/orders`).then((response) => {
-      // console.log(response.data);
-      let filterReservation = response.data.filter(
-        (data) =>
-          data.userId === JSON.parse(sessionStorage.getItem('objectId')),
-      );
+      let filterReservation = response.data.filter((data) => {
+        return (
+          data.userId._id == JSON.parse(sessionStorage.getItem('objectId'))
+        );
+      });
       setReservation(filterReservation);
+      console.log(filterReservation);
     });
   }, []);
 
   return (
     <div className="reservation-container">
       <h3>예약목록</h3>
-      <div>
-        <ReserVationData reservationData={reservationData} />
+      <div class="row align-items-start">
+        <div class="col text-center">가게 사진</div>
+        <div class="col text-center">위치</div>
+        <div class="col text-center">가게 이름</div>
+        <div class="col text-center">예약 시간</div>
       </div>
+      <ReserVationData reservationData={reservationData} />
     </div>
   );
 }
@@ -35,12 +42,10 @@ function ReserVationData({ reservationData }) {
       {reservationData.length !== 0 ? (
         reservationData.map((e) => {
           return (
-            <div className="stored-container">
-              <StoredDataComponent
-                storeId={e.storeId}
-                reservationTime={e.reservationTime}
-              />
-            </div>
+            <StoredDataComponent
+              storeId={e.storeId._id}
+              reservationTime={e.time}
+            />
           );
         })
       ) : (
@@ -51,6 +56,11 @@ function ReserVationData({ reservationData }) {
     </>
   );
 }
+const CarouselItemImg = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
 
 // 가게 정보 들고오기
 function StoredDataComponent({ storeId, reservationTime }) {
@@ -66,21 +76,53 @@ function StoredDataComponent({ storeId, reservationTime }) {
       .catch((err) => console.log(err));
   }, []);
   return (
-    <div className="store-row">
+    <div className="row">
       {store !== null ? (
-        <>
-          <div className="storedImg-container">
-            <div>{store.picture}</div>
+        <div class="row">
+          <hr />
+          <div
+            class="col text-center"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            <CarouselItemImg src={store.picture} />
           </div>
-          <div className="storedInfo-container">
-            <div>{store.categoryLocation}</div>
-            <div>{store.storeName}</div>
-            <div>{reservationTime}</div>
+          <div
+            class="col text-center"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            {store.categoryLocation}
           </div>
-        </>
+          <div
+            class="col text-center"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            {store.storeName}
+          </div>
+          <div
+            class="col text-center"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            {reservationTime}
+          </div>
+        </div>
       ) : null}
     </div>
   );
 }
-
 export default ReservationComponent;
