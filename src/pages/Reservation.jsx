@@ -5,6 +5,7 @@ import { Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons';
+import 'react-day-picker/dist/style.css';
 
 function Reservation() {
   let navigate = useNavigate();

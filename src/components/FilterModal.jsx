@@ -17,7 +17,7 @@ function FilterModal() {
         display: 'flex',
         justifyContent: 'center',
         flexDirection: 'column',
-      }}
+      }}accessKey
     >
       <DayPicker
       // mode="single"
