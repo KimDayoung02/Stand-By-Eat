@@ -1,3 +1,5 @@
+/* storeDetail*/
+
 /*global kakao*/
 import React, { useState, useEffect } from 'react';
 import { Carousel, Button, Modal } from 'react-bootstrap';
@@ -73,27 +75,51 @@ function StoreDetail() {
     marker.setMap(map);
   });
 
+  let date = localStorage.getItem('date');
+  let time = localStorage.getItem('time');
+  let userCount = localStorage.getItem('count');
+  let userObjectId = JSON.parse(sessionStorage.getItem('objectId'));
+
+  // console.log(date);
+  // console.log(time);
+  // console.log(userCount);
+  // console.log(userObjectId);
   const confirmResevation = async (e) => {
     e.preventDefault();
-    // const data={userId,storeId,numberOfReservations,timeId}
+    const data = {
+      userId: userObjectId,
+      storeId: storeId,
+      date: date,
+      time: time,
+      count: userCount
+    };
+
+    console.log(data);
 
     if (haveToken === null) {
       alert('로그인 후 예약해주세요!');
       navigate('/login');
     } else {
-      try {
-        axios
-          .post(
-            `${PORT}/api/order`
-            // data
-          )
-          .then(function (response) {
-            alert('예약이 완료되었습니다.');
-            navigate('/myPage');
-          });
-      } catch (err) {
-        console.log('예약 실패', err);
-      }
+      axios({
+        url: `${PORT}/api/newOrder`,
+        method: 'post',
+        data: {
+          userId: userObjectId,
+          storeId: storeId,
+          date: date,
+          time: time,
+          count: userCount
+        }
+      })
+        .then(function (res) {
+          console.log(res.data);
+          alert('예약이 완료되었습니다.');
+          navigate('/myPage');
+        })
+        .catch((err) => console.log(err));
+      // catch (err) {
+      //   console.log('예약 실패', err);
+      // }
     }
   };
 
@@ -127,7 +153,7 @@ function StoreDetail() {
           {store.webSite}
         </a>
       </div>
-      <div class="HomeDiv2" style={{ overflow: 'auto' }}>
+      <div class="HomeDiv2">
         <h1>MENU</h1>
         {menu &&
           menu.map((menu) => (

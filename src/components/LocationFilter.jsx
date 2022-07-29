@@ -1,3 +1,5 @@
+//locationFilter
+
 import styled from 'styled-components';
 import { ImCalendar, ImClock, ImUsers } from 'react-icons/im';
 import { Modal, Button } from 'react-bootstrap';
@@ -23,6 +25,10 @@ function LocationFilter() {
 
   //예약인원을 선택하는 value 상태
   let [count, setCount] = useState(0);
+
+  localStorage.setItem('date', date);
+  localStorage.setItem('time', selectedOption);
+  localStorage.setItem('count', count);
 
   //모달
   const handleShow = () => setShow(true);
