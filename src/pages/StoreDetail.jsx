@@ -178,7 +178,8 @@ function StoreDetail() {
             <Button
               variant="primary"
               onClick={confirmResevation}
-              style={{ width: '20%' }}
+              style={{ width: '20%' ,  backgroundColor: '#c899d6',
+              borderColor: '#b57ec6'}}
             >
               예약하기
             </Button>
