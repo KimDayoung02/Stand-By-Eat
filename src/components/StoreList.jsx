@@ -37,6 +37,9 @@ function StoreList({ region }) {
                   <StoreName>{store.storeName}</StoreName>
                   <StoreDetail>{store.introduction}</StoreDetail>
                   <StoreNumber>{store.phoneNumber}</StoreNumber>
+                  {store.tag.map((items) => {
+                    return <StoreTag>{items}</StoreTag>;
+                  })}
                 </StoreStringsDiv>
               </Link>
             </StoreContentsDiv>
@@ -102,4 +105,14 @@ const StoreDetail = styled.div`
 
 const StoreNumber = styled.div``;
 
+const StoreTag = styled.span`
+  width: auto;
+  padding: 0.7rem;
+  display: inline-block;
+  border-radius: 1rem;
+  text-align: center;
+  background-color: #f8effb;
+  margin-right: 0.5rem;
+  margin-top: 0.8rem;
+`;
 export default StoreList;
