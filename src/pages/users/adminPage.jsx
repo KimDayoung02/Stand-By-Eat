@@ -22,7 +22,6 @@ function CategoryButtons() {
     </ButtonGroup>
   );
 }
-
 const Layout = styled.div`
   padding: 4%;
   margin: 3% 5%;

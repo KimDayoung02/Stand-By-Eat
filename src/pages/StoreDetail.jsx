@@ -1,6 +1,6 @@
 /*global kakao*/
 import React, { useState, useEffect } from 'react';
-import { Carousel, Button } from 'react-bootstrap';
+import { Carousel, Button, Modal } from 'react-bootstrap';
 import styled from 'styled-components';
 import { useNavigate, useParams } from 'react-router-dom';
 import { PORT } from '../Api';
@@ -14,6 +14,23 @@ function StoreDetail() {
   const { storeId } = useParams();
   const [store, setStore] = useState([]);
   const [menu, setMenu] = useState([]);
+  const [show, setShow] = useState(false);
+
+  const [haveToken, setToken] = useState(null);
+  const [role, setRole] = useState(JSON.parse(sessionStorage.getItem('role')));
+
+  // 토큰 유무찾기
+  useEffect(() => {
+    setToken(sessionStorage.getItem('token'));
+    if (haveToken !== null) {
+      setRole(JSON.parse(sessionStorage.getItem('role')));
+    } else {
+      setRole('');
+    }
+  }, [haveToken, role]);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   useEffect(() => {
     axios
@@ -32,10 +49,6 @@ function StoreDetail() {
       })
       .catch((err) => console.log(err));
   }, [storeId]);
-
-  const reservationButton = () => {
-    navigate('/');
-  };
 
   useEffect(() => {
     const container = document.getElementById('map');
@@ -59,9 +72,31 @@ function StoreDetail() {
     // 마커가 지도 위에 표시되도록 설정합니다
     marker.setMap(map);
   });
- console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^");
- console.log(store.facilities);
- console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^");
+
+  const confirmResevation = async (e) => {
+    e.preventDefault();
+    // const data={userId,storeId,numberOfReservations,timeId}
+
+    if (haveToken === null) {
+      alert('로그인 후 예약해주세요!');
+      navigate('/login');
+    } else {
+      try {
+        axios
+          .post(
+            `${PORT}/api/order`
+            // data
+          )
+          .then(function (response) {
+            alert('예약이 완료되었습니다.');
+            navigate('/myPage');
+          });
+      } catch (err) {
+        console.log('예약 실패', err);
+      }
+    }
+  };
+
   return (
     <>
       <Button variant="light" type="button" onClick={() => navigate(-1)}>
@@ -88,9 +123,11 @@ function StoreDetail() {
         <h5>{store.location}</h5>
         <h5>{store.phoneNumber}</h5>
         <h5>부대시설:{store.facilities}</h5>
-        <a href={store.webSite} target="_blank">{store.webSite}</a>
+        <a href={store.webSite} target="_blank">
+          {store.webSite}
+        </a>
       </div>
-      <div class="HomeDiv2">
+      <div class="HomeDiv2" style={{ overflow: 'auto' }}>
         <h1>MENU</h1>
         {menu &&
           menu.map((menu) => (
@@ -105,9 +142,29 @@ function StoreDetail() {
       <div id="map" style={{ width: '500px', height: '400px' }}></div>
 
       <div class="HomeDiv3">
-        <ReservationButton onClick={reservationButton}>
-          예약하기
-        </ReservationButton>
+        <ReservationButton onClick={handleShow}>예약하기</ReservationButton>
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>예약확정</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>{store.storeName}</Modal.Body>
+          <Modal.Footer>
+            <Button
+              variant="primary"
+              onClick={confirmResevation}
+              style={{ width: '20%' }}
+            >
+              예약하기
+            </Button>
+            <Button
+              variant="secondary"
+              onClick={handleClose}
+              style={{ width: '20%' }}
+            >
+              닫기
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </div>
     </>
   );
