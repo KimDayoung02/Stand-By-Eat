@@ -138,19 +138,19 @@ function Login() {
 
 async function checkToken() {
   let token = JSON.parse(sessionStorage.getItem('token'));
-  let getId = await axios.get('http://localhost:5000/common/id', {
+  let getId = await axios.get(`${PORT}/common/id`, {
     headers: {
       Authorization: `Basic ${token}`
     }
   });
 
-  let getObjectId = await axios.get('http://localhost:5000/common/oid', {
+  let getObjectId = await axios.get(`${PORT}/common/oid`, {
     headers: {
       Authorization: `Basic ${token}`
     }
   });
 
-  let getRole = await axios.get('http://localhost:5000/common/role', {
+  let getRole = await axios.get(`${PORT}/common/role`, {
     headers: {
       Authorization: `Basic ${token}`
     }
