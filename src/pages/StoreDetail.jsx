@@ -26,15 +26,12 @@ function StoreDetail() {
       setRole(JSON.parse(sessionStorage.getItem('role')));
     } else {
       setRole('');
-    
     }
   }, [haveToken, role]);
- 
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  
   useEffect(() => {
     axios
       .get(`${PORT}/api/store/${storeId}`)
@@ -52,7 +49,6 @@ function StoreDetail() {
       })
       .catch((err) => console.log(err));
   }, [storeId]);
-
 
   useEffect(() => {
     const container = document.getElementById('map');
@@ -77,27 +73,29 @@ function StoreDetail() {
     marker.setMap(map);
   });
 
-  const confirmResevation= async (e) => {
+  const confirmResevation = async (e) => {
     e.preventDefault();
     // const data={userId,storeId,numberOfReservations,timeId}
 
-    if(haveToken === null ){
-      alert("로그인 후 예약해주세요!")
+    if (haveToken === null) {
+      alert('로그인 후 예약해주세요!');
       navigate('/login');
-    }else{
-       try { 
-          axios.post(`${PORT}/api/order`,
-          // data
+    } else {
+      try {
+        axios
+          .post(
+            `${PORT}/api/order`
+            // data
           )
-           .then(function(response) {
-            alert('예약이 완료되었습니다.')
+          .then(function (response) {
+            alert('예약이 완료되었습니다.');
             navigate('/myPage');
-          })        
-    } catch (err) {
+          });
+      } catch (err) {
         console.log('예약 실패', err);
+      }
     }
-  }
-  }
+  };
 
   return (
     <>
@@ -125,9 +123,11 @@ function StoreDetail() {
         <h5>{store.location}</h5>
         <h5>{store.phoneNumber}</h5>
         <h5>부대시설:{store.facilities}</h5>
-        <a href={store.webSite} target="_blank">{store.webSite}</a>
+        <a href={store.webSite} target="_blank">
+          {store.webSite}
+        </a>
       </div>
-      <div class="HomeDiv2">
+      <div class="HomeDiv2" style={{ overflow: 'auto' }}>
         <h1>MENU</h1>
         {menu &&
           menu.map((menu) => (
@@ -142,9 +142,7 @@ function StoreDetail() {
       <div id="map" style={{ width: '500px', height: '400px' }}></div>
 
       <div class="HomeDiv3">
-        <ReservationButton onClick={handleShow}>
-          예약하기
-        </ReservationButton>
+        <ReservationButton onClick={handleShow}>예약하기</ReservationButton>
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>예약확정</Modal.Title>
@@ -167,11 +165,7 @@ function StoreDetail() {
             </Button>
           </Modal.Footer>
         </Modal>
-    
       </div>
-    
-     
-        
     </>
   );
 }
