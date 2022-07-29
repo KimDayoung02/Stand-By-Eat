@@ -59,7 +59,9 @@ function StoreDetail() {
     // 마커가 지도 위에 표시되도록 설정합니다
     marker.setMap(map);
   });
-
+ console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^");
+ console.log(store.facilities);
+ console.log("^^^^^^^^^^^^^^^^^^^^^^^^^^");
   return (
     <>
       <Button variant="light" type="button" onClick={() => navigate(-1)}>
@@ -85,6 +87,8 @@ function StoreDetail() {
         <h5>{store.introduction}</h5>
         <h5>{store.location}</h5>
         <h5>{store.phoneNumber}</h5>
+        <h5>부대시설:{store.facilities}</h5>
+        <a href={store.webSite} target="_blank">{store.webSite}</a>
       </div>
       <div class="HomeDiv2">
         <h1>MENU</h1>
