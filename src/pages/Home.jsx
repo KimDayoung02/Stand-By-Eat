@@ -1,8 +1,9 @@
 import { Carousel, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-
+import { Datas } from './datas';
 function Home() {
+  console.log(Datas);
   return (
     <>
       <HomeDiv>
@@ -10,38 +11,39 @@ function Home() {
           <Carousel.Item interval={1500}>
             <CarouselItemImg
               className="d-block w-100"
-              src="food1.jpeg"
+              // src="food1.jpeg"
+              src={Datas[0].imageUrl}
               alt="First slide"
             />
             <Carousel.Caption>
-              <h3>첫번째 맛집</h3>
-              <p>맛있는 고깃집</p>
+              <h3>{Datas[0].storeName}</h3>
+              <p>{Datas[0].introduction}</p>
             </Carousel.Caption>
           </Carousel.Item>
 
           <Carousel.Item interval={1500}>
             <CarouselItemImg
               className="d-block w-100"
-              src="food2.jpg"
+              src={Datas[1].imageUrl}
               alt="Second slide"
             />
 
             <Carousel.Caption>
-              <h3>두번째 맛집</h3>
-              <p>맛있는 한정식집</p>
+              <h3>{Datas[1].storeName}</h3>
+              <p>{Datas[1].introduction}</p>
             </Carousel.Caption>
           </Carousel.Item>
 
           <Carousel.Item interval={1500}>
             <CarouselItemImg
               className="d-block w-100"
-              src="food3.jpg"
+              src={Datas[2].imageUrl}
               alt="Third slide"
             />
 
             <Carousel.Caption>
-              <h3>세번째 맛집</h3>
-              <p>맛있는 한우고기집</p>
+              <h3>{Datas[2].storeName}</h3>
+              <p>{Datas[2].introduction}</p>
             </Carousel.Caption>
           </Carousel.Item>
         </Carousel>
