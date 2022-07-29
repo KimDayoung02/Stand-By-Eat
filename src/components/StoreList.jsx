@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { PORT } from './../Api';
+import { borderRadius } from '@mui/system';
 
 function StoreList({ region }) {
   const [storeList, setStoreList] = useState();
@@ -37,6 +38,24 @@ function StoreList({ region }) {
                   <StoreName>{store.storeName}</StoreName>
                   <StoreDetail>{store.introduction}</StoreDetail>
                   <StoreNumber>{store.phoneNumber}</StoreNumber>
+                  {store.tag.map((items) => {
+                    return (
+                      <span
+                        style={{
+                          width: '4.5rem',
+                          padding: '0.5rem',
+                          display: 'inline-block',
+                          borderRadius: '1rem',
+                          textAlign: 'center',
+                          backgroundColor: '#F8EFFB',
+                          marginRight: '0.5rem',
+                          marginTop: '.5rem'
+                        }}
+                      >
+                        {items}
+                      </span>
+                    );
+                  })}
                 </StoreStringsDiv>
               </Link>
             </StoreContentsDiv>
