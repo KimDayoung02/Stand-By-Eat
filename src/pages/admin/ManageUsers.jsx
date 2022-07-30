@@ -43,7 +43,6 @@ function ManageUsers() {
               <div class="col text-center">
                 <DeleteButton
                   onClick={() => {
-                    // 관리자 전용 삭제 api 추가하기
                     const token = JSON.parse(sessionStorage.getItem('token'));
                     console.log(user._id);
                     axios.delete(`${PORT}/user/delete/${user._id}`, {
@@ -65,17 +64,6 @@ function ManageUsers() {
     </div>
   );
 }
-
-const Layout = styled.div`
-  padding: 4%;
-  margin: 3% 5%;
-  /* background-color: rgba(0, 0, 0, 0.2); */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  /* border: 1px solid black; */
-`;
 
 const BackButton = styled.button`
   width: 100px;

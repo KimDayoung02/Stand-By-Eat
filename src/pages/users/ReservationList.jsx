@@ -2,9 +2,7 @@ import { useState, useEffect } from 'react';
 import { PORT } from '../../Api';
 import styled from 'styled-components';
 
-// 예약 목록 컴포넌트
 import axios from 'axios';
-import { height } from '@mui/system';
 
 function ReservationComponent() {
   const [reservationData, setReservation] = useState([]);
@@ -13,7 +11,7 @@ function ReservationComponent() {
     axios.get(`${PORT}/api/orders`).then((response) => {
       let filterReservation = response.data.filter((data) => {
         return (
-          data.userId._id === JSON.parse(sessionStorage.getItem('objectId'))
+          data.userId._id == JSON.parse(sessionStorage.getItem('objectId'))
         );
       });
       setReservation(filterReservation);
@@ -35,10 +33,7 @@ function ReservationComponent() {
   );
 }
 
-// 예약 컴포넌트
 function ReserVationData({ reservationData }) {
-  console.log('------------------------');
-  console.log(reservationData);
   return (
     <>
       {reservationData.length !== 0 ? (
@@ -66,9 +61,7 @@ const CarouselItemImg = styled.img`
   object-fit: cover;
 `;
 
-// 가게 정보 들고오기
 function StoredDataComponent({ storeId, reservationTime, count, date }) {
-  // console.log(storeId);
   const [store, setStored] = useState([]);
   useEffect(() => {
     axios

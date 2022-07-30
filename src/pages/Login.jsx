@@ -1,15 +1,9 @@
-/*
-    화면명 : Login.jsx
-    생성날짜 : 2022.07.2?
-    작업자 : 정민희
-*/
-import React, { useRef, useState, createContext } from 'react';
+import React, { useRef, useState } from 'react';
 import './../styles/Login.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faKey, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
 import { PORT } from '../Api';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [id, setId] = useState('');
@@ -19,7 +13,6 @@ function Login() {
   const idInput = useRef('');
   const passwordInput = useRef('');
   const handleChange = (e) => {
-    console.log(`선택한 값 : ${e.target.value}`);
     setRole(e.target.value);
   };
 
@@ -56,11 +49,6 @@ function Login() {
         } else {
           alert(error.response.data.reason);
         }
-
-        console.log('error : ' + error);
-        console.log(
-          'error.response.data.reason : ' + error.response.data.reason
-        );
       });
   };
 
@@ -68,7 +56,7 @@ function Login() {
     <div className="session">
       <div className="left"></div>
       <form action="" className="logIn-form" autocomplete="off">
-        <h4 className="title">
+        <h4 className="title" style={{ width: 'auto' }}>
           We are <span>스탠바잇!</span>
         </h4>
         <p>Welcome Stand By Eat!</p>
@@ -89,6 +77,7 @@ function Login() {
             type="radio"
             checked={role === 'admin'}
             onChange={handleChange}
+            style={{ marginLeft: '2rem' }}
           />
           관리자
         </div>
@@ -127,7 +116,7 @@ function Login() {
         <button
           className="login-button"
           onClick={clickLogin}
-          style={{ backgroundColor: '#FF9DF0' }}
+          style={{ backgroundColor: '#FF9DF0', marginBottom: '3rem' }}
         >
           Log in
         </button>
@@ -158,11 +147,9 @@ async function checkToken() {
 
   sessionStorage.setItem('objectId', JSON.stringify(getObjectId.data));
   sessionStorage.setItem('role', JSON.stringify(getRole.data));
-  console.log(getId.data, getObjectId.data, getRole.data);
 
   window.location.href = '/';
 }
-// 로그인하기전 유효성 검사
 function checkUser(id, password) {
   if (id === '') {
     return alert('아이디를 입력하세요');

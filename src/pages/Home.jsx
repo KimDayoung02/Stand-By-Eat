@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Datas } from './datas';
 function Home() {
-  console.log(Datas);
   return (
     <>
       <HomeDiv>
@@ -11,11 +10,12 @@ function Home() {
           <Carousel.Item interval={1500}>
             <CarouselItemImg
               className="d-block w-100"
-              // src="food1.jpeg"
               src={Datas[0].imageUrl}
               alt="First slide"
             />
-            <Carousel.Caption>
+            <Carousel.Caption
+              style={{ backgroundColor: 'rgba(155, 153, 154, 0.6)' }}
+            >
               <h3>{Datas[0].storeName}</h3>
               <p>{Datas[0].introduction}</p>
             </Carousel.Caption>
@@ -28,7 +28,9 @@ function Home() {
               alt="Second slide"
             />
 
-            <Carousel.Caption>
+            <Carousel.Caption
+              style={{ backgroundColor: 'rgba(155, 153, 154, 0.6)' }}
+            >
               <h3>{Datas[1].storeName}</h3>
               <p>{Datas[1].introduction}</p>
             </Carousel.Caption>
@@ -41,7 +43,9 @@ function Home() {
               alt="Third slide"
             />
 
-            <Carousel.Caption>
+            <Carousel.Caption
+              style={{ backgroundColor: 'rgba(155, 153, 154, 0.6)' }}
+            >
               <h3>{Datas[2].storeName}</h3>
               <p>{Datas[2].introduction}</p>
             </Carousel.Caption>
@@ -70,8 +74,6 @@ function Home() {
             <ImgTag src="daegu.png" />
           </Buttons>
         </Link>
-
-        {/* 추후 back에서 가져오는 지역 data로 props를 줘서 component내에서 filter할 예정 */}
       </ReservationButtonDiv>
     </>
   );

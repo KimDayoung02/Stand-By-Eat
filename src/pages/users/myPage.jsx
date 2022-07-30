@@ -7,7 +7,6 @@ import axios from 'axios';
 import { PORT } from '../../Api';
 import { useNavigate } from 'react-router-dom';
 
-// 예약 정보 가져오기
 function MyPage() {
   let navigate = useNavigate();
   const [userData, setUserData] = useState('');
@@ -41,7 +40,6 @@ function MyPage() {
   );
 }
 
-// 사용자 프로필 컴포넌트
 function MyProfileComponent({ userData, role }) {
   let navigate = useNavigate();
 
@@ -119,8 +117,6 @@ function MyProfileComponent({ userData, role }) {
   );
 }
 
-// 스타일
-// 예약 확인 레이아웃
 const DataLayout = styled.div`
   width: 85%;
   height: auto;

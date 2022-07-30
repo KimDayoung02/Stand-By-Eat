@@ -3,24 +3,16 @@ import styled from 'styled-components';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
 
-// 토큰있으면
-// 해당하는 아이디와 권한 가져오기
-
 function Header() {
   const [haveToken, setToken] = useState(null);
   const [role, setRole] = useState(JSON.parse(sessionStorage.getItem('role')));
 
-  // 토큰 유무찾기
   useEffect(() => {
     setToken(sessionStorage.getItem('token'));
     if (haveToken !== null) {
       setRole(JSON.parse(sessionStorage.getItem('role')));
-      // console.log('-----1-');
-      // console.log(role);
     } else {
       setRole('');
-      // console.log('-----3-');
-      // console.log(role);
     }
   }, [haveToken, role]);
 
@@ -34,8 +26,7 @@ function Header() {
         <Navbar.Collapse className="justify-content-end">
           <Nav className="justify-content-end mx-5">
             <LinkStyle to="/">Home</LinkStyle>
-            {/* Link 태그 자체에 있는 밑줄이나 색깔 없애는 styled component입니다. 
-            Link태그 대신 LinkStyle태그 사용해주세요 */}
+
             {haveToken === null ? (
               <>
                 <LinkStyle to="/login">Login</LinkStyle>

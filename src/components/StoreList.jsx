@@ -8,7 +8,6 @@ function StoreList({ region }) {
   const [storeList, setStoreList] = useState();
   const [location] = useState(region);
 
-  // 한글 이름
   let regionName = checkRegionName(location);
 
   useEffect(() => {

@@ -21,7 +21,6 @@ function StoreDetail() {
   const [haveToken, setToken] = useState(null);
   const [role, setRole] = useState(JSON.parse(sessionStorage.getItem('role')));
 
-  // 토큰 유무찾기
   useEffect(() => {
     setToken(sessionStorage.getItem('token'));
     if (haveToken !== null) {
@@ -74,17 +73,14 @@ function StoreDetail() {
 
     const map = new kakao.maps.Map(container, options);
 
-    // // 마커가 표시될 위치입니다
     const markerPosition = new kakao.maps.LatLng(
       store.latitude,
       store.hardness
     );
-    // 마커를 생성합니다
     const marker = new kakao.maps.Marker({
       position: markerPosition
     });
 
-    // 마커가 지도 위에 표시되도록 설정합니다
     marker.setMap(map);
   });
 
@@ -93,10 +89,6 @@ function StoreDetail() {
   let userCount = localStorage.getItem('count');
   let userObjectId = JSON.parse(sessionStorage.getItem('objectId'));
 
-  console.log(date);
-  console.log(time);
-  console.log(userCount);
-  console.log(userObjectId);
   const confirmResevation = async (e) => {
     e.preventDefault();
     const data = {
@@ -106,8 +98,6 @@ function StoreDetail() {
       time: time,
       count: userCount
     };
-
-    console.log(data);
 
     if (haveToken === null) {
       alert('로그인 후 예약해주세요!');
@@ -125,14 +115,10 @@ function StoreDetail() {
         }
       })
         .then(function (res) {
-          console.log(res.data);
           alert('예약이 완료되었습니다.');
           navigate('/myPage');
         })
         .catch((err) => console.log(err));
-      // catch (err) {
-      //   console.log('예약 실패', err);
-      // }
     }
   };
 
