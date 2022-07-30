@@ -23,7 +23,7 @@ function ManageOrders() {
       }
       setOrders(newArray);
     });
-  }, []);
+  }, [orders]);
 
   let random = ['사용자1', '사용자2', '사용자3', '사용자4'];
   let MathNum = Math.floor(Math.random() * random.length);
@@ -57,7 +57,7 @@ function ManageOrders() {
                     // 관리자 전용 삭제 api 추가하기
                     axios.delete(`${PORT}/api/order/${order._id}`);
 
-                    window.location.reload();
+                    // window.location.reload();
                   }}
                 >
                   삭제
