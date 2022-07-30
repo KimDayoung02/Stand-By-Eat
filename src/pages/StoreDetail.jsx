@@ -1,3 +1,5 @@
+/* storeDetail*/
+
 /*global kakao*/
 import React, { useState, useEffect } from 'react';
 import { Carousel, Button, Modal } from 'react-bootstrap';
@@ -30,7 +32,20 @@ function StoreDetail() {
   }, [haveToken, role]);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = () => {
+    if (date == '선택해주세요!') {
+      alert('날짜를 선택해주세요!');
+      navigate(-1);
+    } else if (time == '선택해주세요!') {
+      alert('시간을 선택해주세요!');
+      navigate(-1);
+    } else if (userCount == 0) {
+      alert('인원을 선택해주세요!');
+      navigate(-1);
+    } else {
+      setShow(true);
+    }
+  };
 
   useEffect(() => {
     axios
@@ -73,27 +88,51 @@ function StoreDetail() {
     marker.setMap(map);
   });
 
+  let date = localStorage.getItem('date');
+  let time = localStorage.getItem('time');
+  let userCount = localStorage.getItem('count');
+  let userObjectId = JSON.parse(sessionStorage.getItem('objectId'));
+
+  console.log(date);
+  console.log(time);
+  console.log(userCount);
+  console.log(userObjectId);
   const confirmResevation = async (e) => {
     e.preventDefault();
-    // const data={userId,storeId,numberOfReservations,timeId}
+    const data = {
+      userId: userObjectId,
+      storeId: storeId,
+      date: date,
+      time: time,
+      count: userCount
+    };
+
+    console.log(data);
 
     if (haveToken === null) {
       alert('로그인 후 예약해주세요!');
       navigate('/login');
     } else {
-      try {
-        axios
-          .post(
-            `${PORT}/api/order`
-            // data
-          )
-          .then(function (response) {
-            alert('예약이 완료되었습니다.');
-            navigate('/myPage');
-          });
-      } catch (err) {
-        console.log('예약 실패', err);
-      }
+      axios({
+        url: `${PORT}/api/newOrder`,
+        method: 'post',
+        data: {
+          userId: userObjectId,
+          storeId: storeId,
+          date: date,
+          time: time,
+          count: userCount
+        }
+      })
+        .then(function (res) {
+          console.log(res.data);
+          alert('예약이 완료되었습니다.');
+          navigate('/myPage');
+        })
+        .catch((err) => console.log(err));
+      // catch (err) {
+      //   console.log('예약 실패', err);
+      // }
     }
   };
 
@@ -127,7 +166,7 @@ function StoreDetail() {
           {store.webSite}
         </a>
       </div>
-      <div class="HomeDiv2" style={{ overflow: 'auto' }}>
+      <div class="HomeDiv2">
         <h1>MENU</h1>
         {menu &&
           menu.map((menu) => (
@@ -145,14 +184,24 @@ function StoreDetail() {
         <ReservationButton onClick={handleShow}>예약하기</ReservationButton>
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>예약확정</Modal.Title>
+            <Modal.Title>예약정보가 맞습니까?</Modal.Title>
           </Modal.Header>
-          <Modal.Body>{store.storeName}</Modal.Body>
+          <Modal.Body>
+            <p>{store.storeName}</p>
+            <p>
+              {date}&nbsp;{time}
+            </p>
+            <p>인원: {userCount}명</p>{' '}
+          </Modal.Body>
           <Modal.Footer>
             <Button
               variant="primary"
               onClick={confirmResevation}
-              style={{ width: '20%' }}
+              style={{
+                width: '20%',
+                backgroundColor: '#c899d6',
+                borderColor: '#b57ec6'
+              }}
             >
               예약하기
             </Button>
@@ -186,8 +235,8 @@ const CarouselItemImg = styled.img`
   object-fit: cover;
 `;
 const MenuImg = styled.img`
-  width: 8rem;
-  height: 8rem;
+  width: 27%;
+  height: 27%;
   text-align: center;
   border-radius: 1rem;
 `;

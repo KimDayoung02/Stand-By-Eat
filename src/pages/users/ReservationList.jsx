@@ -13,11 +13,10 @@ function ReservationComponent() {
     axios.get(`${PORT}/api/orders`).then((response) => {
       let filterReservation = response.data.filter((data) => {
         return (
-          data.userId._id == JSON.parse(sessionStorage.getItem('objectId'))
+          data.userId._id === JSON.parse(sessionStorage.getItem('objectId'))
         );
       });
       setReservation(filterReservation);
-      console.log(filterReservation);
     });
   }, []);
 
@@ -29,6 +28,7 @@ function ReservationComponent() {
         <div class="col text-center">위치</div>
         <div class="col text-center">가게 이름</div>
         <div class="col text-center">예약 시간</div>
+        <div class="col text-center">인원</div>
       </div>
       <ReserVationData reservationData={reservationData} />
     </div>
@@ -37,6 +37,8 @@ function ReservationComponent() {
 
 // 예약 컴포넌트
 function ReserVationData({ reservationData }) {
+  console.log('------------------------');
+  console.log(reservationData);
   return (
     <>
       {reservationData.length !== 0 ? (
@@ -45,6 +47,8 @@ function ReserVationData({ reservationData }) {
             <StoredDataComponent
               storeId={e.storeId._id}
               reservationTime={e.time}
+              count={e.count}
+              date={e.date}
             />
           );
         })
@@ -63,7 +67,7 @@ const CarouselItemImg = styled.img`
 `;
 
 // 가게 정보 들고오기
-function StoredDataComponent({ storeId, reservationTime }) {
+function StoredDataComponent({ storeId, reservationTime, count, date }) {
   // console.log(storeId);
   const [store, setStored] = useState([]);
   useEffect(() => {
@@ -75,6 +79,7 @@ function StoredDataComponent({ storeId, reservationTime }) {
       })
       .catch((err) => console.log(err));
   }, []);
+
   return (
     <div className="row">
       {store !== null ? (
@@ -85,7 +90,8 @@ function StoredDataComponent({ storeId, reservationTime }) {
             style={{
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center'
+              justifyContent: 'center',
+              width: '10%'
             }}
           >
             <CarouselItemImg src={store.picture} />
@@ -118,7 +124,17 @@ function StoredDataComponent({ storeId, reservationTime }) {
               justifyContent: 'center'
             }}
           >
-            {reservationTime}
+            {date} {reservationTime}
+          </div>
+          <div
+            class="col text-center"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
+            }}
+          >
+            {count}명
           </div>
         </div>
       ) : null}

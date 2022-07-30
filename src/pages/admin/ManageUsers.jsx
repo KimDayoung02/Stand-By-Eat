@@ -48,8 +48,8 @@ function ManageUsers() {
                     console.log(user._id);
                     axios.delete(`${PORT}/user/delete/${user._id}`, {
                       headers: {
-                        Authorization: `Basic ${token}`,
-                      },
+                        Authorization: `Basic ${token}`
+                      }
                     });
 
                     window.location.reload();
@@ -87,13 +87,13 @@ const BackButton = styled.button`
 `;
 const DeleteButton = styled(Button)`
   width: 5rem;
+  height: auto;
   margin-bottom: 1rem;
+  background-color: #ba86d5;
+  border-color: white;
+
   &:hover {
-    background-color: #ba86d5;
-    border-color: white;
-  }
-  &:active {
-    border-color: #6a2490;
+    background-color: #6a2490;
   }
   &:visited {
     border-color: white;
