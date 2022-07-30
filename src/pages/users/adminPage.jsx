@@ -1,5 +1,6 @@
 import { Button, ButtonGroup } from 'react-bootstrap';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 function AdminPage() {
   return (
@@ -12,13 +13,19 @@ function AdminPage() {
 function CategoryButtons() {
   return (
     <ButtonGroup size="lg">
-      <CategoryButton className="me-3" href="/manageUsers">
-        회원 관리
-      </CategoryButton>
-      <CategoryButton className="me-3" href="/manageStores">
-        가게 관리
-      </CategoryButton>
-      <CategoryButton href="/manageOrders"> 예약 관리</CategoryButton>
+      <Link to="/manageUsers">
+        <CategoryButton className="me-3" href="/manageUsers">
+          회원 관리
+        </CategoryButton>
+      </Link>
+      <Link to="/manageStores">
+        <CategoryButton className="me-3" href="/manageStores">
+          가게 관리
+        </CategoryButton>
+      </Link>
+      <Link to="/manageOrders">
+        <CategoryButton href="/manageOrders"> 예약 관리</CategoryButton>
+      </Link>
     </ButtonGroup>
   );
 }

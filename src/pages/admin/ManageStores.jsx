@@ -22,7 +22,7 @@ function ManageStores() {
       }
       setStores(newArray);
     });
-  }, []);
+  }, [stores]);
   return (
     <div>
       <BackButton onClick={() => navigate(-1)}> 뒤로가기</BackButton>
@@ -47,7 +47,7 @@ function ManageStores() {
                   onClick={() => {
                     axios.delete(`${PORT}/api/store/${store._id}`);
 
-                    window.location.reload();
+                    // window.location.reload();
                   }}
                 >
                   삭제

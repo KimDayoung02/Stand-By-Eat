@@ -22,7 +22,7 @@ function ManageUsers() {
       }
       setUsers(newArray);
     });
-  }, []);
+  }, [users]);
   return (
     <div>
       <BackButton onClick={() => navigate(-1)}> 뒤로가기</BackButton>
@@ -51,7 +51,7 @@ function ManageUsers() {
                       }
                     });
 
-                    window.location.reload();
+                    // window.location.reload();
                   }}
                 >
                   삭제
