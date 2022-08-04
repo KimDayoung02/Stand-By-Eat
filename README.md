@@ -69,7 +69,6 @@
 <img src="https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=CSS&logoColor=white">
 <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white">
 <img src="https://img.shields.io/badge/styled components-DB7093?style=flat-square&logo=styled-components&logoColor=white">
-<img src="https://img.shields.io/badge/FontAwesome-##528DD7?style=for-the-badge&logo=FontAwesome&logoColor=white">
 
 ### BACK
 
